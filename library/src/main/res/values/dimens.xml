@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="baseline_start">16dp</dimen>
+    <dimen name="baseline_content">72dp</dimen>
+    <dimen name="baseline_end">16dp</dimen>
+
+    <dimen name="icon_size">24dp</dimen>
+    <dimen name="avatar_size">40dp</dimen>
+
+    <dimen name="divider_height">1dp</dimen>
+    <dimen name="divider_margin">8dp</dimen>
+
+    <dimen name="list_item_height_text">48dp</dimen>
+    <dimen name="list_item_height_icon_text">48dp</dimen>
+    <dimen name="list_item_height_image_text">56dp</dimen>
+    <dimen name="list_item_height_text_two_line">72dp</dimen>
+    <dimen name="list_item_height_icon_text_two_line">72dp</dimen>
+    <dimen name="list_item_height_image_text_two_line">72dp</dimen>
+    <dimen name="list_item_height_text_three_line">88dp</dimen>
+    <dimen name="list_item_height_icon_text_three_line">88dp</dimen>
+    <dimen name="list_item_height_image_text_three_line">88dp</dimen>
+    <dimen name="list_item_margin">16dp</dimen>
+
+</resources>
