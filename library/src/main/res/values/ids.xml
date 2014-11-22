@@ -13,14 +13,21 @@
   -->
 
 <resources>
+    <item type="id" name="mdLayout"/>
 
-    <color name="drawer_background">#f5f5f5</color>
+    <item type="id" name="mdLayoutProfile"/>
+    <item type="id" name="mdLayoutProfileContent"/>
+    <item type="id" name="mdAvatarProfile"/>
+    <item type="id" name="mdBackgroundProfile"/>
+    <item type="id" name="mdNameProfile"/>
+    <item type="id" name="mdDescriptionProfile"/>
 
-    <color name="scrim_start">#0000</color>
-    <color name="scrim_end">#8a000000</color>
+    <item type="id" name="mdLinearListViewPrimary"/>
+    <item type="id" name="mdDivider"/>
+    <item type="id" name="mdLinearListViewSecondary"/>
 
-    <color name="scrim">#43000000</color>
-
-    <color name="divider">#1f000000</color>
-
+    <item type="id" name="mdRoot"/>
+    <item type="id" name="mdImage"/>
+    <item type="id" name="mdTextPrimary"/>
+    <item type="id" name="mdTextSecondary"/>
 </resources>

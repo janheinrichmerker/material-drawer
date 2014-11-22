@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
   Copyright 2014 Heinrich Reimer
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,9 +12,10 @@
   limitations under the License.
   -->
 
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.heinrichreimersoftware.material_drawer">
-
-    <application android:allowBackup="true"/>
-
-</manifest>
+<View xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@id/mdDivider"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/divider_height"
+    android:layout_marginTop="@dimen/divider_margin"
+    android:layout_marginBottom="@dimen/divider_margin"
+    android:background="@color/divider"/>

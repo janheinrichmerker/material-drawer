@@ -1,12 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright 2014 Heinrich Reimer
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+      http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
 <resources>
 
     <dimen name="baseline_start">16dp</dimen>
     <dimen name="baseline_content">72dp</dimen>
     <dimen name="baseline_end">16dp</dimen>
 
+    <dimen name="drawer_max_width">400dp</dimen>
+    <dimen name="drawer_margin_end">56dp</dimen>
+
+    <dimen name="drawer_list_margin_vertical">8dp</dimen>
+
     <dimen name="icon_size">24dp</dimen>
     <dimen name="avatar_size">40dp</dimen>
+    <dimen name="big_avatar_size">64dp</dimen>
+    <dimen name="profile_text_margin_bottom">4dp</dimen>
 
     <dimen name="divider_height">1dp</dimen>
     <dimen name="divider_margin">8dp</dimen>
@@ -21,5 +41,6 @@
     <dimen name="list_item_height_icon_text_three_line">88dp</dimen>
     <dimen name="list_item_height_image_text_three_line">88dp</dimen>
     <dimen name="list_item_margin">16dp</dimen>
+    <dimen name="list_item_text_secondary_margin">4dp</dimen>
 
 </resources>
