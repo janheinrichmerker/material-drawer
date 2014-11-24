@@ -17,6 +17,7 @@
 package com.heinrichreimersoftware.material_drawer.structure;
 
 import android.graphics.drawable.Drawable;
+import android.widget.ArrayAdapter;
 
 /**
  * Object to be used with {@link com.heinrichreimersoftware.material_drawer.DrawerView} to display a profile in the drawer.
@@ -29,6 +30,7 @@ public class DrawerProfile {
     private String mDescription;
 
     private OnProfileClickListener mOnClickListener;
+    private ArrayAdapter<DrawerProfile> mAdapter;
 
 
     /**
@@ -38,6 +40,7 @@ public class DrawerProfile {
      */
     public DrawerProfile setAvatar(Drawable avatar) {
         mAvatar = avatar;
+        notifyDataChanged();
         return this;
     }
 
@@ -64,6 +67,7 @@ public class DrawerProfile {
      */
     public DrawerProfile removeAvatar() {
         mAvatar = null;
+        notifyDataChanged();
         return this;
     }
 
@@ -75,6 +79,7 @@ public class DrawerProfile {
      */
     public DrawerProfile setBackground(Drawable background) {
         mBackground = background;
+        notifyDataChanged();
         return this;
     }
 
@@ -101,6 +106,7 @@ public class DrawerProfile {
      */
     public DrawerProfile removeBackground() {
         mBackground = null;
+        notifyDataChanged();
         return this;
     }
 
@@ -112,6 +118,7 @@ public class DrawerProfile {
      */
     public DrawerProfile setName(String name) {
         mName = name;
+        notifyDataChanged();
         return this;
     }
 
@@ -138,6 +145,7 @@ public class DrawerProfile {
      */
     public DrawerProfile removeName() {
         mName = null;
+        notifyDataChanged();
         return this;
     }
 
@@ -149,6 +157,7 @@ public class DrawerProfile {
      */
     public DrawerProfile setDescription(String description) {
         mDescription = description;
+        notifyDataChanged();
         return this;
     }
 
@@ -175,6 +184,7 @@ public class DrawerProfile {
      */
     public DrawerProfile removeDescription() {
         mDescription = null;
+        notifyDataChanged();
         return this;
     }
 
@@ -186,6 +196,7 @@ public class DrawerProfile {
      */
     public DrawerProfile setOnProfileClickListener(OnProfileClickListener listener) {
         mOnClickListener = listener;
+        notifyDataChanged();
         return this;
     }
 
@@ -212,7 +223,34 @@ public class DrawerProfile {
      */
     public DrawerProfile removeOnProfileClickListener() {
         mOnClickListener = null;
+        notifyDataChanged();
         return this;
+    }
+
+
+    /**
+     * Attaches the drawer item to an adapter
+     *
+     * @param adapter Adapter to attach to
+     */
+    public DrawerProfile attachTo(ArrayAdapter<DrawerProfile> adapter) {
+        mAdapter = adapter;
+        notifyDataChanged();
+        return this;
+    }
+
+    /**
+     * Detaches the drawer item from its adapter
+     */
+    public DrawerProfile detach() {
+        mAdapter = null;
+        return this;
+    }
+
+    protected void notifyDataChanged(){
+        if(mAdapter != null){
+            mAdapter.notifyDataSetChanged();
+        }
     }
 
 

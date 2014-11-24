@@ -17,6 +17,7 @@
 package com.heinrichreimersoftware.material_drawer.structure;
 
 import android.graphics.drawable.Drawable;
+import android.widget.ArrayAdapter;
 
 /**
  * Object to be used with {@link com.heinrichreimersoftware.material_drawer.DrawerAdapter} and {@link com.heinrichreimersoftware.material_drawer.DrawerView} to display a drawer item.
@@ -41,8 +42,11 @@ public class DrawerItem {
 
     private OnItemClickListener mOnClickListener;
 
+    private ArrayAdapter<DrawerItem> mAdapter;
+
     public DrawerItem setIsDivider(boolean isDivider) {
         mIsDivider = isDivider;
+        notifyDataChanged();
         return this;
     }
 
@@ -60,6 +64,7 @@ public class DrawerItem {
     public DrawerItem setImage(Drawable image, int imageMode) {
         mImage = image;
         setImageMode(imageMode);
+        notifyDataChanged();
         return this;
     }
 
@@ -70,6 +75,7 @@ public class DrawerItem {
      */
     public DrawerItem setImage(Drawable image) {
         setImage(image, ICON);
+        notifyDataChanged();
         return this;
     }
 
@@ -97,6 +103,7 @@ public class DrawerItem {
      */
     public DrawerItem removeImage() {
         mImage = null;
+        notifyDataChanged();
         return this;
     }
 
@@ -111,6 +118,7 @@ public class DrawerItem {
             throw new IllegalArgumentException("Image mode must be either ICON or AVATAR.");
         }
         mImageMode = imageMode;
+        notifyDataChanged();
         return this;
     }
 
@@ -138,6 +146,7 @@ public class DrawerItem {
      */
     public DrawerItem resetImageMode() {
         mImageMode = ICON;
+        notifyDataChanged();
         return this;
     }
 
@@ -149,6 +158,7 @@ public class DrawerItem {
      */
     public DrawerItem setTextPrimary(String textPrimary) {
         mTextPrimary = textPrimary;
+        notifyDataChanged();
         return this;
     }
 
@@ -176,6 +186,7 @@ public class DrawerItem {
      */
     public DrawerItem removeTextPrimary() {
         mTextPrimary = null;
+        notifyDataChanged();
         return this;
     }
 
@@ -189,6 +200,7 @@ public class DrawerItem {
     public DrawerItem setTextSecondary(String textSecondary, int textMode) {
         mTextSecondary = textSecondary;
         setTextMode(textMode);
+        notifyDataChanged();
         return this;
     }
 
@@ -226,6 +238,7 @@ public class DrawerItem {
      */
     public DrawerItem removeTextSecondary() {
         mTextSecondary = null;
+        notifyDataChanged();
         return this;
     }
 
@@ -240,6 +253,7 @@ public class DrawerItem {
             throw new IllegalArgumentException("Image mode must be either SINGLE_LINE, TWO_LINE or THREE_LINE.");
         }
         mTextMode = textMode;
+        notifyDataChanged();
         return this;
     }
 
@@ -267,6 +281,7 @@ public class DrawerItem {
      */
     public DrawerItem resetTextMode() {
         mTextMode = SINGLE_LINE;
+        notifyDataChanged();
         return this;
     }
 
@@ -278,6 +293,7 @@ public class DrawerItem {
      */
     public DrawerItem setOnItemClickListener(OnItemClickListener listener) {
         mOnClickListener = listener;
+        notifyDataChanged();
         return this;
     }
 
@@ -304,7 +320,34 @@ public class DrawerItem {
      */
     public DrawerItem removeOnItemClickListener() {
         mOnClickListener = null;
+        notifyDataChanged();
         return this;
+    }
+
+
+    /**
+     * Attaches the drawer item to an adapter
+     *
+     * @param adapter Adapter to attach to
+     */
+    public DrawerItem attachTo(ArrayAdapter<DrawerItem> adapter) {
+        mAdapter = adapter;
+        notifyDataChanged();
+        return this;
+    }
+
+    /**
+     * Detaches the drawer item from its adapter
+     */
+    public DrawerItem detach() {
+        mAdapter = null;
+        return this;
+    }
+
+    protected void notifyDataChanged(){
+        if(mAdapter != null){
+            mAdapter.notifyDataSetChanged();
+        }
     }
 
 

@@ -16,12 +16,14 @@
 
 package com.heinrichreimersoftware.material_drawer;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -76,8 +78,7 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
         inflate(context, R.layout.drawer, this);
 
         findViews();
-
-        setFitsSystemWindows(true);
+        
         setClipToPadding(false);
         setBackgroundColor(getResources().getColor(R.color.drawer_background));
         setInsetForeground(new ColorDrawable(getResources().getColor(R.color.scrim)));
@@ -86,22 +87,6 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
 
         mAdapter = new DrawerAdapter(context, new ArrayList<DrawerItem>());
         linearListView.setAdapter(mAdapter);
-
-        getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                int width = getWidth();
-                int maxWidth = getResources().getDimensionPixelSize(R.dimen.drawer_max_width);
-
-                getLayoutParams().width = Math.min(width, maxWidth);
-
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
-                    getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                } else {
-                    getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                }
-            }
-        });
     }
 
     private void findViews(){
@@ -223,6 +208,9 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
      * @param items Items to add
      */
     public DrawerView addItems(List<DrawerItem> items) {
+        for (DrawerItem item : items) {
+            item.attachTo(mAdapter);
+        }
         mAdapter.addAll(items);
         updateList();
         return this;
@@ -234,6 +222,7 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
      * @param item Item to add
      */
     public DrawerView addItem(DrawerItem item) {
+        item.attachTo(mAdapter);
         mAdapter.add(item);
         updateList();
         return this;
@@ -243,8 +232,7 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
      * Adds a divider to the drawer view
      */
     public DrawerView addDivider() {
-        mAdapter.add(new DrawerDividerItem());
-        updateList();
+        addItem(new DrawerDividerItem());
         return this;
     }
 
@@ -274,6 +262,7 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
      * @param item Item to remove
      */
     public DrawerView removeItem(DrawerItem item) {
+        item.detach();
         mAdapter.remove(item);
         updateList();
         return this;
@@ -285,6 +274,7 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
      * @param position Position to remove
      */
     public DrawerView removeItem(int position) {
+        mAdapter.getItem(position).detach();
         mAdapter.remove(mAdapter.getItem(position));
         updateList();
         return this;
@@ -294,6 +284,9 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
      * Removes all items from the drawer view
      */
     public DrawerView clearItems() {
+        for (DrawerItem item : mAdapter.getItems()) {
+            item.detach();
+        }
         mAdapter.clear();
         updateList();
         return this;
@@ -343,5 +336,34 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
     public void onInsetsChanged(Rect insets) {
         statusBarHeight = insets.top;
         updateSpacing();
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+
+        if(w != oldw){
+            //Window width
+            int windowWidth = ((Activity)getContext()).getWindow().getDecorView().getWidth();
+
+            //Minus the width of the vertical nav bar
+            if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+                int navigationBarWidthResId = getResources().getIdentifier("navigation_bar_width", "dimen", "android");
+                if (navigationBarWidthResId > 0) {
+                    windowWidth -= getResources().getDimensionPixelSize(navigationBarWidthResId);
+                }
+            }
+
+            //App bar size
+            TypedValue typedValue = new TypedValue();
+            getContext().getTheme().resolveAttribute(R.attr.actionBarSize, typedValue, true);
+            int actionBarSize = TypedValue.complexToDimensionPixelSize(typedValue.data, getResources().getDisplayMetrics());
+
+            int width = windowWidth - actionBarSize;
+
+            int maxWidth = getResources().getDimensionPixelSize(R.dimen.drawer_max_width);
+
+            getLayoutParams().width = Math.min(width, maxWidth);
+        }
     }
 }

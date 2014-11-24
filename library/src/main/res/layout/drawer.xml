@@ -65,12 +65,13 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/list_item_height_text_two_line"
                     android:paddingTop="@dimen/baseline_start"
                     android:paddingLeft="@dimen/baseline_start"
                     android:paddingRight="@dimen/baseline_start"
-                    android:paddingBottom="@dimen/profile_text_margin_bottom"
+                    android:paddingBottom="@dimen/drawer_list_margin_vertical"
                     android:layout_alignParentBottom="true"
+                    android:layout_gravity="center_vertical"
                     android:orientation="vertical"
                     android:background="@drawable/scrim"
                     android:clickable="false">

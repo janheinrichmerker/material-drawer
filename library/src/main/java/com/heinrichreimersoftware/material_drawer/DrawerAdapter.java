@@ -17,7 +17,6 @@
 package com.heinrichreimersoftware.material_drawer;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -113,14 +112,13 @@ public class DrawerAdapter extends ArrayAdapter<DrawerItem> {
         return items;
     }
 
-    private static class ViewHolder extends RecyclerView.ViewHolder {
+    private static class ViewHolder{
         RelativeLayout mRoot;
         ImageView mImageView;
         TextView mTextViewPrimary;
         TextView mTextViewSecondary;
 
         public ViewHolder(View root) {
-            super(root);
             mRoot = (RelativeLayout) root;
             mImageView = (ImageView) root.findViewById(R.id.mdImage);
             mTextViewPrimary = (TextView) root.findViewById(R.id.mdTextPrimary);
