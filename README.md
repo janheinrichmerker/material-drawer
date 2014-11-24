@@ -1,5 +1,6 @@
 material-drawer
 ===============
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-material--drawer-blue.svg?style=flat)](https://android-arsenal.com/details/1/1162)
 
 Custom drawer implementation for Material design apps.
 
