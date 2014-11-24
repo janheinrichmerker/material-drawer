@@ -105,6 +105,12 @@ Dependency
 	    compile 'com.heinrichreimersoftware.material_drawer:library:1.1'
     }
 
+Changes
+-------
+* **Version 1.1.1:**
+    * You can changeItems that you got via `drawer.getItem(position)`. Changes will update the adapter
+    * Fixed title padding
+
 License
 -------
 
