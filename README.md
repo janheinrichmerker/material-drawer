@@ -109,6 +109,7 @@ Changes
 -------
 * **Version 1.1.1:**
     * You can change items that you got via `drawer.getItem(position)`. Changes will update the adapter
+    * Fixed auto drawer width
     * Fixed title padding
 
 License
