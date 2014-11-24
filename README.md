@@ -108,7 +108,7 @@ Dependency
 Changes
 -------
 * **Version 1.1.1:**
-    * You can changeItems that you got via `drawer.getItem(position)`. Changes will update the adapter
+    * You can change items that you got via `drawer.getItem(position)`. Changes will update the adapter
     * Fixed title padding
 
 License
