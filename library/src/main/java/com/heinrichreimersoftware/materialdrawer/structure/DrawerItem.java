@@ -29,6 +29,8 @@ public class DrawerItem {
 
     private boolean mIsDivider = false;
 
+    private int mItemId;
+
     private Drawable mImage;
     private int mImageMode = -1;
 
@@ -49,7 +51,6 @@ public class DrawerItem {
     public boolean isDivider() {
         return mIsDivider;
     }
-
 
     /**
      * Sets an image with a given image mode to the drawer item
@@ -75,6 +76,15 @@ public class DrawerItem {
         return this;
     }
 
+    public DrawerItem setmItemId(int itemId) {
+        mItemId = itemId;
+        return this;
+    }
+
+    public int getmItemId() {
+        return mItemId;
+    }
+
     /**
      * Gets the image of the drawer item
      *
@@ -93,7 +103,6 @@ public class DrawerItem {
         return mImage != null;
     }
 
-
     /**
      * Removes the image from the drawer item
      */
@@ -102,7 +111,6 @@ public class DrawerItem {
         notifyDataChanged();
         return this;
     }
-
 
     /**
      * Sets an image mode to the drawer item
@@ -136,7 +144,6 @@ public class DrawerItem {
         return mImageMode > 0;
     }
 
-
     /**
      * Resets the image mode from the drawer item
      */
@@ -145,7 +152,6 @@ public class DrawerItem {
         notifyDataChanged();
         return this;
     }
-
 
     /**
      * Sets a primary text to the drawer item
@@ -175,7 +181,6 @@ public class DrawerItem {
     public boolean hasTextPrimary() {
         return mTextPrimary != null && !mTextPrimary.equals("");
     }
-
 
     /**
      * Removes the primary text from the drawer item
@@ -215,7 +220,6 @@ public class DrawerItem {
         return mTextSecondary != null && !mTextSecondary.equals("");
     }
 
-
     /**
      * Removes the secondary text from the drawer item
      */
@@ -224,7 +228,6 @@ public class DrawerItem {
         notifyDataChanged();
         return this;
     }
-
 
     /**
      * Sets a click listener to the drawer item
@@ -264,7 +267,6 @@ public class DrawerItem {
         return this;
     }
 
-
     /**
      * Attaches the drawer item to an adapter
      *
@@ -289,7 +291,6 @@ public class DrawerItem {
             mAdapter.notifyDataSetChanged();
         }
     }
-
 
     public interface OnItemClickListener {
         void onClick(DrawerItem item, int position);
