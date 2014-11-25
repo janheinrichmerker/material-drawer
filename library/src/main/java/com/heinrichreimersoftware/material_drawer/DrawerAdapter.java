@@ -17,6 +17,7 @@
 package com.heinrichreimersoftware.material_drawer;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,53 +44,38 @@ public class DrawerAdapter extends ArrayAdapter<DrawerItem> {
     public View getView(int position, View convertView, ViewGroup parent) {
         DrawerItem drawerItem = getItem(position);
 
-        if(drawerItem.isDivider()){
+        if (drawerItem.isDivider()) {
             if (convertView == null || convertView instanceof RelativeLayout) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.drawer_divider_item, parent, false);
             }
-        }
-
-        else{
+        } else {
             if (convertView == null || !(convertView instanceof RelativeLayout)) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.drawer_item, parent, false);
             }
 
             ViewHolder viewHolder = new ViewHolder(convertView);
 
-            if(drawerItem.hasImage()){
+            if (drawerItem.hasImage()) {
                 viewHolder.getImageView().setImageDrawable(drawerItem.getImage());
 
                 ViewGroup.LayoutParams layoutParams = viewHolder.getImageView().getLayoutParams();
-                if(drawerItem.getImageMode() == DrawerItem.AVATAR){
+                if (drawerItem.getImageMode() == DrawerItem.AVATAR) {
                     layoutParams.width = layoutParams.height = getContext().getResources().getDimensionPixelSize(R.dimen.avatar_size);
-                    viewHolder.getRoot().getLayoutParams().height = getContext().getResources().getDimensionPixelSize(R.dimen.list_item_height_image_text);
-                }
-                else{
+                    viewHolder.getRoot().getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                } else {
                     layoutParams.width = layoutParams.height = getContext().getResources().getDimensionPixelSize(R.dimen.icon_size);
-                    viewHolder.getRoot().getLayoutParams().height = getContext().getResources().getDimensionPixelSize(R.dimen.list_item_height_icon_text);
+                    viewHolder.getRoot().getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
                 }
             }
 
-            if(drawerItem.hasTextPrimary()){
+            if (drawerItem.hasTextPrimary()) {
                 viewHolder.getTextViewPrimary().setText(drawerItem.getTextPrimary());
-                if(drawerItem.hasTextSecondary() && (drawerItem.getTextMode() == DrawerItem.TWO_LINE || drawerItem.getTextMode() == DrawerItem.THREE_LINE)){
+                if (drawerItem.hasTextSecondary()) {
                     viewHolder.getTextViewSecondary().setText(drawerItem.getTextSecondary());
-                    if(drawerItem.getTextMode() == DrawerItem.THREE_LINE){
-                        viewHolder.getTextViewSecondary().setLines(2);
-                        viewHolder.getTextViewSecondary().setVisibility(View.VISIBLE);
-                        viewHolder.getRoot().getLayoutParams().height = getContext().getResources().getDimensionPixelSize(R.dimen.list_item_height_icon_text_three_line);
-                    }
-                    else{
-                        viewHolder.getTextViewSecondary().setLines(1);
-                        viewHolder.getTextViewSecondary().setVisibility(View.VISIBLE);
-                        viewHolder.getRoot().getLayoutParams().height = getContext().getResources().getDimensionPixelSize(R.dimen.list_item_height_icon_text_two_line);
-                    }
-                }
-                else{
+                } else {
                     viewHolder.getTextViewSecondary().setVisibility(View.GONE);
                 }
-            }
-            else if(drawerItem.hasTextSecondary()){
+            } else if (drawerItem.hasTextSecondary()) {
                 viewHolder.getTextViewPrimary().setText(drawerItem.getTextPrimary());
                 viewHolder.getTextViewSecondary().setVisibility(View.GONE);
             }
@@ -98,27 +84,27 @@ public class DrawerAdapter extends ArrayAdapter<DrawerItem> {
         return convertView;
     }
 
-
     @Override
     public boolean isEnabled(int position) {
         return getItem(position).hasOnItemClickListener();
     }
 
-    public List<DrawerItem> getItems(){
+    public List<DrawerItem> getItems() {
         List<DrawerItem> items = new ArrayList<DrawerItem>();
-        for(int i = 0; i < getCount(); i++){
+        for (int i = 0; i < getCount(); i++) {
             items.add(getItem(i));
         }
         return items;
     }
 
-    private static class ViewHolder{
+    private static class ViewHolder extends RecyclerView.ViewHolder {
         RelativeLayout mRoot;
         ImageView mImageView;
         TextView mTextViewPrimary;
         TextView mTextViewSecondary;
 
         public ViewHolder(View root) {
+            super(root);
             mRoot = (RelativeLayout) root;
             mImageView = (ImageView) root.findViewById(R.id.mdImage);
             mTextViewPrimary = (TextView) root.findViewById(R.id.mdTextPrimary);
