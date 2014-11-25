@@ -122,9 +122,9 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
 
     private void updateSpacing() {
         if (mProfile != null && mProfile.getAvatar() != null && mProfile.getName() != null && !mProfile.getName().isEmpty()) {
-            int profileHeight = Math.round(getLayoutParams().width / 16 * 9) + statusBarHeight;
+            int profileHeight = Math.round(getLayoutParams().width / 16 * 8) + statusBarHeight;
             frameLayoutProfile.getLayoutParams().height = profileHeight;
-            int profileContentHeight = Math.round(getLayoutParams().width / 16 * 9);
+            int profileContentHeight = Math.round(getLayoutParams().width / 16 * 8);
             relativeLayoutProfileContent.getLayoutParams().height = profileContentHeight;
 
             layout.setPadding(0, 0, 0, 0);
