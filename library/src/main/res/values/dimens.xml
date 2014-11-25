@@ -40,6 +40,7 @@
     <dimen name="list_item_height_icon_text_three_line">88dp</dimen>
     <dimen name="list_item_height_image_text_three_line">88dp</dimen>
     <dimen name="list_item_margin">16dp</dimen>
+    <dimen name="list_item_padding_top">8dp</dimen>
     <dimen name="list_item_text_secondary_margin">4dp</dimen>
 
 </resources>
