@@ -76,12 +76,12 @@ public class DrawerItem {
         return this;
     }
 
-    public DrawerItem setmItemId(int itemId) {
+    public DrawerItem setItemId(int itemId) {
         mItemId = itemId;
         return this;
     }
 
-    public int getmItemId() {
+    public int getItemId() {
         return mItemId;
     }
 
