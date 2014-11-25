@@ -13,9 +13,11 @@
   -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@id/mdRoot"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/list_item_height_icon_text"
+    android:minHeight="@dimen/list_item_height_icon_text"
+    android:layout_height="wrap_content"
     android:background="?android:attr/selectableItemBackground">
 
     <ImageView
@@ -48,6 +50,7 @@
             android:fontFamily="sans-serif-medium"
             android:singleLine="true"
             android:ellipsize="marquee"
+            tools:text="Title"
             style="@style/TextAppearance.AppCompat.Subhead"
             android:clickable="false"/>
 
@@ -57,6 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/list_item_text_secondary_margin"
             android:ellipsize="marquee"
+            tools:text="Description \nSecond line"
             style="@style/TextAppearance.AppCompat.Body1"
             android:clickable="false"/>
 
