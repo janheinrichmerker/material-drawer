@@ -16,14 +16,12 @@
 
 package com.heinrichreimersoftware.material_drawer;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.util.AttributeSet;
-import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -42,7 +40,7 @@ import java.util.List;
 /**
  * View to be used with {@link android.support.v4.widget.DrawerLayout} to display a drawer which is fully compliant with the Material Design specification.
  */
-public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScrollView.OnInsetsCallback{
+public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScrollView.OnInsetsCallback {
     private DrawerProfile mProfile;
 
     private DrawerAdapter mAdapter;
@@ -74,11 +72,12 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
         init(context);
     }
 
-    private void init(Context context){
+    private void init(Context context) {
         inflate(context, R.layout.drawer, this);
 
         findViews();
-        
+
+        setFitsSystemWindows(true);
         setClipToPadding(false);
         setBackgroundColor(getResources().getColor(R.color.drawer_background));
         setInsetForeground(new ColorDrawable(getResources().getColor(R.color.scrim)));
@@ -87,9 +86,27 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
 
         mAdapter = new DrawerAdapter(context, new ArrayList<DrawerItem>());
         linearListView.setAdapter(mAdapter);
+
+        getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                int width = getWidth();
+                int maxWidth = getResources().getDimensionPixelSize(R.dimen.drawer_max_width);
+
+                getLayoutParams().width = Math.min(width, maxWidth);
+
+                updateSpacing();
+
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                    getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                } else {
+                    getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                }
+            }
+        });
     }
 
-    private void findViews(){
+    private void findViews() {
         layout = (LinearLayout) findViewById(R.id.mdLayout);
 
         frameLayoutProfile = (FrameLayout) findViewById(R.id.mdLayoutProfile);
@@ -102,39 +119,38 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
         linearListView = (LinearListView) findViewById(R.id.mdLinearListViewPrimary);
     }
 
-    private void updateSpacing(){
-        if(mProfile != null && mProfile.getAvatar() != null && mProfile.getName() != null && !mProfile.getName().equals("")){
-            frameLayoutProfile.getLayoutParams().height = Math.round(getLayoutParams().width / 16 * 9) + statusBarHeight;
-            relativeLayoutProfileContent.getLayoutParams().height = Math.round(getLayoutParams().width / 16 * 9);
+    private void updateSpacing() {
+        if (mProfile != null && mProfile.getAvatar() != null && mProfile.getName() != null && !mProfile.getName().isEmpty()) {
+            int profileHeight = Math.round(getLayoutParams().width / 16 * 9) + statusBarHeight;
+            frameLayoutProfile.getLayoutParams().height = profileHeight;
+            int profileContentHeight = Math.round(getLayoutParams().width / 16 * 9);
+            relativeLayoutProfileContent.getLayoutParams().height = profileContentHeight;
 
             layout.setPadding(0, 0, 0, 0);
-        }
-        else{
+        } else {
             layout.setPadding(0, statusBarHeight, 0, 0);
         }
     }
 
-    private void updateProfile(){
-        if(mProfile != null && mProfile.getAvatar() != null && mProfile.getName() != null && !mProfile.getName().equals("")){
+    private void updateProfile() {
+        if (mProfile != null && mProfile.getAvatar() != null && mProfile.getName() != null && !mProfile.getName().isEmpty()) {
             imageViewAvatarProfile.setImageDrawable(mProfile.getAvatar());
             textViewNameProfile.setText(mProfile.getName());
 
-            if(mProfile.getBackground() != null){
+            if (mProfile.getBackground() != null) {
                 imageViewBackgroundProfile.setImageDrawable(mProfile.getBackground());
-            }
-            else{
+            } else {
                 imageViewBackgroundProfile.setImageDrawable(new ColorDrawable(getResources().getColor(R.color.primary_material_dark)));
             }
 
-            if(mProfile.getDescription() != null && !mProfile.getDescription().equals("")){
+            if (mProfile.getDescription() != null && !mProfile.getDescription().isEmpty()) {
                 textViewDescriptionProfile.setVisibility(VISIBLE);
                 textViewDescriptionProfile.setText(mProfile.getDescription());
-            }
-            else{
+            } else {
                 textViewDescriptionProfile.setVisibility(GONE);
             }
 
-            if(mProfile.hasOnProfileClickListener()){
+            if (mProfile.hasOnProfileClickListener()) {
                 frameLayoutProfile.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -143,23 +159,19 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
                 });
 
                 frameLayoutProfile.setEnabled(true);
-            }
-            else{
+            } else {
                 frameLayoutProfile.setEnabled(false);
             }
             frameLayoutProfile.setVisibility(VISIBLE);
-        }
-        else{
+        } else {
             frameLayoutProfile.setVisibility(GONE);
         }
-        updateSpacing();
     }
 
-    private void updateList(){
-        if(mAdapter.getCount() == 0){
+    private void updateList() {
+        if (mAdapter.getCount() == 0) {
             linearListView.setVisibility(GONE);
-        }
-        else{
+        } else {
             linearListView.setVisibility(VISIBLE);
         }
 
@@ -180,13 +192,12 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
         });
     }
 
-
     /**
      * Sets a profile to the drawer view
      *
      * @param profile Profile to set
      */
-    public DrawerView setProfile(DrawerProfile profile){
+    public DrawerView setProfile(DrawerProfile profile) {
         mProfile = profile;
         updateProfile();
         return this;
@@ -197,10 +208,9 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
      *
      * @return Profile of the drawer view
      */
-    private DrawerProfile getProfile(){
+    private DrawerProfile getProfile() {
         return mProfile;
     }
-
 
     /**
      * Adds items to the drawer view
@@ -208,9 +218,6 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
      * @param items Items to add
      */
     public DrawerView addItems(List<DrawerItem> items) {
-        for (DrawerItem item : items) {
-            item.attachTo(mAdapter);
-        }
         mAdapter.addAll(items);
         updateList();
         return this;
@@ -222,7 +229,6 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
      * @param item Item to add
      */
     public DrawerView addItem(DrawerItem item) {
-        item.attachTo(mAdapter);
         mAdapter.add(item);
         updateList();
         return this;
@@ -232,7 +238,8 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
      * Adds a divider to the drawer view
      */
     public DrawerView addDivider() {
-        addItem(new DrawerDividerItem());
+        mAdapter.add(new DrawerDividerItem());
+        updateList();
         return this;
     }
 
@@ -249,7 +256,6 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
      * Gets an item from the drawer view
      *
      * @param position The item position
-     *
      * @return Item from the drawer view
      */
     public DrawerItem getItem(int position) {
@@ -262,7 +268,6 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
      * @param item Item to remove
      */
     public DrawerView removeItem(DrawerItem item) {
-        item.detach();
         mAdapter.remove(item);
         updateList();
         return this;
@@ -274,7 +279,6 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
      * @param position Position to remove
      */
     public DrawerView removeItem(int position) {
-        mAdapter.getItem(position).detach();
         mAdapter.remove(mAdapter.getItem(position));
         updateList();
         return this;
@@ -284,14 +288,10 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
      * Removes all items from the drawer view
      */
     public DrawerView clearItems() {
-        for (DrawerItem item : mAdapter.getItems()) {
-            item.detach();
-        }
         mAdapter.clear();
         updateList();
         return this;
     }
-
 
     /**
      * Sets an item click listener to the drawer view
@@ -331,39 +331,17 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
         return this;
     }
 
-
     @Override
     public void onInsetsChanged(Rect insets) {
         statusBarHeight = insets.top;
         updateSpacing();
     }
 
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
+    public ImageView getBackgroundImageView() {
+        return imageViewBackgroundProfile;
+    }
 
-        if(w != oldw){
-            //Window width
-            int windowWidth = ((Activity)getContext()).getWindow().getDecorView().getWidth();
-
-            //Minus the width of the vertical nav bar
-            if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
-                int navigationBarWidthResId = getResources().getIdentifier("navigation_bar_width", "dimen", "android");
-                if (navigationBarWidthResId > 0) {
-                    windowWidth -= getResources().getDimensionPixelSize(navigationBarWidthResId);
-                }
-            }
-
-            //App bar size
-            TypedValue typedValue = new TypedValue();
-            getContext().getTheme().resolveAttribute(R.attr.actionBarSize, typedValue, true);
-            int actionBarSize = TypedValue.complexToDimensionPixelSize(typedValue.data, getResources().getDisplayMetrics());
-
-            int width = windowWidth - actionBarSize;
-
-            int maxWidth = getResources().getDimensionPixelSize(R.dimen.drawer_max_width);
-
-            getLayoutParams().width = Math.min(width, maxWidth);
-        }
+    public ImageView getAvatarImageView() {
+        return imageViewAvatarProfile;
     }
 }
