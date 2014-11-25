@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.heinrichreimersoftware.material_drawer.structure;
+package com.heinrichreimersoftware.materialdrawer.structure;
 
 import android.graphics.drawable.Drawable;
 import android.widget.ArrayAdapter;
 
 /**
- * Object to be used with {@link com.heinrichreimersoftware.material_drawer.DrawerView} to display a profile in the drawer.
+ * Object to be used with {@link com.heinrichreimersoftware.materialdrawer.DrawerView} to display a profile in the drawer.
  * Can hold an image, a primary text, a secondary text and a listener.
  */
 public class DrawerProfile {

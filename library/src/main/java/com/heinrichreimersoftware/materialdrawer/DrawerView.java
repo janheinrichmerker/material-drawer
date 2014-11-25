@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.heinrichreimersoftware.material_drawer;
+package com.heinrichreimersoftware.materialdrawer;
 
 import android.content.Context;
 import android.graphics.Rect;
@@ -28,11 +28,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.heinrichreimersoftware.material_drawer.structure.DrawerDividerItem;
-import com.heinrichreimersoftware.material_drawer.structure.DrawerItem;
-import com.heinrichreimersoftware.material_drawer.structure.DrawerProfile;
-import com.heinrichreimersoftware.material_drawer.widget.LinearListView;
-import com.heinrichreimersoftware.material_drawer.widget.ScrimInsetsScrollView;
+import com.heinrichreimersoftware.material_drawer.R;
+import com.heinrichreimersoftware.materialdrawer.structure.DrawerDividerItem;
+import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
+import com.heinrichreimersoftware.materialdrawer.structure.DrawerProfile;
+import com.heinrichreimersoftware.materialdrawer.widget.LinearListView;
+import com.heinrichreimersoftware.materialdrawer.widget.ScrimInsetsScrollView;
 
 import java.util.ArrayList;
 import java.util.List;

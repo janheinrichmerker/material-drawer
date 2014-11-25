@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.heinrichreimersoftware.material_drawer;
+package com.heinrichreimersoftware.materialdrawer;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -26,7 +26,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.heinrichreimersoftware.material_drawer.structure.DrawerItem;
+import com.heinrichreimersoftware.material_drawer.R;
+import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
 
 import java.util.ArrayList;
 import java.util.List;
