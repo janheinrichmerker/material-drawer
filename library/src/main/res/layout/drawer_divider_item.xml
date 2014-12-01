@@ -18,4 +18,4 @@
     android:layout_height="@dimen/divider_height"
     android:layout_marginTop="@dimen/divider_margin"
     android:layout_marginBottom="@dimen/divider_margin"
-    android:background="@color/divider"/>
+    android:background="@color/divider" />

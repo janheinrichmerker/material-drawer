@@ -26,7 +26,6 @@
     <dimen name="icon_size">24dp</dimen>
     <dimen name="avatar_size">40dp</dimen>
     <dimen name="big_avatar_size">64dp</dimen>
-    <dimen name="profile_text_margin_bottom">4dp</dimen>
 
     <dimen name="divider_height">1dp</dimen>
     <dimen name="divider_margin">8dp</dimen>
@@ -41,6 +40,6 @@
     <dimen name="list_item_height_icon_text_three_line">88dp</dimen>
     <dimen name="list_item_height_image_text_three_line">88dp</dimen>
     <dimen name="list_item_margin">16dp</dimen>
-    <dimen name="list_item_text_secondary_margin">4dp</dimen>
+    <dimen name="list_item_text_secondary_margin">0dp</dimen>
 
 </resources>

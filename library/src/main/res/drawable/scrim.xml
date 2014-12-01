@@ -16,5 +16,5 @@
     <gradient
         android:startColor="@color/scrim_start"
         android:endColor="@color/scrim_end"
-        android:angle="270"/>
+        android:angle="270" />
 </shape>

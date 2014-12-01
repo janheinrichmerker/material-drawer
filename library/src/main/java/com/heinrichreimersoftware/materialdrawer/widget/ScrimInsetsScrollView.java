@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.heinrichreimersoftware.material_drawer.widget;
+package com.heinrichreimersoftware.materialdrawer.widget;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -68,16 +68,15 @@ public class ScrimInsetsScrollView extends ScrollView {
 
     @Override
     protected boolean fitSystemWindows(Rect insets) {
-        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT_WATCH) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT_WATCH) {
             handleWindowInsets(new Rect(insets));
             return true; // consume insets
-        }
-        else return false;
+        } else return false;
     }
 
     @TargetApi(Build.VERSION_CODES.KITKAT_WATCH)
     @Override
-    public WindowInsets onApplyWindowInsets(WindowInsets insets){
+    public WindowInsets onApplyWindowInsets(WindowInsets insets) {
         insets = super.onApplyWindowInsets(insets);
         handleWindowInsets(
                 new Rect(
@@ -90,7 +89,7 @@ public class ScrimInsetsScrollView extends ScrollView {
         return insets;
     }
 
-    public void handleWindowInsets(Rect insets){
+    public void handleWindowInsets(Rect insets) {
         mInsets = new Rect(insets);
         setWillNotDraw(mInsetForeground == null);
         ViewCompat.postInvalidateOnAnimation(this);

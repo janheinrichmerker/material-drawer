@@ -14,13 +14,16 @@
  * limitations under the License.
  */
 
-package com.heinrichreimersoftware.material_drawer.structure;
+package com.heinrichreimersoftware.materialdrawer.structure;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.widget.ArrayAdapter;
 
 /**
- * Object to be used with {@link com.heinrichreimersoftware.material_drawer.DrawerAdapter} and {@link com.heinrichreimersoftware.material_drawer.DrawerView} to display a drawer item.
+ * Object to be used with {@link com.heinrichreimersoftware.materialdrawer.DrawerAdapter} and {@link com.heinrichreimersoftware.materialdrawer.DrawerView} to display a drawer item.
  * Can hold an image, a primary text, a secondary text and a listener.
  */
 public class DrawerItem {
@@ -33,6 +36,8 @@ public class DrawerItem {
 
     private boolean mIsDivider = false;
 
+    private int mId = -1;
+
     private Drawable mImage;
     private int mImageMode = -1;
 
@@ -44,21 +49,52 @@ public class DrawerItem {
 
     private ArrayAdapter<DrawerItem> mAdapter;
 
+
+    /**
+     * Sets whether the drawer item is a divider
+     *
+     * @param isDivider True if the drawer item should be a divider, false otherwise.
+     */
     public DrawerItem setIsDivider(boolean isDivider) {
         mIsDivider = isDivider;
         notifyDataChanged();
         return this;
     }
 
+    /**
+     * Gets whether the drawer item is a divider
+     *
+     * @return True if the drawer item is a divider, false otherwise.
+     */
     public boolean isDivider() {
         return mIsDivider;
     }
 
 
     /**
+     * Sets an ID the drawer item
+     *
+     * @param id ID to set
+     */
+    public DrawerItem setId(int id) {
+        mId = id;
+        return this;
+    }
+
+    /**
+     * Gets the ID of the drawer item
+     *
+     * @return ID of the drawer item
+     */
+    public int getId() {
+        return mId;
+    }
+
+
+    /**
      * Sets an image with a given image mode to the drawer item
      *
-     * @param image Image to set
+     * @param image     Image to set
      * @param imageMode Image mode to set
      */
     public DrawerItem setImage(Drawable image, int imageMode) {
@@ -77,6 +113,25 @@ public class DrawerItem {
         setImage(image, ICON);
         notifyDataChanged();
         return this;
+    }
+
+    /**
+     * Sets an image with a given image mode to the drawer item
+     *
+     * @param image     Image to set
+     * @param imageMode Image mode to set
+     */
+    public DrawerItem setImage(Context context, Bitmap image, int imageMode) {
+        return setImage(new BitmapDrawable(context.getResources(), image), imageMode);
+    }
+
+    /**
+     * Sets an image to the drawer item
+     *
+     * @param image Image to set
+     */
+    public DrawerItem setImage(Context context, Bitmap image) {
+        return setImage(new BitmapDrawable(context.getResources(), image));
     }
 
     /**
@@ -114,7 +169,7 @@ public class DrawerItem {
      * @param imageMode Image mode to set
      */
     public DrawerItem setImageMode(int imageMode) {
-        if(imageMode != ICON && imageMode != AVATAR){
+        if (imageMode != ICON && imageMode != AVATAR) {
             throw new IllegalArgumentException("Image mode must be either ICON or AVATAR.");
         }
         mImageMode = imageMode;
@@ -195,7 +250,7 @@ public class DrawerItem {
      * Sets a secondary text with a given text mode to the drawer item
      *
      * @param textSecondary Secondary text to set
-     * @param textMode Text mode to set
+     * @param textMode      Text mode to set
      */
     public DrawerItem setTextSecondary(String textSecondary, int textMode) {
         mTextSecondary = textSecondary;
@@ -249,7 +304,7 @@ public class DrawerItem {
      * @param textMode Text mode to set
      */
     public DrawerItem setTextMode(int textMode) {
-        if(textMode != SINGLE_LINE && textMode != TWO_LINE && textMode != THREE_LINE){
+        if (textMode != SINGLE_LINE && textMode != TWO_LINE && textMode != THREE_LINE) {
             throw new IllegalArgumentException("Image mode must be either SINGLE_LINE, TWO_LINE or THREE_LINE.");
         }
         mTextMode = textMode;
@@ -344,14 +399,14 @@ public class DrawerItem {
         return this;
     }
 
-    protected void notifyDataChanged(){
-        if(mAdapter != null){
+    protected void notifyDataChanged() {
+        if (mAdapter != null) {
             mAdapter.notifyDataSetChanged();
         }
     }
 
 
-    public interface OnItemClickListener{
-        void onClick(DrawerItem item, int position);
+    public interface OnItemClickListener {
+        void onClick(DrawerItem item, int id, int position);
     }
 }

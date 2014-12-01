@@ -13,21 +13,21 @@
   -->
 
 <resources>
-    <item type="id" name="mdLayout"/>
+    <item type="id" name="mdLayout" />
 
-    <item type="id" name="mdLayoutProfile"/>
-    <item type="id" name="mdLayoutProfileContent"/>
-    <item type="id" name="mdAvatarProfile"/>
-    <item type="id" name="mdBackgroundProfile"/>
-    <item type="id" name="mdNameProfile"/>
-    <item type="id" name="mdDescriptionProfile"/>
+    <item type="id" name="mdLayoutProfile" />
+    <item type="id" name="mdLayoutProfileContent" />
+    <item type="id" name="mdAvatarProfile" />
+    <item type="id" name="mdBackgroundProfile" />
+    <item type="id" name="mdNameProfile" />
+    <item type="id" name="mdDescriptionProfile" />
 
-    <item type="id" name="mdLinearListViewPrimary"/>
-    <item type="id" name="mdDivider"/>
-    <item type="id" name="mdLinearListViewSecondary"/>
+    <item type="id" name="mdLinearListViewPrimary" />
+    <item type="id" name="mdDivider" />
+    <item type="id" name="mdLinearListViewSecondary" />
 
-    <item type="id" name="mdRoot"/>
-    <item type="id" name="mdImage"/>
-    <item type="id" name="mdTextPrimary"/>
-    <item type="id" name="mdTextSecondary"/>
+    <item type="id" name="mdRoot" />
+    <item type="id" name="mdImage" />
+    <item type="id" name="mdTextPrimary" />
+    <item type="id" name="mdTextSecondary" />
 </resources>

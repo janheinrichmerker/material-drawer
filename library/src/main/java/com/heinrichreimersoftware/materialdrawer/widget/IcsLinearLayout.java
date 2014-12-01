@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.heinrichreimersoftware.material_drawer.widget;
+package com.heinrichreimersoftware.materialdrawer.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -34,7 +34,7 @@ import android.widget.LinearLayout;
  * {@link android.widget.FrameLayout} so it can receive the margin.
  */
 public class IcsLinearLayout extends LinearLayout {
-    private static final int[] R_styleable_LinearLayout = new int[] {
+    private static final int[] R_styleable_LinearLayout = new int[]{
         /* 0 */ android.R.attr.divider,
         /* 1 */ android.R.attr.measureWithLargestChild,
         /* 2 */ android.R.attr.showDividers,
@@ -62,10 +62,10 @@ public class IcsLinearLayout extends LinearLayout {
      */
     public static final int SHOW_DIVIDER_END = 4;
 
-    
+
     private static final boolean IS_HONEYCOMB = Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB;
 
-    
+
     private Drawable mDivider;
     protected int mDividerWidth;
     protected int mDividerHeight;
@@ -75,7 +75,7 @@ public class IcsLinearLayout extends LinearLayout {
 
     private boolean mUseLargestChild;
 
-	public IcsLinearLayout(Context context, AttributeSet attrs) {
+    public IcsLinearLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         TypedArray a = context.obtainStyledAttributes(attrs, /*com.android.internal.R.styleable.*/R_styleable_LinearLayout);
@@ -113,6 +113,7 @@ public class IcsLinearLayout extends LinearLayout {
 
     /**
      * Set a drawable to be used as a divider between items.
+     *
      * @param divider Drawable that will divide each item.
      * @see #setShowDividers(int)
      */
@@ -137,7 +138,6 @@ public class IcsLinearLayout extends LinearLayout {
      * Set padding displayed on both ends of dividers.
      *
      * @param padding Padding value in pixels that will be applied to each end
-     *
      * @see #setShowDividers(int)
      * @see #setDividerDrawable(android.graphics.drawable.Drawable)
      * @see #getDividerPadding()
@@ -261,7 +261,7 @@ public class IcsLinearLayout extends LinearLayout {
     }
 
     void drawHorizontalDivider(Canvas canvas, int top) {
-        if(mClipDivider && !IS_HONEYCOMB) {
+        if (mClipDivider && !IS_HONEYCOMB) {
             canvas.save();
             canvas.clipRect(getPaddingLeft() + mDividerPadding, top,
                     getWidth() - getPaddingRight() - mDividerPadding, top + mDividerHeight);
@@ -275,7 +275,7 @@ public class IcsLinearLayout extends LinearLayout {
     }
 
     void drawVerticalDivider(Canvas canvas, int left) {
-        if(mClipDivider && !IS_HONEYCOMB) {
+        if (mClipDivider && !IS_HONEYCOMB) {
             canvas.save();
             canvas.clipRect(left, getPaddingTop() + mDividerPadding,
                     left + mDividerWidth, getHeight() - getPaddingBottom() - mDividerPadding);
@@ -319,8 +319,7 @@ public class IcsLinearLayout extends LinearLayout {
      * measured normally.
      *
      * @return True to measure children with a weight using the minimum
-     *         size of the largest child, false otherwise.
-     *
+     * size of the largest child, false otherwise.
      * @attr ref android.R.styleable#LinearLayout_measureWithLargestChild
      */
     public boolean isMeasureWithLargestChildEnabled() {
@@ -331,12 +330,11 @@ public class IcsLinearLayout extends LinearLayout {
      * When set to true, all children with a weight will be considered having
      * the minimum size of the largest child. If false, all children are
      * measured normally.
-     *
+     * <p/>
      * Disabled by default.
      *
      * @param enabled True to measure children with a weight using the
-     *        minimum size of the largest child, false otherwise.
-     *
+     *                minimum size of the largest child, false otherwise.
      * @attr ref android.R.styleable#LinearLayout_measureWithLargestChild
      */
     public void setMeasureWithLargestChildEnabled(boolean enabled) {

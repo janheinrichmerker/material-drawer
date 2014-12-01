@@ -12,8 +12,8 @@
   -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.heinrichreimersoftware.material_drawer">
+    package="com.heinrichreimersoftware.materialdrawer">
 
-    <application android:allowBackup="true"/>
+    <application android:allowBackup="true" />
 
 </manifest>

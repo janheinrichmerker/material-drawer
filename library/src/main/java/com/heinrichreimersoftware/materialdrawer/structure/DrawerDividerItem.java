@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.heinrichreimersoftware.material_drawer.structure;
+package com.heinrichreimersoftware.materialdrawer.structure;
 
 /**
  * {@link DrawerItem} which should only display a divider.
  */
 public class DrawerDividerItem extends DrawerItem {
-    public DrawerDividerItem(){
+    public DrawerDividerItem() {
         setIsDivider(true);
     }
 }

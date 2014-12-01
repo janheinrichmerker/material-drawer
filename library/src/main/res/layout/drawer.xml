@@ -31,13 +31,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:clickable="false"/>
+                android:clickable="false" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/divider"
-                android:clickable="false"/>
+                android:clickable="false" />
 
             <RelativeLayout
                 android:id="@id/mdLayoutProfileContent"
@@ -61,7 +61,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="false"
                     android:scaleType="centerCrop"
-                    android:clickable="false"/>
+                    android:clickable="false" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -85,7 +85,7 @@
                         android:ellipsize="marquee"
                         android:textColor="@android:color/white"
                         style="@style/TextAppearance.AppCompat.Subhead.Inverse"
-                        android:clickable="false"/>
+                        android:clickable="false" />
 
                     <TextView
                         android:id="@id/mdDescriptionProfile"
@@ -93,7 +93,7 @@
                         android:layout_height="wrap_content"
                         android:ellipsize="marquee"
                         style="@style/TextAppearance.AppCompat.Subhead.Inverse"
-                        android:clickable="false"/>
+                        android:clickable="false" />
 
                 </LinearLayout>
 
@@ -101,13 +101,13 @@
 
         </FrameLayout>
 
-        <com.heinrichreimersoftware.material_drawer.widget.LinearListView
+        <com.heinrichreimersoftware.materialdrawer.widget.LinearListView
             android:id="@id/mdLinearListViewPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/drawer_list_margin_vertical"
             android:paddingBottom="@dimen/drawer_list_margin_vertical"
-            android:orientation="vertical"/>
+            android:orientation="vertical" />
 
     </LinearLayout>
 

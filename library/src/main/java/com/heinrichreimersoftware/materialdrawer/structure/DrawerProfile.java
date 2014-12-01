@@ -14,13 +14,17 @@
  * limitations under the License.
  */
 
-package com.heinrichreimersoftware.material_drawer.structure;
+package com.heinrichreimersoftware.materialdrawer.structure;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.widget.ArrayAdapter;
+
+import com.heinrichreimersoftware.materialdrawer.DrawerView;
 
 /**
- * Object to be used with {@link com.heinrichreimersoftware.material_drawer.DrawerView} to display a profile in the drawer.
+ * Object to be used with {@link com.heinrichreimersoftware.materialdrawer.DrawerView} to display a profile in the drawer.
  * Can hold an image, a primary text, a secondary text and a listener.
  */
 public class DrawerProfile {
@@ -30,7 +34,7 @@ public class DrawerProfile {
     private String mDescription;
 
     private OnProfileClickListener mOnClickListener;
-    private ArrayAdapter<DrawerProfile> mAdapter;
+    private DrawerView mDrawerView;
 
 
     /**
@@ -40,6 +44,17 @@ public class DrawerProfile {
      */
     public DrawerProfile setAvatar(Drawable avatar) {
         mAvatar = avatar;
+        notifyDataChanged();
+        return this;
+    }
+
+    /**
+     * Sets an avatar image to the drawer profile
+     *
+     * @param avatar Avatar image to set
+     */
+    public DrawerProfile setAvatar(Context context, Bitmap avatar) {
+        mAvatar = new BitmapDrawable(context.getResources(), avatar);
         notifyDataChanged();
         return this;
     }
@@ -79,6 +94,17 @@ public class DrawerProfile {
      */
     public DrawerProfile setBackground(Drawable background) {
         mBackground = background;
+        notifyDataChanged();
+        return this;
+    }
+
+    /**
+     * Sets a background to the drawer profile
+     *
+     * @param background Background to set
+     */
+    public DrawerProfile setBackground(Context context, Bitmap background) {
+        mBackground = new BitmapDrawable(context.getResources(), background);
         notifyDataChanged();
         return this;
     }
@@ -229,32 +255,32 @@ public class DrawerProfile {
 
 
     /**
-     * Attaches the drawer item to an adapter
+     * Attaches the drawer item to a drawer
      *
-     * @param adapter Adapter to attach to
+     * @param drawerView drawer to attach to
      */
-    public DrawerProfile attachTo(ArrayAdapter<DrawerProfile> adapter) {
-        mAdapter = adapter;
+    public DrawerProfile attachTo(DrawerView drawerView) {
+        mDrawerView = drawerView;
         notifyDataChanged();
         return this;
     }
 
     /**
-     * Detaches the drawer item from its adapter
+     * Detaches the drawer item from its drawer
      */
     public DrawerProfile detach() {
-        mAdapter = null;
+        mDrawerView = null;
         return this;
     }
 
-    protected void notifyDataChanged(){
-        if(mAdapter != null){
-            mAdapter.notifyDataSetChanged();
+    protected void notifyDataChanged() {
+        if (mDrawerView != null) {
+            mDrawerView.setProfile(this);
         }
     }
 
 
-    public interface OnProfileClickListener{
+    public interface OnProfileClickListener {
         void onClick(DrawerProfile item);
     }
 }
