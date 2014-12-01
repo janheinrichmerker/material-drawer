@@ -1,4 +1,4 @@
-package com.heinrichreimersoftware.material_drawer;
+package com.heinrichreimersoftware.materialdrawer;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

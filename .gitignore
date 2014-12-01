@@ -5,3 +5,11 @@
 .DS_Store
 /build
 material-drawer.iml
+
+# IntelliJ IDEA
+.idea
+*.iml
+*.ipr
+*.iws
+classes
+gen-external-apklibs

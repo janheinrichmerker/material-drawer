@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.heinrichreimersoftware.material_drawer.widget;
+package com.heinrichreimersoftware.materialdrawer.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;

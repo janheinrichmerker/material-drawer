@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.heinrichreimersoftware.material_drawer.widget;
+package com.heinrichreimersoftware.materialdrawer.widget;
 
 import android.annotation.TargetApi;
 import android.content.Context;

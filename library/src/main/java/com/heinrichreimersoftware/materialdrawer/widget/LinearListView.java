@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.heinrichreimersoftware.material_drawer.widget;
+package com.heinrichreimersoftware.materialdrawer.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -241,17 +241,17 @@ public class LinearListView extends IcsLinearLayout {
 	private void updateEmptyStatus(boolean empty) {
 		if (empty) {
 			if (mEmptyView != null) {
-				mEmptyView.setVisibility(View.VISIBLE);
-				setVisibility(View.GONE);
+				mEmptyView.setVisibility(VISIBLE);
+				setVisibility(GONE);
 			} else {
 				// If the caller just removed our empty view, make sure the list
 				// view is visible
-				setVisibility(View.VISIBLE);
+				setVisibility(VISIBLE);
 			}
 		} else {
 			if (mEmptyView != null)
-				mEmptyView.setVisibility(View.GONE);
-			setVisibility(View.VISIBLE);
+				mEmptyView.setVisibility(GONE);
+			setVisibility(VISIBLE);
 		}
 	}
 

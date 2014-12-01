@@ -14,24 +14,22 @@
  * limitations under the License.
  */
 
-package com.heinrichreimersoftware.material_drawer.structure;
+package com.heinrichreimersoftware.materialdrawer.structure;
 
 import android.graphics.drawable.Drawable;
 import android.widget.ArrayAdapter;
 
 /**
- * Object to be used with {@link com.heinrichreimersoftware.material_drawer.DrawerAdapter} and {@link com.heinrichreimersoftware.material_drawer.DrawerView} to display a drawer item.
+ * Object to be used with {@link com.heinrichreimersoftware.materialdrawer.DrawerAdapter} and {@link com.heinrichreimersoftware.materialdrawer.DrawerView} to display a drawer item.
  * Can hold an image, a primary text, a secondary text and a listener.
  */
 public class DrawerItem {
     public static final int ICON = 1;
     public static final int AVATAR = 2;
 
-    public static final int SINGLE_LINE = 3;
-    public static final int TWO_LINE = 4;
-    public static final int THREE_LINE = 5;
-
     private boolean mIsDivider = false;
+
+    private int mItemId;
 
     private Drawable mImage;
     private int mImageMode = -1;
@@ -54,11 +52,10 @@ public class DrawerItem {
         return mIsDivider;
     }
 
-
     /**
      * Sets an image with a given image mode to the drawer item
      *
-     * @param image Image to set
+     * @param image     Image to set
      * @param imageMode Image mode to set
      */
     public DrawerItem setImage(Drawable image, int imageMode) {
@@ -79,6 +76,15 @@ public class DrawerItem {
         return this;
     }
 
+    public DrawerItem setItemId(int itemId) {
+        mItemId = itemId;
+        return this;
+    }
+
+    public int getItemId() {
+        return mItemId;
+    }
+
     /**
      * Gets the image of the drawer item
      *
@@ -97,7 +103,6 @@ public class DrawerItem {
         return mImage != null;
     }
 
-
     /**
      * Removes the image from the drawer item
      */
@@ -107,14 +112,13 @@ public class DrawerItem {
         return this;
     }
 
-
     /**
      * Sets an image mode to the drawer item
      *
      * @param imageMode Image mode to set
      */
     public DrawerItem setImageMode(int imageMode) {
-        if(imageMode != ICON && imageMode != AVATAR){
+        if (imageMode != ICON && imageMode != AVATAR) {
             throw new IllegalArgumentException("Image mode must be either ICON or AVATAR.");
         }
         mImageMode = imageMode;
@@ -140,7 +144,6 @@ public class DrawerItem {
         return mImageMode > 0;
     }
 
-
     /**
      * Resets the image mode from the drawer item
      */
@@ -149,7 +152,6 @@ public class DrawerItem {
         notifyDataChanged();
         return this;
     }
-
 
     /**
      * Sets a primary text to the drawer item
@@ -180,26 +182,11 @@ public class DrawerItem {
         return mTextPrimary != null && !mTextPrimary.equals("");
     }
 
-
     /**
      * Removes the primary text from the drawer item
      */
     public DrawerItem removeTextPrimary() {
         mTextPrimary = null;
-        notifyDataChanged();
-        return this;
-    }
-
-
-    /**
-     * Sets a secondary text with a given text mode to the drawer item
-     *
-     * @param textSecondary Secondary text to set
-     * @param textMode Text mode to set
-     */
-    public DrawerItem setTextSecondary(String textSecondary, int textMode) {
-        mTextSecondary = textSecondary;
-        setTextMode(textMode);
         notifyDataChanged();
         return this;
     }
@@ -210,7 +197,8 @@ public class DrawerItem {
      * @param textSecondary Secondary text to set
      */
     public DrawerItem setTextSecondary(String textSecondary) {
-        setTextSecondary(textSecondary, TWO_LINE);
+        mTextSecondary = textSecondary;
+        notifyDataChanged();
         return this;
     }
 
@@ -232,7 +220,6 @@ public class DrawerItem {
         return mTextSecondary != null && !mTextSecondary.equals("");
     }
 
-
     /**
      * Removes the secondary text from the drawer item
      */
@@ -241,50 +228,6 @@ public class DrawerItem {
         notifyDataChanged();
         return this;
     }
-
-
-    /**
-     * Sets a text mode to the drawer item
-     *
-     * @param textMode Text mode to set
-     */
-    public DrawerItem setTextMode(int textMode) {
-        if(textMode != SINGLE_LINE && textMode != TWO_LINE && textMode != THREE_LINE){
-            throw new IllegalArgumentException("Image mode must be either SINGLE_LINE, TWO_LINE or THREE_LINE.");
-        }
-        mTextMode = textMode;
-        notifyDataChanged();
-        return this;
-    }
-
-    /**
-     * Gets the text mode of the drawer item
-     *
-     * @return Text mode of the drawer item
-     */
-    public int getTextMode() {
-        return mTextMode;
-    }
-
-    /**
-     * Gets whether the drawer item has a text mode set to it
-     *
-     * @return True if the drawer item has a text mode set to it, false otherwise.
-     */
-    public boolean hasTextMode() {
-        return mTextMode > 0;
-    }
-
-
-    /**
-     * Resets the text mode from the drawer item
-     */
-    public DrawerItem resetTextMode() {
-        mTextMode = SINGLE_LINE;
-        notifyDataChanged();
-        return this;
-    }
-
 
     /**
      * Sets a click listener to the drawer item
@@ -324,7 +267,6 @@ public class DrawerItem {
         return this;
     }
 
-
     /**
      * Attaches the drawer item to an adapter
      *
@@ -344,14 +286,13 @@ public class DrawerItem {
         return this;
     }
 
-    protected void notifyDataChanged(){
-        if(mAdapter != null){
+    protected void notifyDataChanged() {
+        if (mAdapter != null) {
             mAdapter.notifyDataSetChanged();
         }
     }
 
-
-    public interface OnItemClickListener{
+    public interface OnItemClickListener {
         void onClick(DrawerItem item, int position);
     }
 }
