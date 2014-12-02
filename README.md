@@ -54,8 +54,8 @@ How-To-Use
                     .setTextSecondary(getString(R.string.description_first_item))
                     .setOnItemClickListener(new DrawerItem.OnItemClickListener() {
                         @Override
-                        public void onClick(DrawerItem drawerItem, int position) {
-                            Toast.makeText(YourActivity.this, "Clicked first item", Toast.LENGTH_SHORT).show();
+                        public void onClick(DrawerItem drawerItem, int id, int position) {
+                            Toast.makeText(YourActivity.this, "Clicked first item (#" + id + ")", Toast.LENGTH_SHORT).show();
                         }
                     })
             );
@@ -66,8 +66,8 @@ How-To-Use
                     .setTextPrimary(getString(R.string.title_second_item))
                     .setOnItemClickListener(new DrawerItem.OnItemClickListener() {
                         @Override
-                        public void onClick(DrawerItem drawerItem, int position) {
-                            Toast.makeText(YourActivity.this, "Clicked second item", Toast.LENGTH_SHORT).show();
+                        public void onClick(DrawerItem drawerItem, ind id, int position) {
+                            Toast.makeText(YourActivity.this, "Clicked second item (#" + id + ")", Toast.LENGTH_SHORT).show();
                         }
                     })
             );
@@ -102,11 +102,16 @@ Dependency
 **Gradle dependency:**
 
     dependencies {
-	    compile 'com.heinrichreimersoftware.material_drawer:library:1.1'
+	    compile 'com.heinrichreimersoftware.materialdrawer:library:1.2'
     }
+
+Get the latest dependency with ["Gradle, please"][4]
 
 Changes
 -------
+* **Version 1.2:**
+    * Drawer items can now contain an ID
+    * Image setters work with Bitmap too
 * **Version 1.1.1:**
     * You can change items that you got via `drawer.getItem(position)`. Changes will update the adapter
     * Fixed auto drawer width
@@ -132,3 +137,4 @@ License
 [1]: http://stackoverflow.com/questions/26440879/how-do-i-use-drawerlayout-to-display-over-the-actionbar-toolbar-and-under-the-st
 [2]: http://developer.android.com/reference/android/support/v7/widget/Toolbar.html
 [3]: http://developer.android.com/reference/android/support/v7/app/ActionBar.html
+[4]: http://gradleplease.appspot.com/#materialdrawer
