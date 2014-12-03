@@ -117,6 +117,13 @@ Changes
     * Fixed auto drawer width
     * Fixed title padding
 
+Open source libraries
+-------
+
+_material-drawer_ uses the following open source libraries or files:
+* [LinearListView][5] by [@frankiesardo][6] (Apache License 2.0)
+* [ScrimInsetsScrollView][7] from the Google IO app 2014 by [@google][8] (Apache License 2.0)
+
 License
 -------
 
@@ -138,3 +145,7 @@ License
 [2]: http://developer.android.com/reference/android/support/v7/widget/Toolbar.html
 [3]: http://developer.android.com/reference/android/support/v7/app/ActionBar.html
 [4]: http://gradleplease.appspot.com/#materialdrawer
+[5]: https://github.com/frankiesardo/LinearListView
+[6]: https://github.com/frankiesardo
+[7]: https://github.com/google/iosched/blob/master/android/src/main/java/com/google/samples/apps/iosched/ui/widget/ScrimInsetsScrollView.java
+[8]: https://github.com/google
