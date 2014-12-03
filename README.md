@@ -15,7 +15,7 @@ How-To-Use
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
         
-        <com.heinrichreimersoftware.material_drawer.DrawerView
+        <com.heinrichreimersoftware.materialdrawer.DrawerView
             android:id="@+id/drawer"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
