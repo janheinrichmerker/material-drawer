@@ -11,13 +11,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import com.anjlab.android.iab.v3.BillingProcessor;
+import com.anjlab.android.iab.v3.TransactionDetails;
 import com.heinrichreimersoftware.materialdrawer.DrawerFrameLayout;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerProfile;
 
 
-public class MainActivity2 extends ActionBarActivity {
+public class MainActivity2 extends ActionBarActivity implements BillingProcessor.IBillingHandler  {
+
+    private BillingProcessor bp;
 
     private Toolbar toolbar;
 
@@ -29,6 +34,8 @@ public class MainActivity2 extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
+        bp = new BillingProcessor(this, "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjhzh8zf3W1ezb2fIlki3Udlr5UikqEVQb4d705GmzWEm9DSB7i3ZQI6vMncxmABK5X5SpljCUsTQ/GFCqJ0QVLjohn6/a95qJ2WxSmdnlYZYmTEUZUh8U4kDLFSlUgFor7VKd0Lij2gWECCuE4ZpWTxwoInbVa2/WBq0f1cYuayXC1YLKGBrImUUrIJg5diB00uIPNSks/oouPA+rKb5ITHq9WV1Di7pRijRwMe3IsjzyW9RqsK6pRusYRO7C5O53F1o9ClVpH+HGDQwjJtqvTZN3XcH3eQHqoKSWLDPnkQthW+ShpiRDlMdSd6wU7F3t8QYxNwRb57EQrdJIChhYwIDAQAB\n", this);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -112,14 +119,25 @@ public class MainActivity2 extends ActionBarActivity {
             return true;
         }
 
-        int id = item.getItemId();
-
-        if (id == R.id.action_github) {
-            String url = "https://github.com/HeinrichReimer/material-md_drawer";
-            Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setData(Uri.parse(url));
-            startActivity(i);
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_github:
+                String url = "https://github.com/HeinrichReimer/material-drawer";
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+                break;
+            case R.id.donation1:
+                donate(1);
+                break;
+            case R.id.donation2:
+                donate(2);
+                break;
+            case R.id.donation3:
+                donate(3);
+                break;
+            case R.id.donation4:
+                donate(4);
+                break;
         }
 
         return super.onOptionsItemSelected(item);
@@ -136,5 +154,43 @@ public class MainActivity2 extends ActionBarActivity {
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         drawerToggle.syncState();
+    }
+
+    /* Donation stuff via in app billing */
+
+    public void donate(int index) {
+        bp.purchase(this, "donate_" + index);
+    }
+
+    @Override
+    public void onBillingInitialized() {}
+
+    @Override
+    public void onProductPurchased(String productId, TransactionDetails transactionDetails) {
+        bp.consumePurchase(productId);
+        Toast.makeText(this, R.string.thank_you, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onBillingError(int errorCode, Throwable error) {
+        if (errorCode != 110 && errorCode != 2) {
+            Toast.makeText(this, "Billing error: code = " + errorCode + ", error: " +
+                    (error != null ? error.getMessage() : "?"), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void onPurchaseHistoryRestored() {}
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (!bp.handleActivityResult(requestCode, resultCode, data))
+            super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onDestroy() {
+        if (bp != null) bp.release();
+        super.onDestroy();
     }
 }

@@ -4,4 +4,23 @@
     <item android:id="@+id/action_github" android:title="@string/action_github"
         android:icon="@drawable/ic_action_web"
         android:orderInCategory="100" app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/donate"
+        android:title="@string/donate"
+        app:showAsAction="never">
+        <menu>
+            <item
+                android:id="@+id/donation1"
+                android:title="@string/donation1" />
+            <item
+                android:id="@+id/donation2"
+                android:title="@string/donation2" />
+            <item
+                android:id="@+id/donation3"
+                android:title="@string/donation3" />
+            <item
+                android:id="@+id/donation4"
+                android:title="@string/donation4" />
+        </menu>
+    </item>
 </menu>
