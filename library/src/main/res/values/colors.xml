@@ -14,13 +14,17 @@
 
 <resources>
 
-    <color name="drawer_background">#f5f5f5</color>
+    <color name="md_drawer_background">#f5f5f5</color>
 
-    <color name="scrim_start">#0000</color>
-    <color name="scrim_end">#8a000000</color>
+    <color name="md_primary">#000</color>
+    <color name="md_secondary">#8a000000</color>
+    <color name="md_header">@color/md_secondary</color>
 
-    <color name="scrim">#43000000</color>
+    <color name="md_divider">#1f000000</color>
 
-    <color name="divider">#1f000000</color>
+    <color name="md_selected">#14000000</color>
+
+    <color name="md_scrim_start">#0000</color>
+    <color name="md_scrim_end">#8a000000</color>
 
 </resources>

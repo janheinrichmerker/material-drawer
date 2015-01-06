@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">material-drawer</string>
+    <string name="drawer_open">Menu open</string>
+    <string name="drawer_close">Menu closed</string>
+    <string name="hello_world">Custom drawer implementation for Material design apps.
+
+Play with the drawer by checking the checkboxes below.
+
+Made by Heinrich Reimer</string>
+    <string name="hello_world2">Example of using DrawerFrameLayout for the drawer.
+
+Check out the sample code on GitHub</string>
+    <string name="check_box_list">List</string>
+    <string name="check_box_profile">Profile</string>
+    <string name="check_box_dividers">Dividers</string>
+    <string name="check_box_headers">Headers</string>
+    <string name="action_github">GitHub</string>
+    <string name="lorem_ipsum_short" translatable="false">Lorem ipsum</string>
+    <string name="lorem_ipsum_medium" translatable="false">Lorem ipsum dolor sit amet</string>
+    <string name="lorem_ipsum_long" translatable="false">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="drawer_view">DrawerView</string>
+    <string name="drawer_frame_layout">DrawerFrameLayout</string>
+
+</resources>

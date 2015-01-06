@@ -13,6 +13,8 @@
   -->
 
 <resources>
+    <item type="id" name="mdDrawer" />
+
     <item type="id" name="mdLayout" />
 
     <item type="id" name="mdLayoutProfile" />
@@ -23,11 +25,16 @@
     <item type="id" name="mdDescriptionProfile" />
 
     <item type="id" name="mdLinearListViewPrimary" />
-    <item type="id" name="mdDivider" />
     <item type="id" name="mdLinearListViewSecondary" />
 
     <item type="id" name="mdRoot" />
     <item type="id" name="mdImage" />
+    <item type="id" name="mdTextRoot" />
     <item type="id" name="mdTextPrimary" />
     <item type="id" name="mdTextSecondary" />
+
+    <item type="id" name="mdHeaderRoot" />
+    <item type="id" name="mdDivider" />
+    <item type="id" name="mdHeaderTitleRoot" />
+    <item type="id" name="mdHeaderTitle" />
 </resources>

@@ -36,7 +36,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/divider"
+                android:background="@color/md_divider"
                 android:clickable="false" />
 
             <RelativeLayout
@@ -48,12 +48,12 @@
 
                 <ImageView
                     android:id="@id/mdAvatarProfile"
-                    android:layout_width="@dimen/big_avatar_size"
-                    android:layout_height="@dimen/big_avatar_size"
-                    android:layout_marginTop="@dimen/baseline_start"
-                    android:layout_marginLeft="@dimen/baseline_start"
+                    android:layout_width="@dimen/md_big_avatar_size"
+                    android:layout_height="@dimen/md_big_avatar_size"
+                    android:layout_marginTop="@dimen/md_baseline_start"
+                    android:layout_marginLeft="@dimen/md_baseline_start"
                     android:layout_marginRight="0dp"
-                    android:layout_marginStart="@dimen/baseline_start"
+                    android:layout_marginStart="@dimen/md_baseline_start"
                     android:layout_marginEnd="0dp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentLeft="true"
@@ -65,15 +65,15 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/list_item_height_text_two_line"
-                    android:paddingTop="@dimen/baseline_start"
-                    android:paddingLeft="@dimen/baseline_start"
-                    android:paddingRight="@dimen/baseline_start"
-                    android:paddingBottom="@dimen/drawer_list_margin_vertical"
+                    android:layout_height="@dimen/md_list_item_height_two_line"
+                    android:paddingTop="@dimen/md_baseline_start"
+                    android:paddingLeft="@dimen/md_baseline_start"
+                    android:paddingRight="@dimen/md_baseline_start"
+                    android:paddingBottom="@dimen/md_drawer_list_margin_vertical"
                     android:layout_alignParentBottom="true"
                     android:layout_gravity="center_vertical"
                     android:orientation="vertical"
-                    android:background="@drawable/scrim"
+                    android:background="@drawable/md_scrim"
                     android:clickable="false">
 
                     <TextView
@@ -105,8 +105,8 @@
             android:id="@id/mdLinearListViewPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/drawer_list_margin_vertical"
-            android:paddingBottom="@dimen/drawer_list_margin_vertical"
+            android:paddingTop="@dimen/md_drawer_list_margin_vertical"
+            android:paddingBottom="@dimen/md_drawer_list_margin_vertical"
             android:orientation="vertical" />
 
     </LinearLayout>

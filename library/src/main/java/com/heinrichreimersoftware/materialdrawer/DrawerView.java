@@ -19,6 +19,7 @@ package com.heinrichreimersoftware.materialdrawer;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.util.AttributeSet;
@@ -30,7 +31,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.heinrichreimersoftware.materialdrawer.structure.DrawerDividerItem;
+import com.heinrichreimersoftware.materialdrawer.structure.DrawerHeaderItem;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerProfile;
 import com.heinrichreimersoftware.materialdrawer.widget.LinearListView;
@@ -40,10 +41,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * View to be used with {@link android.support.v4.widget.DrawerLayout} to display a drawer which is fully compliant with the Material Design specification.
+ * View to be used with {@link android.support.v4.widget.DrawerLayout} to display a md_drawer which is fully compliant with the Material Design specification.
  */
 public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScrollView.OnInsetsCallback {
-    private DrawerProfile mProfile;
+    private DrawerProfile mProfile = null;
 
     private DrawerAdapter mAdapter;
     private DrawerItem.OnItemClickListener mOnItemClickListener;
@@ -75,18 +76,21 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
     }
 
     private void init(Context context) {
-        inflate(context, R.layout.drawer, this);
+        inflate(context, R.layout.md_drawer, this);
 
         findViews();
 
         setClipToPadding(false);
-        setBackgroundColor(getResources().getColor(R.color.drawer_background));
-        setInsetForeground(new ColorDrawable(getResources().getColor(R.color.scrim)));
+        setBackgroundColor(getResources().getColor(R.color.md_drawer_background));
+        setInsetForeground(new ColorDrawable(getResources().getColor(R.color.md_secondary)));
 
         setOnInsetsCallback(this);
 
         mAdapter = new DrawerAdapter(context, new ArrayList<DrawerItem>());
         linearListView.setAdapter(mAdapter);
+
+        updateProfile();
+        updateList();
     }
 
     private void findViews() {
@@ -104,8 +108,8 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
 
     private void updateSpacing() {
         if (mProfile != null && mProfile.getAvatar() != null && mProfile.getName() != null && !mProfile.getName().isEmpty()) {
-            frameLayoutProfile.getLayoutParams().height = Math.round(getLayoutParams().width / 16 * 9) + statusBarHeight;
-            relativeLayoutProfileContent.getLayoutParams().height = Math.round(getLayoutParams().width / 16 * 9);
+            frameLayoutProfile.getLayoutParams().height = Math.round(getLayoutParams().width / 16 * 9);
+            relativeLayoutProfileContent.getLayoutParams().height = Math.round(getLayoutParams().width / 16 * 9) - statusBarHeight;
 
             layout.setPadding(0, 0, 0, 0);
         } else {
@@ -114,14 +118,26 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
     }
 
     private void updateProfile() {
-        if (mProfile != null && mProfile.getAvatar() != null && mProfile.getName() != null && !mProfile.getName().isEmpty()) {
-            imageViewAvatarProfile.setImageDrawable(mProfile.getAvatar());
-            textViewNameProfile.setText(mProfile.getName());
+        if (mProfile != null) {
+            if (mProfile.getAvatar() != null) {
+                imageViewAvatarProfile.setImageDrawable(mProfile.getAvatar());
+            }
+            if (mProfile.getName() != null && !mProfile.getName().isEmpty()) {
+                textViewNameProfile.setText(mProfile.getName());
+            }
 
             if (mProfile.getBackground() != null) {
                 imageViewBackgroundProfile.setImageDrawable(mProfile.getBackground());
             } else {
-                imageViewBackgroundProfile.setImageDrawable(new ColorDrawable(getResources().getColor(R.color.primary_material_dark)));
+                int colorPrimary = getResources().getColor(R.color.primary_dark_material_light);
+                TypedArray a = getContext().getTheme().obtainStyledAttributes(new int[]{R.attr.colorPrimary});
+                try {
+                    colorPrimary = a.getColor(0, 0);
+                } finally {
+                    a.recycle();
+                }
+
+                imageViewBackgroundProfile.setImageDrawable(new ColorDrawable(colorPrimary));
             }
 
             if (mProfile.getDescription() != null && !mProfile.getDescription().equals("")) {
@@ -176,7 +192,7 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
 
 
     /**
-     * Sets a profile to the drawer view
+     * Sets a profile to the md_drawer view
      *
      * @param profile Profile to set
      */
@@ -187,17 +203,26 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
     }
 
     /**
-     * Gets the profile of the drawer view
+     * Gets the profile of the md_drawer view
      *
-     * @return Profile of the drawer view
+     * @return Profile of the md_drawer view
      */
-    private DrawerProfile getProfile() {
+    public DrawerProfile getProfile() {
         return mProfile;
+    }
+
+    /**
+     * Removes the profile from the md_drawer view
+     */
+    public DrawerView removeProfile() {
+        mProfile = null;
+        updateProfile();
+        return this;
     }
 
 
     /**
-     * Adds items to the drawer view
+     * Adds items to the md_drawer view
      *
      * @param items Items to add
      */
@@ -211,7 +236,7 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
     }
 
     /**
-     * Adds an item to the drawer view
+     * Adds an item to the md_drawer view
      *
      * @param item Item to add
      */
@@ -223,37 +248,37 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
     }
 
     /**
-     * Adds a divider to the drawer view
+     * Adds a divider to the md_drawer view
      */
     public DrawerView addDivider() {
-        addItem(new DrawerDividerItem());
+        addItem(new DrawerHeaderItem());
         return this;
     }
 
     /**
-     * Gets all items from the drawer view
+     * Gets all items from the md_drawer view
      *
-     * @return Items from the drawer view
+     * @return Items from the md_drawer view
      */
     public List<DrawerItem> getItems() {
         return mAdapter.getItems();
     }
 
     /**
-     * Gets an item from the drawer view
+     * Gets an item from the md_drawer view
      *
      * @param position The item position
-     * @return Item from the drawer view
+     * @return Item from the md_drawer view
      */
     public DrawerItem getItem(int position) {
         return mAdapter.getItem(position);
     }
 
     /**
-     * Gets an item from the drawer view
+     * Gets an item from the md_drawer view
      *
      * @param id The item ID
-     * @return Item from the drawer view
+     * @return Item from the md_drawer view
      */
     public DrawerItem findItemById(int id) {
         for (int i = 0; i < mAdapter.getCount(); i++){
@@ -265,17 +290,16 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
     }
 
     /**
-     * Selects an item from the drawer view
+     * Selects an item from the md_drawer view
      *
      * @param position The item position
      */
-    public DrawerItem selectItem(int position) {
+    public void selectItem(int position) {
         mAdapter.select(position);
-        return null;
     }
 
     /**
-     * Gets the selected item position of the drawer view
+     * Gets the selected item position of the md_drawer view
      *
      * @return Position of the selected item
      */
@@ -284,7 +308,7 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
     }
 
     /**
-     * Selects an item from the drawer view
+     * Selects an item from the md_drawer view
      *
      * @param id The item ID
      */
@@ -297,7 +321,7 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
     }
 
     /**
-     * Removes an item from the drawer view
+     * Removes an item from the md_drawer view
      *
      * @param item Item to remove
      */
@@ -309,7 +333,7 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
     }
 
     /**
-     * Removes an item from the drawer view
+     * Removes an item from the md_drawer view
      *
      * @param position Position to remove
      */
@@ -321,7 +345,7 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
     }
 
     /**
-     * Removes all items from the drawer view
+     * Removes all items from the md_drawer view
      */
     public DrawerView clearItems() {
         for (DrawerItem item : mAdapter.getItems()) {
@@ -334,7 +358,7 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
 
 
     /**
-     * Sets an item click listener to the drawer view
+     * Sets an item click listener to the md_drawer view
      *
      * @param listener Listener to set
      */
@@ -345,25 +369,25 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
     }
 
     /**
-     * Gets the item click listener of the drawer view
+     * Gets the item click listener of the md_drawer view
      *
-     * @return Item click listener of the drawer view
+     * @return Item click listener of the md_drawer view
      */
     public DrawerItem.OnItemClickListener getOnItemClickListener() {
         return mOnItemClickListener;
     }
 
     /**
-     * Gets whether the drawer view has an item click listener set to it
+     * Gets whether the md_drawer view has an item click listener set to it
      *
-     * @return True if the drawer view has an item click listener set to it, false otherwise.
+     * @return True if the md_drawer view has an item click listener set to it, false otherwise.
      */
     public boolean hasOnItemClickListener() {
         return mOnItemClickListener != null;
     }
 
     /**
-     * Removes the item click listener from the drawer view
+     * Removes the item click listener from the md_drawer view
      */
     public DrawerView removeOnItemClickListener() {
         mOnItemClickListener = null;
@@ -401,7 +425,7 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
 
             int width = windowWidth - actionBarSize;
 
-            int maxWidth = getResources().getDimensionPixelSize(R.dimen.drawer_max_width);
+            int maxWidth = getResources().getDimensionPixelSize(R.dimen.md_drawer_max_width);
 
             getLayoutParams().width = Math.min(width, maxWidth);
 

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright 2014 Heinrich Reimer
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+      http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@id/mdRoot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/md_list_item_height"
+        android:paddingLeft="@dimen/md_baseline_start"
+        android:paddingRight="@dimen/md_baseline_end"
+        android:paddingStart="@dimen/md_baseline_start"
+        android:paddingEnd="@dimen/md_baseline_end"
+        android:paddingTop="@dimen/md_list_item_margin"
+        android:paddingBottom="@dimen/md_list_item_margin"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@id/mdImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:cropToPadding="false"
+            android:clickable="false" />
+
+        <LinearLayout
+            android:id="@id/mdTextRoot"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:clickable="false">
+
+            <TextView
+                android:id="@id/mdTextPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:textColor="@color/md_primary"
+                style="@style/TextAppearance.AppCompat.Subhead"
+                android:clickable="false" />
+
+            <TextView
+                android:id="@id/mdTextSecondary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/md_list_item_text_secondary_margin"
+                android:maxLines="2"
+                android:ellipsize="marquee"
+                android:textColor="@color/md_secondary"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:clickable="false" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>
