@@ -4,30 +4,37 @@ material-drawer
 
 Custom drawer implementation for Material design apps.
 
+Demo
+----
+A demo app is available on Google Play:
+
+[![Get it on Google Play](https://developer.android.com/images/brand/en_generic_rgb_wo_45.png)](https://play.google.com/store/apps/details?id=com.heinrichreimersoftware.materialdrawerdemo)
+
+Screenshots
+-----------
+
+| ![material-drawer](http://i.imgur.com/JEbu2nG.png) | ![material-drawer](http://i.imgur.com/wJaJUcF.png) | ![material-drawer](http://i.imgur.com/QKEwO58.png) |
+|:-:|:-:|:-:|
+| Active state tinting | Scrollable drawer | Few items |
+
 How-To-Use
 ----------
 **Step 1:** Include it in your layout:
 
-    <android.support.v4.widget.DrawerLayout
+    <com.heinrichreimersoftware.materialdrawer.DrawerFrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/drawerLayout"
+        android:id="@+id/drawer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
         
-        <com.heinrichreimersoftware.materialdrawer.DrawerView
-            android:id="@+id/drawer"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:fitsSystemWindows="true"/>
+        <!-- Your main content here -->
     
-    </android.support.v4.widget.DrawerLayout>
+    </com.heinrichreimersoftware.materialdrawer.DrawerFrameLayout>
 
-**Step 2:** Find views:
+**Step 2:** Find view:
 
-    DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-    DrawerView drawer = (DrawerView) findViewById(R.id.drawer);
+    DrawerFrameLayout drawer = (DrawerFrameLayout) findViewById(R.id.drawer);
 
 **Step 3:** Set a profile:
 
@@ -72,18 +79,14 @@ How-To-Use
                     })
             );
 
-Tip: Lollipop status bar
+Pro Tip: Lollipop status bar
 ----------------------------
 
-**Step 1:** Add `fitSystemWindows="true"` to your DrawerLayout and your DrawerView in XML.
+**Step 1:** Add `fitSystemWindows="true"` attribute to your [DrawerFrameLayout][9] in XML.
 
-**Step 2:** Set custom status bar color for your DrawerLayout:
+**Step 2:** Use [Toolbar][2] instead of [ActionBar][3].
 
-    drawerLayout.setStatusBarBackgroundColor(getResources().getColor(R.color.your_chosen_color));
-
-**Step 3:** Use [Toolbar][2] instead of [ActionBar][3].
-
-**Step 4:** Make your status bar transparent:
+**Step 3:** Make your status bar transparent:
 
     <style name="Theme.MyApp" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -102,13 +105,19 @@ Dependency
 **Gradle dependency:**
 
     dependencies {
-	    compile 'com.heinrichreimersoftware.materialdrawer:library:1.2'
+	    compile 'com.heinrichreimersoftware.materialdrawer:library:1.3.2'
     }
 
 Get the latest dependency with ["Gradle, please"][4]
 
 Changes
 -------
+
+* **Version 1.3.2:**
+    * Added [DrawerFrameLayout][9] as [DrawerLayout][11] replacement
+    * Active state tinting
+    * List headers ([DrawerHeaderItem][10])
+    * Fixed spacing
 * **Version 1.2:**
     * Drawer items can now contain an ID
     * Image setters work with Bitmap too
@@ -121,6 +130,7 @@ Open source libraries
 -------
 
 _material-drawer_ uses the following open source libraries or files:
+
 * [LinearListView][5] by [@frankiesardo][6] (Apache License 2.0)
 * [ScrimInsetsScrollView][7] from the Google IO app 2014 by [@google][8] (Apache License 2.0)
 
@@ -149,3 +159,6 @@ License
 [6]: https://github.com/frankiesardo
 [7]: https://github.com/google/iosched/blob/master/android/src/main/java/com/google/samples/apps/iosched/ui/widget/ScrimInsetsScrollView.java
 [8]: https://github.com/google
+[9]: https://github.com/HeinrichReimer/material-drawer/blob/master/library/src/main/java/com/heinrichreimersoftware/materialdrawer/DrawerFrameLayout.java
+[10]: https://github.com/HeinrichReimer/material-drawer/blob/master/library/src/main/java/com/heinrichreimersoftware/materialdrawer/structure/DrawerHeaderItem.java
+[11]: https://developer.android.com/reference/android/support/v4/widget/DrawerLayout.html
