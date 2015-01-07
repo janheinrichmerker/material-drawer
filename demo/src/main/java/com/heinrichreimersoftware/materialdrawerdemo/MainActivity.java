@@ -292,10 +292,31 @@ public class MainActivity extends ActionBarActivity implements BillingProcessor.
 
     @Override
     public void onBillingError(int errorCode, Throwable error) {
-        if (errorCode != 110 && errorCode != 2) {
-            Toast.makeText(this, "Billing error: code = " + errorCode + ", error: " +
-                    (error != null ? error.getMessage() : "?"), Toast.LENGTH_LONG).show();
+        int errorMessageResId = 0;
+        switch (errorCode){
+            case 1:
+                errorMessageResId = R.string.donation_error_1;
+                break;
+            case 2:
+                errorMessageResId = R.string.donation_error_2;
+                break;
+            case 3:
+                errorMessageResId = R.string.donation_error_3;
+                break;
+            case 4:
+                errorMessageResId = R.string.donation_error_4;
+                break;
+            case 5:
+                errorMessageResId = R.string.donation_error_5;
+                break;
+            case 6:
+                errorMessageResId = R.string.donation_error_6;
+                break;
+            default:
+                Toast.makeText(this, "Billing error: code = " + errorCode + ", error: " +
+                        (error != null ? error.getMessage() : "?"), Toast.LENGTH_LONG).show();
         }
+        Toast.makeText(this, getString(errorMessageResId), Toast.LENGTH_SHORT).show();
     }
 
     @Override
