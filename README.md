@@ -133,11 +133,12 @@ _material-drawer_ uses the following open source libraries or files:
 
 * [LinearListView][5] by [@frankiesardo][6] (Apache License 2.0)
 * [ScrimInsetsScrollView][7] from the Google IO app 2014 by [@google][8] (Apache License 2.0)
+* [Android In-App Billing v3][12] by [@anjlab][13] (Apache License 2.0)
 
 License
 -------
 
-    Copyright 2013 Heinrich Reimer
+    Copyright 2015 Heinrich Reimer
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -162,3 +163,5 @@ License
 [9]: https://github.com/HeinrichReimer/material-drawer/blob/master/library/src/main/java/com/heinrichreimersoftware/materialdrawer/DrawerFrameLayout.java
 [10]: https://github.com/HeinrichReimer/material-drawer/blob/master/library/src/main/java/com/heinrichreimersoftware/materialdrawer/structure/DrawerHeaderItem.java
 [11]: https://developer.android.com/reference/android/support/v4/widget/DrawerLayout.html
+[12]: https://github.com/anjlab/android-inapp-billing-v3
+[13]: https://github.com/anjlab/
