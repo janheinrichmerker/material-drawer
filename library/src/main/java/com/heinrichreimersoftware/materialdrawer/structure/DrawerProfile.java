@@ -24,7 +24,7 @@ import android.graphics.drawable.Drawable;
 import com.heinrichreimersoftware.materialdrawer.DrawerView;
 
 /**
- * Object to be used with {@link com.heinrichreimersoftware.materialdrawer.DrawerView} to display a profile in the md_drawer.
+ * Object to be used with {@link com.heinrichreimersoftware.materialdrawer.DrawerView} to display a profile in the md_drawer_view.
  * Can hold an image, a primary text, a secondary text and a listener.
  */
 public class DrawerProfile {
@@ -38,7 +38,7 @@ public class DrawerProfile {
 
 
     /**
-     * Sets an avatar image to the md_drawer profile
+     * Sets an avatar image to the md_drawer_view profile
      *
      * @param avatar Avatar image to set
      */
@@ -49,7 +49,7 @@ public class DrawerProfile {
     }
 
     /**
-     * Sets an avatar image to the md_drawer profile
+     * Sets an avatar image to the md_drawer_view profile
      *
      * @param avatar Avatar image to set
      */
@@ -60,25 +60,25 @@ public class DrawerProfile {
     }
 
     /**
-     * Gets the avatar image of the md_drawer profile
+     * Gets the avatar image of the md_drawer_view profile
      *
-     * @return Avatar image of the md_drawer profile
+     * @return Avatar image of the md_drawer_view profile
      */
     public Drawable getAvatar() {
         return mAvatar;
     }
 
     /**
-     * Gets whether the md_drawer profile has an avatar image set to it
+     * Gets whether the md_drawer_view profile has an avatar image set to it
      *
-     * @return True if the md_drawer profile has an avatar image set to it, false otherwise.
+     * @return True if the md_drawer_view profile has an avatar image set to it, false otherwise.
      */
     public boolean hasAvatar() {
         return mAvatar != null;
     }
 
     /**
-     * Removes the avatar image from the md_drawer profile
+     * Removes the avatar image from the md_drawer_view profile
      */
     public DrawerProfile removeAvatar() {
         mAvatar = null;
@@ -88,7 +88,7 @@ public class DrawerProfile {
 
 
     /**
-     * Sets a background to the md_drawer profile
+     * Sets a background to the md_drawer_view profile
      *
      * @param background Background to set
      */
@@ -99,7 +99,7 @@ public class DrawerProfile {
     }
 
     /**
-     * Sets a background to the md_drawer profile
+     * Sets a background to the md_drawer_view profile
      *
      * @param background Background to set
      */
@@ -110,25 +110,25 @@ public class DrawerProfile {
     }
 
     /**
-     * Gets the background of the md_drawer profile
+     * Gets the background of the md_drawer_view profile
      *
-     * @return Background of the md_drawer profile
+     * @return Background of the md_drawer_view profile
      */
     public Drawable getBackground() {
         return mBackground;
     }
 
     /**
-     * Gets whether the md_drawer profile has a background set to it
+     * Gets whether the md_drawer_view profile has a background set to it
      *
-     * @return True if the md_drawer profile has a background set to it, false otherwise.
+     * @return True if the md_drawer_view profile has a background set to it, false otherwise.
      */
     public boolean hasBackground() {
         return mBackground != null;
     }
 
     /**
-     * Removes the background from the md_drawer profile
+     * Removes the background from the md_drawer_view profile
      */
     public DrawerProfile removeBackground() {
         mBackground = null;
@@ -138,7 +138,7 @@ public class DrawerProfile {
 
 
     /**
-     * Sets a name to the md_drawer profile
+     * Sets a name to the md_drawer_view profile
      *
      * @param name Name to set
      */
@@ -149,25 +149,25 @@ public class DrawerProfile {
     }
 
     /**
-     * Gets the name of the md_drawer profile
+     * Gets the name of the md_drawer_view profile
      *
-     * @return Name of the md_drawer profile
+     * @return Name of the md_drawer_view profile
      */
     public String getName() {
         return mName;
     }
 
     /**
-     * Gets whether the md_drawer profile has a name set to it
+     * Gets whether the md_drawer_view profile has a name set to it
      *
-     * @return True if the md_drawer profile has a name set to it, false otherwise.
+     * @return True if the md_drawer_view profile has a name set to it, false otherwise.
      */
     public boolean hasName() {
         return mName != null && !mName.equals("");
     }
 
     /**
-     * Removes the name from the md_drawer profile
+     * Removes the name from the md_drawer_view profile
      */
     public DrawerProfile removeName() {
         mName = null;
@@ -177,7 +177,7 @@ public class DrawerProfile {
 
 
     /**
-     * Sets a description to the md_drawer profile
+     * Sets a description to the md_drawer_view profile
      *
      * @param description Description to set
      */
@@ -188,25 +188,25 @@ public class DrawerProfile {
     }
 
     /**
-     * Gets the description of the md_drawer profile
+     * Gets the description of the md_drawer_view profile
      *
-     * @return Description of the md_drawer profile
+     * @return Description of the md_drawer_view profile
      */
     public String getDescription() {
         return mDescription;
     }
 
     /**
-     * Gets whether the md_drawer profile has a description set to it
+     * Gets whether the md_drawer_view profile has a description set to it
      *
-     * @return True if the md_drawer profile has a description set to it, false otherwise.
+     * @return True if the md_drawer_view profile has a description set to it, false otherwise.
      */
     public boolean hasDescription() {
         return mDescription != null && !mDescription.equals("");
     }
 
     /**
-     * Removes the description from the md_drawer profile
+     * Removes the description from the md_drawer_view profile
      */
     public DrawerProfile removeDescription() {
         mDescription = null;
@@ -216,7 +216,7 @@ public class DrawerProfile {
 
 
     /**
-     * Sets a click listener to the md_drawer profile
+     * Sets a click listener to the md_drawer_view profile
      *
      * @param listener Listener to set
      */
@@ -227,25 +227,25 @@ public class DrawerProfile {
     }
 
     /**
-     * Gets the click listener of the md_drawer profile
+     * Gets the click listener of the md_drawer_view profile
      *
-     * @return Click listener of the md_drawer profile
+     * @return Click listener of the md_drawer_view profile
      */
     public OnProfileClickListener getOnProfileClickListener() {
         return mOnClickListener;
     }
 
     /**
-     * Gets whether the md_drawer profile has a click listener set to it
+     * Gets whether the md_drawer_view profile has a click listener set to it
      *
-     * @return True if the md_drawer profile has a click listener set to it, false otherwise.
+     * @return True if the md_drawer_view profile has a click listener set to it, false otherwise.
      */
     public boolean hasOnProfileClickListener() {
         return mOnClickListener != null;
     }
 
     /**
-     * Removes the click listener from the md_drawer profile
+     * Removes the click listener from the md_drawer_view profile
      */
     public DrawerProfile removeOnProfileClickListener() {
         mOnClickListener = null;
@@ -255,9 +255,9 @@ public class DrawerProfile {
 
 
     /**
-     * Attaches the md_drawer item to a md_drawer
+     * Attaches the md_drawer_view item to a md_drawer_view
      *
-     * @param drawerView md_drawer to attach to
+     * @param drawerView md_drawer_view to attach to
      */
     public DrawerProfile attachTo(DrawerView drawerView) {
         mDrawerView = drawerView;
@@ -266,7 +266,7 @@ public class DrawerProfile {
     }
 
     /**
-     * Detaches the md_drawer item from its md_drawer
+     * Detaches the md_drawer_view item from its md_drawer_view
      */
     public DrawerProfile detach() {
         mDrawerView = null;

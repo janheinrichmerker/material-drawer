@@ -37,7 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Adapter to be used with {@link DrawerView} to display a list of md_drawer items.
+ * Adapter to be used with {@link DrawerView} to display a list of md_drawer_view items.
  */
 public class DrawerAdapter extends ArrayAdapter<DrawerItem> {
 
@@ -188,6 +188,14 @@ public class DrawerAdapter extends ArrayAdapter<DrawerItem> {
             selectedPosition = position;
             notifyDataSetChanged();
         }
+        else{
+            selectedPosition = -1;
+            notifyDataSetChanged();
+        }
+    }
+
+    public void clearSelection(){
+        select(-1);
     }
 
     public int getSelectedPosition(){

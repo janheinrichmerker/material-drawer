@@ -64,7 +64,7 @@
                 android:layout_marginTop="@dimen/md_list_item_text_secondary_margin"
                 android:maxLines="2"
                 android:ellipsize="marquee"
-                android:textColor="@color/md_secondary"
+                android:textColor="@color/md_inset_foreground"
                 style="@style/TextAppearance.AppCompat.Body1"
                 android:clickable="false" />
 

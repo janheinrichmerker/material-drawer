@@ -15,6 +15,8 @@
 <resources>
     <item type="id" name="mdDrawer" />
 
+    <item type="id" name="mdScrollView" />
+
     <item type="id" name="mdLayout" />
 
     <item type="id" name="mdLayoutProfile" />
@@ -24,8 +26,10 @@
     <item type="id" name="mdNameProfile" />
     <item type="id" name="mdDescriptionProfile" />
 
-    <item type="id" name="mdLinearListViewPrimary" />
-    <item type="id" name="mdLinearListViewSecondary" />
+    <item type="id" name="mdLinearListView" />
+
+    <item type="id" name="mdFixedListContainer" />
+    <item type="id" name="mdLinearListViewFixed" />
 
     <item type="id" name="mdRoot" />
     <item type="id" name="mdImage" />

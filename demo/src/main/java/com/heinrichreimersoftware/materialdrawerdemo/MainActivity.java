@@ -32,6 +32,7 @@ public class MainActivity extends ActionBarActivity implements BillingProcessor.
     private DrawerLayout drawerLayout;
     private DrawerView drawer;
     private CheckBox checkBoxList;
+    private CheckBox checkBoxFixedList;
     private CheckBox checkBoxProfile;
     private CheckBox checkBoxDividers;
     private CheckBox checkBoxHeaders;
@@ -51,6 +52,7 @@ public class MainActivity extends ActionBarActivity implements BillingProcessor.
         drawer = (DrawerView) findViewById(R.id.drawer);
 
         checkBoxList = (CheckBox) findViewById(R.id.checkBoxList);
+        checkBoxFixedList = (CheckBox) findViewById(R.id.checkBoxFixedList);
         checkBoxProfile = (CheckBox) findViewById(R.id.checkBoxProfile);
         checkBoxDividers = (CheckBox) findViewById(R.id.checkBoxDividers);
         checkBoxHeaders = (CheckBox) findViewById(R.id.checkBoxHeaders);
@@ -85,6 +87,12 @@ public class MainActivity extends ActionBarActivity implements BillingProcessor.
                 updateDrawer();
             }
         });
+        checkBoxFixedList.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                updateDrawer();
+            }
+        });
         checkBoxProfile.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -109,6 +117,7 @@ public class MainActivity extends ActionBarActivity implements BillingProcessor.
 
     public void updateDrawer(){
         drawer.clearItems();
+        drawer.clearFixedItems();
         if (checkBoxList.isChecked()){
 
             checkBoxDividers.setActivated(true);
@@ -179,6 +188,8 @@ public class MainActivity extends ActionBarActivity implements BillingProcessor.
                             .setTextPrimary(getString(R.string.lorem_ipsum_short))
                             .setTextSecondary(getString(R.string.lorem_ipsum_long), DrawerItem.THREE_LINE)
             );
+
+
             drawer.selectItem(1);
             drawer.setOnItemClickListener(new DrawerItem.OnItemClickListener() {
                 @Override
@@ -192,6 +203,41 @@ public class MainActivity extends ActionBarActivity implements BillingProcessor.
             checkBoxDividers.setActivated(false);
             checkBoxHeaders.setActivated(false);
         }
+        if (checkBoxFixedList.isChecked()){
+            Drawable icon4;
+            if (Math.random() >= .5){
+                icon4 = getResources().getDrawable(R.drawable.cat_1);
+            }
+            else {
+                icon4 = getResources().getDrawable(R.drawable.cat_2);
+            }
+            drawer.addFixedItem(new DrawerItem()
+                            .setImage(icon4)
+                            .setTextPrimary(getString(R.string.lorem_ipsum_short))
+            );
+
+            Drawable icon5;
+            if (Math.random() >= .5){
+                icon5 = getResources().getDrawable(R.drawable.cat_1);
+            }
+            else {
+                icon5 = getResources().getDrawable(R.drawable.cat_2);
+            }
+            drawer.addFixedItem(new DrawerItem()
+                            .setImage(icon5)
+                            .setTextPrimary(getString(R.string.lorem_ipsum_short))
+            );
+
+
+            drawer.setOnFixedItemClickListener(new DrawerItem.OnItemClickListener() {
+                @Override
+                public void onClick(DrawerItem item, int id, int position) {
+                    drawer.selectFixedItem(position);
+                    Toast.makeText(MainActivity.this, "Clicked fixed item #" + position, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
         if (checkBoxProfile.isChecked()){
             Drawable avatar;
             if (Math.random() >= .5){

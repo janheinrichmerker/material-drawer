@@ -16,7 +16,6 @@
 
 package com.heinrichreimersoftware.materialdrawer;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
@@ -29,25 +28,31 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerHeaderItem;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerProfile;
 import com.heinrichreimersoftware.materialdrawer.widget.LinearListView;
-import com.heinrichreimersoftware.materialdrawer.widget.ScrimInsetsScrollView;
+import com.heinrichreimersoftware.materialdrawer.widget.ScrimInsetsFrameLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * View to be used with {@link android.support.v4.widget.DrawerLayout} to display a md_drawer which is fully compliant with the Material Design specification.
+ * View to be used with {@link android.support.v4.widget.DrawerLayout} to display a md_drawer_view which is fully compliant with the Material Design specification.
  */
-public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScrollView.OnInsetsCallback {
+public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFrameLayout.OnInsetsCallback {
     private DrawerProfile mProfile = null;
 
     private DrawerAdapter mAdapter;
+    private DrawerAdapter mAdapterFixed;
+
     private DrawerItem.OnItemClickListener mOnItemClickListener;
+    private DrawerItem.OnItemClickListener mOnFixedItemClickListener;
+
+    private ScrollView scrollView;
 
     private LinearLayout layout;
 
@@ -59,6 +64,9 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
     private TextView textViewDescriptionProfile;
 
     private LinearListView linearListView;
+
+    private LinearLayout fixedListContainer;
+    private LinearListView linearListViewFixed;
 
     private int statusBarHeight = 0;
 
@@ -76,24 +84,30 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
     }
 
     private void init(Context context) {
-        inflate(context, R.layout.md_drawer, this);
+        inflate(context, R.layout.md_drawer_view, this);
 
         findViews();
 
         setClipToPadding(false);
         setBackgroundColor(getResources().getColor(R.color.md_drawer_background));
-        setInsetForeground(new ColorDrawable(getResources().getColor(R.color.md_secondary)));
+        setInsetForeground(new ColorDrawable(getResources().getColor(R.color.md_inset_foreground)));
 
         setOnInsetsCallback(this);
 
         mAdapter = new DrawerAdapter(context, new ArrayList<DrawerItem>());
         linearListView.setAdapter(mAdapter);
 
+        mAdapterFixed = new DrawerAdapter(context, new ArrayList<DrawerItem>());
+        linearListViewFixed.setAdapter(mAdapterFixed);
+
         updateProfile();
         updateList();
+        updateFixedList();
     }
 
     private void findViews() {
+        scrollView = (ScrollView) findViewById(R.id.mdScrollView);
+
         layout = (LinearLayout) findViewById(R.id.mdLayout);
 
         frameLayoutProfile = (FrameLayout) findViewById(R.id.mdLayoutProfile);
@@ -103,7 +117,10 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
         textViewNameProfile = (TextView) findViewById(R.id.mdNameProfile);
         textViewDescriptionProfile = (TextView) findViewById(R.id.mdDescriptionProfile);
 
-        linearListView = (LinearListView) findViewById(R.id.mdLinearListViewPrimary);
+        linearListView = (LinearListView) findViewById(R.id.mdLinearListView);
+
+        fixedListContainer = (LinearLayout) findViewById(R.id.mdFixedListContainer);
+        linearListViewFixed = (LinearListView) findViewById(R.id.mdLinearListViewFixed);
     }
 
     private void updateSpacing() {
@@ -114,6 +131,12 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
             layout.setPadding(0, 0, 0, 0);
         } else {
             layout.setPadding(0, statusBarHeight, 0, 0);
+        }
+
+        if (mAdapterFixed.getCount() > 0) {
+            scrollView.setPadding(0, 0, 0, linearListViewFixed.getHeight());
+        } else {
+            scrollView.setPadding(0, 0, 0, 0);
         }
     }
 
@@ -177,7 +200,7 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
             @Override
             public void onItemClick(LinearListView parent, View view, int position, long id) {
                 DrawerItem item = mAdapter.getItem(position);
-                if (!item.isDivider()) {
+                if (!item.isHeader()) {
                     if (item.hasOnItemClickListener()) {
                         item.getOnItemClickListener().onClick(item, item.getId(), position);
                     } else {
@@ -188,11 +211,37 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
                 }
             }
         });
+        updateSpacing();
+    }
+
+    private void updateFixedList() {
+        if (mAdapterFixed.getCount() == 0) {
+            fixedListContainer.setVisibility(GONE);
+        } else {
+            fixedListContainer.setVisibility(VISIBLE);
+        }
+
+        linearListViewFixed.setOnItemClickListener(new LinearListView.OnItemClickListener() {
+            @Override
+            public void onItemClick(LinearListView parent, View view, int position, long id) {
+                DrawerItem item = mAdapterFixed.getItem(position);
+                if (!item.isHeader()) {
+                    if (item.hasOnItemClickListener()) {
+                        item.getOnItemClickListener().onClick(item, item.getId(), position);
+                    } else {
+                        if (hasOnItemClickListener()) {
+                            mOnFixedItemClickListener.onClick(item, item.getId(), position);
+                        }
+                    }
+                }
+            }
+        });
+        updateSpacing();
     }
 
 
     /**
-     * Sets a profile to the md_drawer view
+     * Sets a profile to the drawer view
      *
      * @param profile Profile to set
      */
@@ -203,16 +252,16 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
     }
 
     /**
-     * Gets the profile of the md_drawer view
+     * Gets the profile of the drawer view
      *
-     * @return Profile of the md_drawer view
+     * @return Profile of the drawer view
      */
     public DrawerProfile getProfile() {
         return mProfile;
     }
 
     /**
-     * Removes the profile from the md_drawer view
+     * Removes the profile from the drawer view
      */
     public DrawerView removeProfile() {
         mProfile = null;
@@ -222,7 +271,7 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
 
 
     /**
-     * Adds items to the md_drawer view
+     * Adds items to the drawer view
      *
      * @param items Items to add
      */
@@ -236,7 +285,7 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
     }
 
     /**
-     * Adds an item to the md_drawer view
+     * Adds an item to the drawer view
      *
      * @param item Item to add
      */
@@ -248,7 +297,7 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
     }
 
     /**
-     * Adds a divider to the md_drawer view
+     * Adds a divider to the drawer view
      */
     public DrawerView addDivider() {
         addItem(new DrawerHeaderItem());
@@ -256,29 +305,29 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
     }
 
     /**
-     * Gets all items from the md_drawer view
+     * Gets all items from the drawer view
      *
-     * @return Items from the md_drawer view
+     * @return Items from the drawer view
      */
     public List<DrawerItem> getItems() {
         return mAdapter.getItems();
     }
 
     /**
-     * Gets an item from the md_drawer view
+     * Gets an item from the drawer view
      *
      * @param position The item position
-     * @return Item from the md_drawer view
+     * @return Item from the drawer view
      */
     public DrawerItem getItem(int position) {
         return mAdapter.getItem(position);
     }
 
     /**
-     * Gets an item from the md_drawer view
+     * Gets an item from the drawer view
      *
      * @param id The item ID
-     * @return Item from the md_drawer view
+     * @return Item from the drawer view
      */
     public DrawerItem findItemById(int id) {
         for (int i = 0; i < mAdapter.getCount(); i++){
@@ -290,16 +339,17 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
     }
 
     /**
-     * Selects an item from the md_drawer view
+     * Selects an item from the drawer view
      *
      * @param position The item position
      */
     public void selectItem(int position) {
+        mAdapterFixed.clearSelection();
         mAdapter.select(position);
     }
 
     /**
-     * Gets the selected item position of the md_drawer view
+     * Gets the selected item position of the drawer view
      *
      * @return Position of the selected item
      */
@@ -308,11 +358,13 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
     }
 
     /**
-     * Selects an item from the md_drawer view
+     * Selects an item from the drawer view
      *
      * @param id The item ID
      */
     public void selectItemById(int id) {
+        mAdapterFixed.clearSelection();
+
         for (int i = 0; i < mAdapter.getCount(); i++){
             if (mAdapter.getItem(i).getId() == id) {
                 mAdapter.select(i);
@@ -321,7 +373,7 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
     }
 
     /**
-     * Removes an item from the md_drawer view
+     * Removes an item from the drawer view
      *
      * @param item Item to remove
      */
@@ -333,7 +385,7 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
     }
 
     /**
-     * Removes an item from the md_drawer view
+     * Removes an item from the drawer view
      *
      * @param position Position to remove
      */
@@ -345,7 +397,7 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
     }
 
     /**
-     * Removes all items from the md_drawer view
+     * Removes all items from the drawer view
      */
     public DrawerView clearItems() {
         for (DrawerItem item : mAdapter.getItems()) {
@@ -358,7 +410,7 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
 
 
     /**
-     * Sets an item click listener to the md_drawer view
+     * Sets an item click listener to the drawer view
      *
      * @param listener Listener to set
      */
@@ -369,29 +421,207 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
     }
 
     /**
-     * Gets the item click listener of the md_drawer view
+     * Gets the item click listener of the drawer view
      *
-     * @return Item click listener of the md_drawer view
+     * @return Item click listener of the drawer view
      */
     public DrawerItem.OnItemClickListener getOnItemClickListener() {
         return mOnItemClickListener;
     }
 
     /**
-     * Gets whether the md_drawer view has an item click listener set to it
+     * Gets whether the drawer view has an item click listener set to it
      *
-     * @return True if the md_drawer view has an item click listener set to it, false otherwise.
+     * @return True if the drawer view has an item click listener set to it, false otherwise.
      */
     public boolean hasOnItemClickListener() {
         return mOnItemClickListener != null;
     }
 
     /**
-     * Removes the item click listener from the md_drawer view
+     * Removes the item click listener from the drawer view
      */
     public DrawerView removeOnItemClickListener() {
         mOnItemClickListener = null;
         updateList();
+        return this;
+    }
+
+
+    /**
+     * Adds fixed items to the drawer view
+     *
+     * @param items Items to add
+     */
+    public DrawerView addFixedItems(List<DrawerItem> items) {
+        for (DrawerItem item : items) {
+            item.attachTo(mAdapterFixed);
+        }
+        mAdapterFixed.addAll(items);
+        updateFixedList();
+        return this;
+    }
+
+    /**
+     * Adds a fixed item to the drawer view
+     *
+     * @param item Item to add
+     */
+    public DrawerView addFixedItem(DrawerItem item) {
+        item.attachTo(mAdapterFixed);
+        mAdapterFixed.add(item);
+        updateFixedList();
+        return this;
+    }
+
+    /**
+     * Adds a fixed divider to the drawer view
+     */
+    public DrawerView addFixedDivider() {
+        addFixedItem(new DrawerHeaderItem());
+        return this;
+    }
+
+    /**
+     * Gets all fixed items from the drawer view
+     *
+     * @return Items from the drawer view
+     */
+    public List<DrawerItem> getFixedItems() {
+        return mAdapterFixed.getItems();
+    }
+
+    /**
+     * Gets a fixed item from the drawer view
+     *
+     * @param position The item position
+     * @return Item from the drawer view
+     */
+    public DrawerItem getFixedItem(int position) {
+        return mAdapterFixed.getItem(position);
+    }
+
+    /**
+     * Gets a fixed item from the drawer view
+     *
+     * @param id The item ID
+     * @return Item from the drawer view
+     */
+    public DrawerItem findFixedItemById(int id) {
+        for (int i = 0; i < mAdapterFixed.getCount(); i++){
+            if (mAdapterFixed.getItem(i).getId() == id) {
+                return mAdapterFixed.getItem(i);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Selects a fixed item from the drawer view
+     *
+     * @param position The item position
+     */
+    public void selectFixedItem(int position) {
+        mAdapter.clearSelection();
+        mAdapterFixed.select(position);
+    }
+
+    /**
+     * Gets the selected fixed item position of the drawer view
+     *
+     * @return Position of the selected item
+     */
+    public int getSelectedFixedPosition(){
+        return mAdapterFixed.getSelectedPosition();
+    }
+
+    /**
+     * Selects a fixed item from the drawer view
+     *
+     * @param id The item ID
+     */
+    public void selectFixedItemById(int id) {
+        mAdapter.clearSelection();
+
+        for (int i = 0; i < mAdapterFixed.getCount(); i++){
+            if (mAdapterFixed.getItem(i).getId() == id) {
+                mAdapterFixed.select(i);
+            }
+        }
+    }
+
+    /**
+     * Removes a fixed item from the drawer view
+     *
+     * @param item Item to remove
+     */
+    public DrawerView removeFixedItem(DrawerItem item) {
+        item.detach();
+        mAdapterFixed.remove(item);
+        updateFixedList();
+        return this;
+    }
+
+    /**
+     * Removes a fixed item from the drawer view
+     *
+     * @param position Position to remove
+     */
+    public DrawerView removeFixedItem(int position) {
+        mAdapterFixed.getItem(position).detach();
+        mAdapterFixed.remove(mAdapterFixed.getItem(position));
+        updateFixedList();
+        return this;
+    }
+
+    /**
+     * Removes all fixed items from the drawer view
+     */
+    public DrawerView clearFixedItems() {
+        for (DrawerItem item : mAdapterFixed.getItems()) {
+            item.detach();
+        }
+        mAdapterFixed.clear();
+        updateFixedList();
+        return this;
+    }
+
+
+    /**
+     * Sets a fixed item click listener to the drawer view
+     *
+     * @param listener Listener to set
+     */
+    public DrawerView setOnFixedItemClickListener(DrawerItem.OnItemClickListener listener) {
+        mOnFixedItemClickListener = listener;
+        updateFixedList();
+        return this;
+    }
+
+    /**
+     * Gets the fixed item click listener of the drawer view
+     *
+     * @return Item click listener of the drawer view
+     */
+    public DrawerItem.OnItemClickListener getOnFixedItemClickListener() {
+        return mOnFixedItemClickListener;
+    }
+
+    /**
+     * Gets whether the drawer view has a fixed item click listener set to it
+     *
+     * @return True if the drawer view has a fixed item click listener set to it, false otherwise.
+     */
+    public boolean hasOnFixedItemClickListener() {
+        return mOnFixedItemClickListener != null;
+    }
+
+    /**
+     * Removes the fixed item click listener from the drawer view
+     */
+    public DrawerView removeOnFixedItemClickListener() {
+        mOnFixedItemClickListener = null;
+        updateFixedList();
         return this;
     }
 
@@ -407,23 +637,26 @@ public class DrawerView extends ScrimInsetsScrollView implements ScrimInsetsScro
         super.onSizeChanged(w, h, oldw, oldh);
 
         if (w != oldw) {
-            //Window width
-            int windowWidth = ((Activity) getContext()).getWindow().getDecorView().getWidth();
+
+            int viewportWidth = getContext().getResources().getDisplayMetrics().widthPixels;
+            int viewportHeight = getContext().getResources().getDisplayMetrics().heightPixels;
 
             //Minus the width of the vertical nav bar
             if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 int navigationBarWidthResId = getResources().getIdentifier("navigation_bar_width", "dimen", "android");
                 if (navigationBarWidthResId > 0) {
-                    windowWidth -= getResources().getDimensionPixelSize(navigationBarWidthResId);
+                    viewportWidth -= getResources().getDimensionPixelSize(navigationBarWidthResId);
                 }
             }
+
+            int viewportMin = Math.min(viewportWidth, viewportHeight);
 
             //App bar size
             TypedValue typedValue = new TypedValue();
             getContext().getTheme().resolveAttribute(R.attr.actionBarSize, typedValue, true);
             int actionBarSize = TypedValue.complexToDimensionPixelSize(typedValue.data, getResources().getDisplayMetrics());
 
-            int width = windowWidth - actionBarSize;
+            int width = viewportMin - actionBarSize;
 
             int maxWidth = getResources().getDimensionPixelSize(R.dimen.md_drawer_max_width);
 

@@ -23,7 +23,7 @@ import android.graphics.drawable.Drawable;
 import android.widget.ArrayAdapter;
 
 /**
- * Object to be used with {@link com.heinrichreimersoftware.materialdrawer.DrawerAdapter} and {@link com.heinrichreimersoftware.materialdrawer.DrawerView} to display a md_drawer item.
+ * Object to be used with {@link com.heinrichreimersoftware.materialdrawer.DrawerAdapter} and {@link com.heinrichreimersoftware.materialdrawer.DrawerView} to display a md_drawer_view item.
  * Can hold an image, a primary text, a secondary text and a listener.
  */
 public class DrawerItem {
@@ -51,9 +51,9 @@ public class DrawerItem {
 
 
     /**
-     * Sets whether the md_drawer item is a header
+     * Sets whether the md_drawer_view item is a header
      *
-     * @param isHeader True if the md_drawer item should be a header, false otherwise.
+     * @param isHeader True if the md_drawer_view item should be a header, false otherwise.
      */
     public DrawerItem setIsHeader(boolean isHeader) {
         mIsHeader = isHeader;
@@ -62,18 +62,18 @@ public class DrawerItem {
     }
 
     /**
-     * Gets whether the md_drawer item is a header
+     * Gets whether the md_drawer_view item is a header
      *
-     * @return True if the md_drawer item is a header, false otherwise.
+     * @return True if the md_drawer_view item is a header, false otherwise.
      */
     public boolean isHeader() {
         return mIsHeader;
     }
 
     /**
-     * Sets whether the md_drawer item is a divider
+     * Sets whether the md_drawer_view item is a divider
      *
-     * @param isDivider True if the md_drawer item should be a divider, false otherwise.
+     * @param isDivider True if the md_drawer_view item should be a divider, false otherwise.
      */
     @Deprecated
     public DrawerItem setIsDivider(boolean isDivider) {
@@ -82,9 +82,9 @@ public class DrawerItem {
     }
 
     /**
-     * Gets whether the md_drawer item is a divider
+     * Gets whether the md_drawer_view item is a divider
      *
-     * @return True if the md_drawer item is a divider, false otherwise.
+     * @return True if the md_drawer_view item is a divider, false otherwise.
      */
     @Deprecated
     public boolean isDivider() {
@@ -93,7 +93,7 @@ public class DrawerItem {
 
 
     /**
-     * Sets an ID the md_drawer item
+     * Sets an ID the md_drawer_view item
      *
      * @param id ID to set
      */
@@ -103,9 +103,9 @@ public class DrawerItem {
     }
 
     /**
-     * Gets the ID of the md_drawer item
+     * Gets the ID of the md_drawer_view item
      *
-     * @return ID of the md_drawer item
+     * @return ID of the md_drawer_view item
      */
     public int getId() {
         return mId;
@@ -113,7 +113,7 @@ public class DrawerItem {
 
 
     /**
-     * Sets an image with a given image mode to the md_drawer item
+     * Sets an image with a given image mode to the md_drawer_view item
      *
      * @param image     Image to set
      * @param imageMode Image mode to set
@@ -126,7 +126,7 @@ public class DrawerItem {
     }
 
     /**
-     * Sets an image to the md_drawer item
+     * Sets an image to the md_drawer_view item
      *
      * @param image Image to set
      */
@@ -137,7 +137,7 @@ public class DrawerItem {
     }
 
     /**
-     * Sets an image with a given image mode to the md_drawer item
+     * Sets an image with a given image mode to the md_drawer_view item
      *
      * @param image     Image to set
      * @param imageMode Image mode to set
@@ -147,7 +147,7 @@ public class DrawerItem {
     }
 
     /**
-     * Sets an image to the md_drawer item
+     * Sets an image to the md_drawer_view item
      *
      * @param image Image to set
      */
@@ -156,18 +156,18 @@ public class DrawerItem {
     }
 
     /**
-     * Gets the image of the md_drawer item
+     * Gets the image of the md_drawer_view item
      *
-     * @return Image of the md_drawer item
+     * @return Image of the md_drawer_view item
      */
     public Drawable getImage() {
         return mImage;
     }
 
     /**
-     * Gets whether the md_drawer item has an image set to it
+     * Gets whether the md_drawer_view item has an image set to it
      *
-     * @return True if the md_drawer item has an image set to it, false otherwise.
+     * @return True if the md_drawer_view item has an image set to it, false otherwise.
      */
     public boolean hasImage() {
         return mImage != null;
@@ -175,7 +175,7 @@ public class DrawerItem {
 
 
     /**
-     * Removes the image from the md_drawer item
+     * Removes the image from the md_drawer_view item
      */
     public DrawerItem removeImage() {
         mImage = null;
@@ -185,7 +185,7 @@ public class DrawerItem {
 
 
     /**
-     * Sets an image mode to the md_drawer item
+     * Sets an image mode to the md_drawer_view item
      *
      * @param imageMode Image mode to set
      */
@@ -199,18 +199,18 @@ public class DrawerItem {
     }
 
     /**
-     * Gets the image mode of the md_drawer item
+     * Gets the image mode of the md_drawer_view item
      *
-     * @return Image mode of the md_drawer item
+     * @return Image mode of the md_drawer_view item
      */
     public int getImageMode() {
         return mImageMode;
     }
 
     /**
-     * Gets whether the md_drawer item has an image mode set to it
+     * Gets whether the md_drawer_view item has an image mode set to it
      *
-     * @return True if the md_drawer item has an image mode set to it, false otherwise.
+     * @return True if the md_drawer_view item has an image mode set to it, false otherwise.
      */
     public boolean hasImageMode() {
         return mImageMode > 0;
@@ -218,7 +218,7 @@ public class DrawerItem {
 
 
     /**
-     * Resets the image mode from the md_drawer item
+     * Resets the image mode from the md_drawer_view item
      */
     public DrawerItem resetImageMode() {
         mImageMode = ICON;
@@ -228,7 +228,7 @@ public class DrawerItem {
 
 
     /**
-     * Sets a primary text to the md_drawer item
+     * Sets a primary text to the md_drawer_view item
      *
      * @param textPrimary Primary text to set
      */
@@ -239,18 +239,18 @@ public class DrawerItem {
     }
 
     /**
-     * Gets the primary text of the md_drawer item
+     * Gets the primary text of the md_drawer_view item
      *
-     * @return Primary text of the md_drawer item
+     * @return Primary text of the md_drawer_view item
      */
     public String getTextPrimary() {
         return mTextPrimary;
     }
 
     /**
-     * Gets whether the md_drawer item has a primary text set to it
+     * Gets whether the md_drawer_view item has a primary text set to it
      *
-     * @return True if the md_drawer item has a primary text set to it, false otherwise.
+     * @return True if the md_drawer_view item has a primary text set to it, false otherwise.
      */
     public boolean hasTextPrimary() {
         return mTextPrimary != null && !mTextPrimary.equals("");
@@ -258,7 +258,7 @@ public class DrawerItem {
 
 
     /**
-     * Removes the primary text from the md_drawer item
+     * Removes the primary text from the md_drawer_view item
      */
     public DrawerItem removeTextPrimary() {
         mTextPrimary = null;
@@ -268,7 +268,7 @@ public class DrawerItem {
 
 
     /**
-     * Sets a secondary text with a given text mode to the md_drawer item
+     * Sets a secondary text with a given text mode to the md_drawer_view item
      *
      * @param textSecondary Secondary text to set
      * @param textMode      Text mode to set
@@ -281,7 +281,7 @@ public class DrawerItem {
     }
 
     /**
-     * Sets a secondary text to the md_drawer item
+     * Sets a secondary text to the md_drawer_view item
      *
      * @param textSecondary Secondary text to set
      */
@@ -291,18 +291,18 @@ public class DrawerItem {
     }
 
     /**
-     * Gets the secondary text of the md_drawer item
+     * Gets the secondary text of the md_drawer_view item
      *
-     * @return Secondary text of the md_drawer item
+     * @return Secondary text of the md_drawer_view item
      */
     public String getTextSecondary() {
         return mTextSecondary;
     }
 
     /**
-     * Gets whether the md_drawer item has a secondary text set to it
+     * Gets whether the md_drawer_view item has a secondary text set to it
      *
-     * @return True if the md_drawer item has a secondary text set to it, false otherwise.
+     * @return True if the md_drawer_view item has a secondary text set to it, false otherwise.
      */
     public boolean hasTextSecondary() {
         return mTextSecondary != null && !mTextSecondary.equals("");
@@ -310,7 +310,7 @@ public class DrawerItem {
 
 
     /**
-     * Removes the secondary text from the md_drawer item
+     * Removes the secondary text from the md_drawer_view item
      */
     public DrawerItem removeTextSecondary() {
         mTextSecondary = null;
@@ -320,7 +320,7 @@ public class DrawerItem {
 
 
     /**
-     * Sets a text mode to the md_drawer item
+     * Sets a text mode to the md_drawer_view item
      *
      * @param textMode Text mode to set
      */
@@ -334,18 +334,18 @@ public class DrawerItem {
     }
 
     /**
-     * Gets the text mode of the md_drawer item
+     * Gets the text mode of the md_drawer_view item
      *
-     * @return Text mode of the md_drawer item
+     * @return Text mode of the md_drawer_view item
      */
     public int getTextMode() {
         return mTextMode;
     }
 
     /**
-     * Gets whether the md_drawer item has a text mode set to it
+     * Gets whether the md_drawer_view item has a text mode set to it
      *
-     * @return True if the md_drawer item has a text mode set to it, false otherwise.
+     * @return True if the md_drawer_view item has a text mode set to it, false otherwise.
      */
     public boolean hasTextMode() {
         return mTextMode > 0;
@@ -353,7 +353,7 @@ public class DrawerItem {
 
 
     /**
-     * Resets the text mode from the md_drawer item
+     * Resets the text mode from the md_drawer_view item
      */
     public DrawerItem resetTextMode() {
         mTextMode = SINGLE_LINE;
@@ -363,7 +363,7 @@ public class DrawerItem {
 
 
     /**
-     * Sets a click listener to the md_drawer item
+     * Sets a click listener to the md_drawer_view item
      *
      * @param listener Listener to set
      */
@@ -374,25 +374,25 @@ public class DrawerItem {
     }
 
     /**
-     * Gets the click listener of the md_drawer item
+     * Gets the click listener of the md_drawer_view item
      *
-     * @return Click listener of the md_drawer item
+     * @return Click listener of the md_drawer_view item
      */
     public OnItemClickListener getOnItemClickListener() {
         return mOnClickListener;
     }
 
     /**
-     * Gets whether the md_drawer item has a click listener set to it
+     * Gets whether the md_drawer_view item has a click listener set to it
      *
-     * @return True if the md_drawer item has a click listener set to it, false otherwise.
+     * @return True if the md_drawer_view item has a click listener set to it, false otherwise.
      */
     public boolean hasOnItemClickListener() {
         return mOnClickListener != null;
     }
 
     /**
-     * Removes the click listener from the md_drawer item
+     * Removes the click listener from the md_drawer_view item
      */
     public DrawerItem removeOnItemClickListener() {
         mOnClickListener = null;
@@ -402,7 +402,7 @@ public class DrawerItem {
 
 
     /**
-     * Attaches the md_drawer item to an adapter
+     * Attaches the md_drawer_view item to an adapter
      *
      * @param adapter Adapter to attach to
      */
@@ -413,7 +413,7 @@ public class DrawerItem {
     }
 
     /**
-     * Detaches the md_drawer item from its adapter
+     * Detaches the md_drawer_view item from its adapter
      */
     public DrawerItem detach() {
         mAdapter = null;

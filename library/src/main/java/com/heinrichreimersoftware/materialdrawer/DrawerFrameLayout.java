@@ -44,7 +44,7 @@ public class DrawerFrameLayout extends DrawerLayout {
     public DrawerFrameLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        inflate(context, R.layout.md_drawer_view, this);
+        inflate(context, R.layout.md_drawer_frame_layout, this);
         mDrawer = (DrawerView) findViewById(R.id.mdDrawer);
 
         setDrawerShadow(R.drawable.md_drawer_shadow, Gravity.START);
@@ -67,7 +67,7 @@ public class DrawerFrameLayout extends DrawerLayout {
     }
 
     /**
-     * Sets a profile to the md_drawer
+     * Sets a profile to the md_drawer_view
      *
      * @param profile Profile to set
      */
@@ -77,16 +77,16 @@ public class DrawerFrameLayout extends DrawerLayout {
     }
 
     /**
-     * Gets the profile of the md_drawer
+     * Gets the profile of the md_drawer_view
      *
-     * @return Profile of the md_drawer
+     * @return Profile of the md_drawer_view
      */
     public DrawerProfile getProfile() {
         return mDrawer.getProfile();
     }
 
     /**
-     * Removes the profile from the md_drawer
+     * Removes the profile from the md_drawer_view
      */
     public DrawerFrameLayout removeProfile() {
         mDrawer.removeProfile();
@@ -95,7 +95,7 @@ public class DrawerFrameLayout extends DrawerLayout {
 
 
     /**
-     * Adds items to the md_drawer
+     * Adds items to the md_drawer_view
      *
      * @param items Items to add
      */
@@ -105,7 +105,7 @@ public class DrawerFrameLayout extends DrawerLayout {
     }
 
     /**
-     * Adds an item to the md_drawer
+     * Adds an item to the md_drawer_view
      *
      * @param item Item to add
      */
@@ -115,7 +115,7 @@ public class DrawerFrameLayout extends DrawerLayout {
     }
 
     /**
-     * Adds a divider to the md_drawer
+     * Adds a divider to the md_drawer_view
      */
     public DrawerFrameLayout addDivider() {
         mDrawer.addDivider();
@@ -123,29 +123,29 @@ public class DrawerFrameLayout extends DrawerLayout {
     }
 
     /**
-     * Gets all items from the md_drawer
+     * Gets all items from the md_drawer_view
      *
-     * @return Items from the md_drawer
+     * @return Items from the md_drawer_view
      */
     public List<DrawerItem> getItems() {
         return mDrawer.getItems();
     }
 
     /**
-     * Gets an item from the md_drawer
+     * Gets an item from the md_drawer_view
      *
      * @param position The item position
-     * @return Item from the md_drawer
+     * @return Item from the md_drawer_view
      */
     public DrawerItem getItem(int position) {
         return mDrawer.getItem(position);
     }
 
     /**
-     * Gets an item from the md_drawer
+     * Gets an item from the md_drawer_view
      *
      * @param id The item ID
-     * @return Item from the md_drawer
+     * @return Item from the md_drawer_view
      */
     public DrawerItem findItemById(int id) {
         mDrawer.findItemById(id);
@@ -153,7 +153,7 @@ public class DrawerFrameLayout extends DrawerLayout {
     }
 
     /**
-     * Selects an item from the md_drawer
+     * Selects an item from the md_drawer_view
      *
      * @param position The item position
      */
@@ -162,7 +162,7 @@ public class DrawerFrameLayout extends DrawerLayout {
     }
 
     /**
-     * Gets the selected item position of the md_drawer
+     * Gets the selected item position of the md_drawer_view
      *
      * @return Position of the selected item
      */
@@ -171,7 +171,7 @@ public class DrawerFrameLayout extends DrawerLayout {
     }
 
     /**
-     * Selects an item from the md_drawer
+     * Selects an item from the md_drawer_view
      *
      * @param id The item ID
      */
@@ -180,7 +180,7 @@ public class DrawerFrameLayout extends DrawerLayout {
     }
 
     /**
-     * Removes an item from the md_drawer
+     * Removes an item from the md_drawer_view
      *
      * @param item Item to remove
      */
@@ -190,7 +190,7 @@ public class DrawerFrameLayout extends DrawerLayout {
     }
 
     /**
-     * Removes an item from the md_drawer
+     * Removes an item from the md_drawer_view
      *
      * @param position Position to remove
      */
@@ -200,7 +200,7 @@ public class DrawerFrameLayout extends DrawerLayout {
     }
 
     /**
-     * Removes all items from the md_drawer
+     * Removes all items from the md_drawer_view
      */
     public DrawerFrameLayout clearItems() {
         mDrawer.clearItems();
@@ -209,7 +209,7 @@ public class DrawerFrameLayout extends DrawerLayout {
 
 
     /**
-     * Sets an item click listener to the md_drawer
+     * Sets an item click listener to the md_drawer_view
      *
      * @param listener Listener to set
      */
@@ -219,25 +219,25 @@ public class DrawerFrameLayout extends DrawerLayout {
     }
 
     /**
-     * Gets the item click listener of the md_drawer
+     * Gets the item click listener of the md_drawer_view
      *
-     * @return Item click listener of the md_drawer
+     * @return Item click listener of the md_drawer_view
      */
     public DrawerItem.OnItemClickListener getOnItemClickListener() {
         return mDrawer.getOnItemClickListener();
     }
 
     /**
-     * Gets whether the md_drawer has an item click listener set to it
+     * Gets whether the md_drawer_view has an item click listener set to it
      *
-     * @return True if the md_drawer has an item click listener set to it, false otherwise.
+     * @return True if the md_drawer_view has an item click listener set to it, false otherwise.
      */
     public boolean hasOnItemClickListener() {
         return mDrawer.hasOnItemClickListener();
     }
 
     /**
-     * Removes the item click listener from the md_drawer
+     * Removes the item click listener from the md_drawer_view
      */
     public DrawerFrameLayout removeOnItemClickListener() {
         mDrawer.removeOnItemClickListener();
@@ -246,14 +246,14 @@ public class DrawerFrameLayout extends DrawerLayout {
 
 
     /**
-     * Opens the md_drawer
+     * Opens the md_drawer_view
      */
     public void openDrawer(){
         openDrawer(mDrawer);
     }
 
     /**
-     * Closes the md_drawer
+     * Closes the md_drawer_view
      */
     public void closeDrawer(){
         closeDrawer(mDrawer);
