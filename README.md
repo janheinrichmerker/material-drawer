@@ -105,7 +105,7 @@ Dependency
 **Gradle dependency:**
 
     dependencies {
-	    compile 'com.heinrichreimersoftware.materialdrawer:library:1.3.2'
+	    compile 'com.heinrichreimersoftware.materialdrawer:library:1.4.1'
     }
 
 Get the latest dependency with ["Gradle, please"][4]
@@ -113,6 +113,11 @@ Get the latest dependency with ["Gradle, please"][4]
 Changes
 -------
 
+* **Version 1.4.1:**
+    * Fixed bottom list
+    * Improved sizing
+    * Improved colors
+    * Fixed issue #27
 * **Version 1.3.2:**
     * Added [DrawerFrameLayout][9] as [DrawerLayout][11] replacement
     * Active state tinting
