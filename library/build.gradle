@@ -5,10 +5,10 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        minSdkVersion 11
+        minSdkVersion 7
         targetSdkVersion 21
-        versionCode 8
-        versionName "1.4"
+        versionCode 10
+        versionName "1.4.2"
     }
     buildTypes {
         release {
@@ -24,4 +24,4 @@ dependencies {
     compile 'com.android.support:appcompat-v7:21.0.3'
 }
 
-apply from: '../gradle-mvn-push.gradle'
+apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'

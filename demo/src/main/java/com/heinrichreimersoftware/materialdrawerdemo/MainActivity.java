@@ -184,7 +184,7 @@ public class MainActivity extends ActionBarActivity implements BillingProcessor.
                 icon3 = getResources().getDrawable(R.drawable.cat_2);
             }
             drawer.addItem(new DrawerItem()
-                            .setImage(icon3)
+                            .setImage(icon3, DrawerItem.SMALL_AVATAR)
                             .setTextPrimary(getString(R.string.lorem_ipsum_short))
                             .setTextSecondary(getString(R.string.lorem_ipsum_long), DrawerItem.THREE_LINE)
             );
@@ -212,7 +212,7 @@ public class MainActivity extends ActionBarActivity implements BillingProcessor.
                 icon4 = getResources().getDrawable(R.drawable.cat_2);
             }
             drawer.addFixedItem(new DrawerItem()
-                            .setImage(icon4)
+                            .setImage(icon4, DrawerItem.SMALL_AVATAR)
                             .setTextPrimary(getString(R.string.lorem_ipsum_short))
             );
 

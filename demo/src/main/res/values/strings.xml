@@ -5,7 +5,7 @@
     <string name="drawer_open">Menu open</string>
     <string name="drawer_close">Menu closed</string>
     <string name="hello_world">Custom drawer implementation for Material design apps.\n\nPlay with the drawer by checking the checkboxes below.\n\nMade by <b>Heinrich Reimer</b>\n\n<i>If you like this library you can show your enthusiasm by buying me a beer or two.</i></string>
-    <string name="hello_world2">Example of using <i>DrawerFrameLayout</i> for the drawer.\n\nCheck out the sample code on GitHub</string>
+    <string name="hello_world2">Example of using <i>DrawerFrameLayout</i> for the drawer.\nThis drawer has a custom max width of 250dp.\n\nCheck out the sample code on GitHub</string>
     <string name="check_box_list">List</string>
     <string name="check_box_fixed_list">Fixed list</string>
     <string name="check_box_profile">Profile</string>

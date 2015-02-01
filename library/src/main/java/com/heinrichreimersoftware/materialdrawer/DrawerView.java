@@ -22,8 +22,10 @@ import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -41,9 +43,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * View to be used with {@link android.support.v4.widget.DrawerLayout} to display a md_drawer_view which is fully compliant with the Material Design specification.
+ * View to be used with {@link android.support.v4.widget.DrawerLayout} to display a drawer which is fully compliant with the Material Design specification.
  */
 public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFrameLayout.OnInsetsCallback {
+
+    private static final String TAG = "DrawerView";
+
     private DrawerProfile mProfile = null;
 
     private DrawerAdapter mAdapter;
@@ -70,6 +75,8 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
 
     private int statusBarHeight = 0;
 
+    private int drawerMaxWidth = -1;
+
     public DrawerView(Context context) {
         this(context, null);
     }
@@ -80,10 +87,12 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
 
     public DrawerView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        init(context);
+        Log.d(TAG, "DrawerView()");
+        init(context, attrs);
     }
 
-    private void init(Context context) {
+    private void init(Context context, AttributeSet attrs) {
+        Log.d(TAG, "init()");
         inflate(context, R.layout.md_drawer_view, this);
 
         findViews();
@@ -105,7 +114,9 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
         updateFixedList();
     }
 
+
     private void findViews() {
+        Log.d(TAG, "findViews()");
         scrollView = (ScrollView) findViewById(R.id.mdScrollView);
 
         layout = (LinearLayout) findViewById(R.id.mdLayout);
@@ -123,16 +134,42 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
         linearListViewFixed = (LinearListView) findViewById(R.id.mdLinearListViewFixed);
     }
 
-    private void updateSpacing() {
-        if (mProfile != null && mProfile.getAvatar() != null && mProfile.getName() != null && !mProfile.getName().isEmpty()) {
-            frameLayoutProfile.getLayoutParams().height = Math.round(getLayoutParams().width / 16 * 9);
-            relativeLayoutProfileContent.getLayoutParams().height = Math.round(getLayoutParams().width / 16 * 9) - statusBarHeight;
+    private void updateDrawerWidth() {
+        Log.d(TAG, "updateDrawerWidth()");
 
-            layout.setPadding(0, 0, 0, 0);
-        } else {
-            layout.setPadding(0, statusBarHeight, 0, 0);
+        int viewportWidth = getContext().getResources().getDisplayMetrics().widthPixels;
+        int viewportHeight = getContext().getResources().getDisplayMetrics().heightPixels;
+
+        //Minus the width of the vertical nav bar
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            int navigationBarWidthResId = getResources().getIdentifier("navigation_bar_width", "dimen", "android");
+            if (navigationBarWidthResId > 0) {
+                viewportWidth -= getResources().getDimensionPixelSize(navigationBarWidthResId);
+            }
         }
 
+        int viewportMin = Math.min(viewportWidth, viewportHeight);
+
+        //App bar size
+        TypedValue typedValue = new TypedValue();
+        getContext().getTheme().resolveAttribute(R.attr.actionBarSize, typedValue, true);
+        int actionBarSize = TypedValue.complexToDimensionPixelSize(typedValue.data, getResources().getDisplayMetrics());
+
+        int width = viewportMin - actionBarSize;
+
+        getLayoutParams().width = Math.min(width, drawerMaxWidth);
+
+        updateProfileSpacing();
+    }
+
+    private void updateProfileSpacing() {
+        Log.d(TAG, "updateProfileSpacing()");
+        frameLayoutProfile.getLayoutParams().height = Math.round(getLayoutParams().width / 16 * 9);
+        relativeLayoutProfileContent.getLayoutParams().height = Math.round(getLayoutParams().width / 16 * 9) - statusBarHeight;
+    }
+
+    private void updateListSpacing() {
+        Log.d(TAG, "updateListSpacing()");
         if (mAdapterFixed.getCount() > 0) {
             scrollView.setPadding(0, 0, 0, linearListViewFixed.getHeight());
         } else {
@@ -141,11 +178,12 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
     }
 
     private void updateProfile() {
+        Log.d(TAG, "updateProfile()");
         if (mProfile != null) {
             if (mProfile.getAvatar() != null) {
                 imageViewAvatarProfile.setImageDrawable(mProfile.getAvatar());
             }
-            if (mProfile.getName() != null && !mProfile.getName().isEmpty()) {
+            if (mProfile.getName() != null && !mProfile.getName().equals("")) {
                 textViewNameProfile.setText(mProfile.getName());
             }
 
@@ -183,13 +221,15 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
                 frameLayoutProfile.setEnabled(false);
             }
             frameLayoutProfile.setVisibility(VISIBLE);
+            layout.setPadding(0, 0, 0, 0);
         } else {
             frameLayoutProfile.setVisibility(GONE);
+            layout.setPadding(0, statusBarHeight, 0, 0);
         }
-        updateSpacing();
     }
 
     private void updateList() {
+        Log.d(TAG, "updateList()");
         if (mAdapter.getCount() == 0) {
             linearListView.setVisibility(GONE);
         } else {
@@ -211,10 +251,11 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
                 }
             }
         });
-        updateSpacing();
+        updateListSpacing();
     }
 
     private void updateFixedList() {
+        Log.d(TAG, "updateFixedList()");
         if (mAdapterFixed.getCount() == 0) {
             fixedListContainer.setVisibility(GONE);
         } else {
@@ -236,7 +277,49 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
                 }
             }
         });
-        updateSpacing();
+        updateListSpacing();
+    }
+
+
+    /**
+     * Sets the max drawer width
+     *
+     * @param drawerMaxWidth Max drawer width to set
+     */
+    public DrawerView setDrawerMaxWidth(int drawerMaxWidth){
+        Log.d(TAG, "setDrawerMaxWidth(" + drawerMaxWidth + ")");
+        this.drawerMaxWidth = drawerMaxWidth;
+        updateDrawerWidth();
+        return this;
+    }
+
+    /**
+     * Sets the max drawer width from resources
+     *
+     * @param drawerMaxWidthResource Max drawer width resource to set
+     */
+    public DrawerView setDrawerMaxWidthResource(int drawerMaxWidthResource){
+        drawerMaxWidth = getResources().getDimensionPixelSize(drawerMaxWidthResource);
+        Log.d(TAG, "setDrawerMaxWidthResource(" + drawerMaxWidth + ")");
+        updateDrawerWidth();
+        return this;
+    }
+
+    /**
+     * Resets the max drawer width
+     */
+    public DrawerView resetDrawerMaxWidth(){
+        Log.d(TAG, "resetDrawerMaxWidth()");
+        this.drawerMaxWidth = getResources().getDimensionPixelSize(R.dimen.md_drawer_max_width);
+        updateDrawerWidth();
+        return this;
+    }
+
+    /**
+     * Gets the max drawer width
+     */
+    public int getDrawerMaxWidth(){
+        return drawerMaxWidth;
     }
 
 
@@ -276,10 +359,13 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
      * @param items Items to add
      */
     public DrawerView addItems(List<DrawerItem> items) {
+        mAdapter.setNotifyOnChange(false);
         for (DrawerItem item : items) {
             item.attachTo(mAdapter);
+            mAdapter.add(item);
         }
-        mAdapter.addAll(items);
+        mAdapter.setNotifyOnChange(true);
+        mAdapter.notifyDataSetChanged();
         updateList();
         return this;
     }
@@ -454,10 +540,13 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
      * @param items Items to add
      */
     public DrawerView addFixedItems(List<DrawerItem> items) {
+        mAdapterFixed.setNotifyOnChange(false);
         for (DrawerItem item : items) {
             item.attachTo(mAdapterFixed);
+            mAdapterFixed.add(item);
         }
-        mAdapterFixed.addAll(items);
+        mAdapterFixed.setNotifyOnChange(true);
+        mAdapterFixed.notifyDataSetChanged();
         updateFixedList();
         return this;
     }
@@ -628,41 +717,27 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
 
     @Override
     public void onInsetsChanged(Rect insets) {
+        Log.d(TAG, "onInsetsChanged()");
         statusBarHeight = insets.top;
-        updateSpacing();
+        updateProfileSpacing();
     }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        Log.d(TAG, "onSizeChanged()");
         super.onSizeChanged(w, h, oldw, oldh);
 
         if (w != oldw) {
-
-            int viewportWidth = getContext().getResources().getDisplayMetrics().widthPixels;
-            int viewportHeight = getContext().getResources().getDisplayMetrics().heightPixels;
-
-            //Minus the width of the vertical nav bar
-            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                int navigationBarWidthResId = getResources().getIdentifier("navigation_bar_width", "dimen", "android");
-                if (navigationBarWidthResId > 0) {
-                    viewportWidth -= getResources().getDimensionPixelSize(navigationBarWidthResId);
+            if(drawerMaxWidth <= 0) {
+                if(getLayoutParams().width != ViewGroup.LayoutParams.MATCH_PARENT && getLayoutParams().width != ViewGroup.LayoutParams.WRAP_CONTENT){
+                    setDrawerMaxWidth(getLayoutParams().width);
+                }
+                else{
+                    resetDrawerMaxWidth();
                 }
             }
 
-            int viewportMin = Math.min(viewportWidth, viewportHeight);
-
-            //App bar size
-            TypedValue typedValue = new TypedValue();
-            getContext().getTheme().resolveAttribute(R.attr.actionBarSize, typedValue, true);
-            int actionBarSize = TypedValue.complexToDimensionPixelSize(typedValue.data, getResources().getDisplayMetrics());
-
-            int width = viewportMin - actionBarSize;
-
-            int maxWidth = getResources().getDimensionPixelSize(R.dimen.md_drawer_max_width);
-
-            getLayoutParams().width = Math.min(width, maxWidth);
-
-            updateSpacing();
+            updateDrawerWidth();
         }
     }
 }

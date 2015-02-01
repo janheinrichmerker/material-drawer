@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.v4.widget.DrawerLayout;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,7 @@ import java.util.List;
 public class DrawerFrameLayout extends DrawerLayout {
 
     private DrawerView mDrawer;
+    private int drawerMaxWidthResource;
 
     public DrawerFrameLayout(Context context) {
         this(context, null);
@@ -50,15 +52,28 @@ public class DrawerFrameLayout extends DrawerLayout {
         setDrawerShadow(R.drawable.md_drawer_shadow, Gravity.START);
 
 
-        int colorPrimaryDark = getResources().getColor(android.R.color.black);
         TypedArray a = getContext().getTheme().obtainStyledAttributes(new int[]{R.attr.colorPrimaryDark});
-        try {
-            colorPrimaryDark = a.getColor(0, 0);
-        } finally {
-            a.recycle();
+
+        int colorPrimaryDark = a.getColor(0, 0);
+        Log.d("fsgsdg", "colorPrimaryDark: " + colorPrimaryDark);
+        if (colorPrimaryDark != 0) {
+            setStatusBarBackgroundColor(colorPrimaryDark);
+        }
+        else{
+            setStatusBarBackgroundColor(getResources().getColor(android.R.color.black));
         }
 
-        setStatusBarBackgroundColor(colorPrimaryDark);
+        a = getContext().obtainStyledAttributes(attrs, new int[]{R.attr.drawerMaxWidth});
+
+        int drawerMaxWidth = a.getDimensionPixelSize(0, 0);
+        Log.d("fsgsdg", "drawerMaxWidth: " + drawerMaxWidth);
+        if (drawerMaxWidth != 0) {
+            setDrawerMaxWidth(drawerMaxWidth);
+        }
+        else{
+            resetDrawerMaxWidth();
+        }
+        a.recycle();
     }
 
     @Override
@@ -66,8 +81,45 @@ public class DrawerFrameLayout extends DrawerLayout {
         super.addView(child, 0, params);
     }
 
+
     /**
-     * Sets a profile to the md_drawer_view
+     * Sets the max drawer width
+     *
+     * @param drawerMaxWidth Max drawer width to set
+     */
+    public DrawerFrameLayout setDrawerMaxWidth(int drawerMaxWidth){
+        mDrawer.setDrawerMaxWidth(drawerMaxWidth);
+        return this;
+    }
+
+    /**
+     * Sets the max drawer width from resources
+     *
+     * @param drawerMaxWidthResource Max drawer width resource to set
+     */
+    public DrawerFrameLayout setDrawerMaxWidthResource(int drawerMaxWidthResource){
+        mDrawer.setDrawerMaxWidthResource(drawerMaxWidthResource);
+        return this;
+    }
+
+    /**
+     * Resets the max drawer width
+     */
+    public DrawerFrameLayout resetDrawerMaxWidth(){
+        mDrawer.resetDrawerMaxWidth();
+        return this;
+    }
+
+    /**
+     * Gets the max drawer width
+     */
+    public int getDrawerMaxWidth(){
+        return mDrawer.getDrawerMaxWidth();
+    }
+
+
+    /**
+     * Sets a profile to the drawer
      *
      * @param profile Profile to set
      */
@@ -77,16 +129,16 @@ public class DrawerFrameLayout extends DrawerLayout {
     }
 
     /**
-     * Gets the profile of the md_drawer_view
+     * Gets the profile of the drawer
      *
-     * @return Profile of the md_drawer_view
+     * @return Profile of the drawer
      */
     public DrawerProfile getProfile() {
         return mDrawer.getProfile();
     }
 
     /**
-     * Removes the profile from the md_drawer_view
+     * Removes the profile from the drawer
      */
     public DrawerFrameLayout removeProfile() {
         mDrawer.removeProfile();
@@ -95,7 +147,7 @@ public class DrawerFrameLayout extends DrawerLayout {
 
 
     /**
-     * Adds items to the md_drawer_view
+     * Adds items to the drawer
      *
      * @param items Items to add
      */
@@ -105,7 +157,7 @@ public class DrawerFrameLayout extends DrawerLayout {
     }
 
     /**
-     * Adds an item to the md_drawer_view
+     * Adds an item to the drawer
      *
      * @param item Item to add
      */
@@ -115,7 +167,7 @@ public class DrawerFrameLayout extends DrawerLayout {
     }
 
     /**
-     * Adds a divider to the md_drawer_view
+     * Adds a divider to the drawer
      */
     public DrawerFrameLayout addDivider() {
         mDrawer.addDivider();
@@ -123,29 +175,29 @@ public class DrawerFrameLayout extends DrawerLayout {
     }
 
     /**
-     * Gets all items from the md_drawer_view
+     * Gets all items from the drawer
      *
-     * @return Items from the md_drawer_view
+     * @return Items from the drawer
      */
     public List<DrawerItem> getItems() {
         return mDrawer.getItems();
     }
 
     /**
-     * Gets an item from the md_drawer_view
+     * Gets an item from the drawer
      *
      * @param position The item position
-     * @return Item from the md_drawer_view
+     * @return Item from the drawer
      */
     public DrawerItem getItem(int position) {
         return mDrawer.getItem(position);
     }
 
     /**
-     * Gets an item from the md_drawer_view
+     * Gets an item from the drawer
      *
      * @param id The item ID
-     * @return Item from the md_drawer_view
+     * @return Item from the drawer
      */
     public DrawerItem findItemById(int id) {
         mDrawer.findItemById(id);
@@ -153,7 +205,7 @@ public class DrawerFrameLayout extends DrawerLayout {
     }
 
     /**
-     * Selects an item from the md_drawer_view
+     * Selects an item from the drawer
      *
      * @param position The item position
      */
@@ -162,7 +214,7 @@ public class DrawerFrameLayout extends DrawerLayout {
     }
 
     /**
-     * Gets the selected item position of the md_drawer_view
+     * Gets the selected item position of the drawer
      *
      * @return Position of the selected item
      */
@@ -171,7 +223,7 @@ public class DrawerFrameLayout extends DrawerLayout {
     }
 
     /**
-     * Selects an item from the md_drawer_view
+     * Selects an item from the drawer
      *
      * @param id The item ID
      */
@@ -180,7 +232,7 @@ public class DrawerFrameLayout extends DrawerLayout {
     }
 
     /**
-     * Removes an item from the md_drawer_view
+     * Removes an item from the drawer
      *
      * @param item Item to remove
      */
@@ -190,7 +242,7 @@ public class DrawerFrameLayout extends DrawerLayout {
     }
 
     /**
-     * Removes an item from the md_drawer_view
+     * Removes an item from the drawer
      *
      * @param position Position to remove
      */
@@ -200,7 +252,7 @@ public class DrawerFrameLayout extends DrawerLayout {
     }
 
     /**
-     * Removes all items from the md_drawer_view
+     * Removes all items from the drawer
      */
     public DrawerFrameLayout clearItems() {
         mDrawer.clearItems();
@@ -209,7 +261,7 @@ public class DrawerFrameLayout extends DrawerLayout {
 
 
     /**
-     * Sets an item click listener to the md_drawer_view
+     * Sets an item click listener to the drawer
      *
      * @param listener Listener to set
      */
@@ -219,25 +271,25 @@ public class DrawerFrameLayout extends DrawerLayout {
     }
 
     /**
-     * Gets the item click listener of the md_drawer_view
+     * Gets the item click listener of the drawer
      *
-     * @return Item click listener of the md_drawer_view
+     * @return Item click listener of the drawer
      */
     public DrawerItem.OnItemClickListener getOnItemClickListener() {
         return mDrawer.getOnItemClickListener();
     }
 
     /**
-     * Gets whether the md_drawer_view has an item click listener set to it
+     * Gets whether the drawer has an item click listener set to it
      *
-     * @return True if the md_drawer_view has an item click listener set to it, false otherwise.
+     * @return True if the drawer has an item click listener set to it, false otherwise.
      */
     public boolean hasOnItemClickListener() {
         return mDrawer.hasOnItemClickListener();
     }
 
     /**
-     * Removes the item click listener from the md_drawer_view
+     * Removes the item click listener from the drawer
      */
     public DrawerFrameLayout removeOnItemClickListener() {
         mDrawer.removeOnItemClickListener();
@@ -246,14 +298,14 @@ public class DrawerFrameLayout extends DrawerLayout {
 
 
     /**
-     * Opens the md_drawer_view
+     * Opens the drawer
      */
     public void openDrawer(){
         openDrawer(mDrawer);
     }
 
     /**
-     * Closes the md_drawer_view
+     * Closes the drawer
      */
     public void closeDrawer(){
         closeDrawer(mDrawer);

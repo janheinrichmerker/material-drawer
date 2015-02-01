@@ -37,7 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Adapter to be used with {@link DrawerView} to display a list of md_drawer_view items.
+ * Adapter to be used with {@link DrawerView} to display a list of drawer items.
  */
 public class DrawerAdapter extends ArrayAdapter<DrawerItem> {
 
@@ -105,7 +105,7 @@ public class DrawerAdapter extends ArrayAdapter<DrawerItem> {
                 } else {
                     imageSize = getContext().getResources().getDimensionPixelSize(R.dimen.md_icon_size);
 
-                    if (colorAccent != -1) {
+                    if (colorAccent != -1 && drawerItem.getImageMode() == DrawerItem.ICON) {
                         viewHolder.getImageView().setColorFilter(colorAccent, PorterDuff.Mode.SRC_IN);
                     }
                     else {
