@@ -2,7 +2,7 @@ material-drawer
 ===============
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-material--drawer-blue.svg?style=flat)](https://android-arsenal.com/details/1/1162)
 
-Custom drawer implementation for Material design apps.
+Custom drawer implementation for Material design apps down to Android 2.1.
 
 Demo
 ----
@@ -105,7 +105,7 @@ Dependency
 **Gradle dependency:**
 
     dependencies {
-	    compile 'com.heinrichreimersoftware.materialdrawer:library:1.4.1'
+	    compile 'com.heinrichreimersoftware.materialdrawer:library:1.4.2'
     }
 
 Get the latest dependency with ["Gradle, please"][4]
@@ -113,6 +113,11 @@ Get the latest dependency with ["Gradle, please"][4]
 Changes
 -------
 
+* **Version 1.4.2:**
+    * Changed min SDK to 7 (Android 2.1)
+    * Drawer max width can be changed (#30)
+    * New image type `DrawerItem.SMALL_AVATAR` which doesn't get auto-tinted
+    * Fixed issue #26
 * **Version 1.4.1:**
     * Fixed bottom list
     * Improved sizing
