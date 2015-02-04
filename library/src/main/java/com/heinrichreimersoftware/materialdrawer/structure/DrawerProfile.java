@@ -261,7 +261,6 @@ public class DrawerProfile {
      */
     public DrawerProfile attachTo(DrawerView drawerView) {
         mDrawerView = drawerView;
-        notifyDataChanged();
         return this;
     }
 
