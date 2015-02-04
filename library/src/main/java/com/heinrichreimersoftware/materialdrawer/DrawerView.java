@@ -330,6 +330,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
      */
     public DrawerView setProfile(DrawerProfile profile) {
         mProfile = profile;
+        mProfile.attachTo(this);
         updateProfile();
         return this;
     }
