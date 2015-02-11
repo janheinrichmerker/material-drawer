@@ -36,41 +36,6 @@
                     android:layout_marginBottom="@dimen/activity_vertical_margin"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
-                <CheckBox
-                    android:id="@+id/checkBoxProfile"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/check_box_profile"
-                    android:checked="true"/>
-
-                <CheckBox
-                    android:id="@+id/checkBoxList"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/check_box_list"
-                    android:checked="true"/>
-
-                <CheckBox
-                    android:id="@+id/checkBoxFixedList"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/check_box_fixed_list"
-                    android:checked="true"/>
-
-                <CheckBox
-                    android:id="@+id/checkBoxDividers"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/check_box_dividers"
-                    android:checked="true"/>
-
-                <CheckBox
-                    android:id="@+id/checkBoxHeaders"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/check_box_headers"
-                    android:checked="true"/>
-
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
