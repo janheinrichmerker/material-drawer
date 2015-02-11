@@ -22,6 +22,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.widget.ArrayAdapter;
 
+import com.heinrichreimersoftware.materialdrawer.drawable.RoundedAvatarDrawable;
+
 /**
  * Object to be used with {@link com.heinrichreimersoftware.materialdrawer.DrawerAdapter} and {@link com.heinrichreimersoftware.materialdrawer.DrawerView} to display a drawer item.
  * Can hold an image, a primary text, a secondary text and a listener.
@@ -37,7 +39,7 @@ public class DrawerItem {
 
     private boolean mIsHeader = false;
 
-    private int mId = -1;
+    private long mId = -1;
 
     private Drawable mImage;
     private int mImageMode = -1;
@@ -98,7 +100,7 @@ public class DrawerItem {
      *
      * @param id ID to set
      */
-    public DrawerItem setId(int id) {
+    public DrawerItem setId(long id) {
         mId = id;
         return this;
     }
@@ -108,7 +110,7 @@ public class DrawerItem {
      *
      * @return ID of the drawer item
      */
-    public int getId() {
+    public long getId() {
         return mId;
     }
 
@@ -154,6 +156,44 @@ public class DrawerItem {
      */
     public DrawerItem setImage(Context context, Bitmap image) {
         return setImage(new BitmapDrawable(context.getResources(), image));
+    }
+
+    /**
+     * Sets a rounded image with a given image mode to the drawer item
+     *
+     * @param image     Image to set
+     * @param imageMode Image mode to set
+     */
+    public DrawerItem setRoundedImage(BitmapDrawable image, int imageMode) {
+        return setImage(new RoundedAvatarDrawable(image.getBitmap()), imageMode);
+    }
+
+    /**
+     * Sets a rounded image to the drawer item
+     *
+     * @param image Image to set
+     */
+    public DrawerItem setRoundedImage(BitmapDrawable image) {
+        return setImage(new RoundedAvatarDrawable(image.getBitmap()), AVATAR);
+    }
+
+    /**
+     * Sets a rounded image with a given image mode to the drawer item
+     *
+     * @param image     Image to set
+     * @param imageMode Image mode to set
+     */
+    public DrawerItem setRoundedImage(Context context, Bitmap image, int imageMode) {
+        return setImage(new RoundedAvatarDrawable(new BitmapDrawable(context.getResources(), image).getBitmap()), imageMode);
+    }
+
+    /**
+     * Sets a rounded image to the drawer item
+     *
+     * @param image Image to set
+     */
+    public DrawerItem setRoundedImage(Context context, Bitmap image) {
+        return setImage(new RoundedAvatarDrawable(new BitmapDrawable(context.getResources(), image).getBitmap()), AVATAR);
     }
 
     /**
@@ -429,6 +469,6 @@ public class DrawerItem {
 
 
     public interface OnItemClickListener {
-        void onClick(DrawerItem item, int id, int position);
+        void onClick(DrawerItem item, long id, int position);
     }
 }

@@ -21,13 +21,28 @@
 
     <item type="id" name="mdLayoutProfile" />
     <item type="id" name="mdLayoutProfileContent" />
+
     <item type="id" name="mdAvatarProfile" />
-    <item type="id" name="mdBackgroundProfile" />
-    <item type="id" name="mdNameProfile" />
-    <item type="id" name="mdDescriptionProfile" />
+    <item type="id" name="mdAvatarProfileSecondary" />
+    <item type="id" name="mdAvatarProfileCount" />
 
-    <item type="id" name="mdLinearListView" />
+    <item type="id" name="mdProfileBackground" />
+    <item type="id" name="mdProfileBackgroundOverlay" />
+    <item type="id" name="mdProfileTextContainer" />
+    <item type="id" name="mdProfileName" />
+    <item type="id" name="mdProfileDescription" />
 
+    <item type="id" name="mdOpenProfileListContainer" />
+    <item type="id" name="mdOpenProfileListIcon" />
+
+    <item type="id" name="mdProfileList" />
+
+
+    <item type="id" name="mdListContainer" />
+    <item type="id" name="mdList" />
+
+    <item type="id" name="mdFixedShadow" />
+    <item type="id" name="mdFixedDivider" />
     <item type="id" name="mdFixedListContainer" />
     <item type="id" name="mdLinearListViewFixed" />
 

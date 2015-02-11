@@ -2,6 +2,7 @@ package com.heinrichreimersoftware.materialdrawerdemo;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,7 +18,6 @@ import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
 import com.heinrichreimersoftware.materialdrawer.DrawerFrameLayout;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
-import com.heinrichreimersoftware.materialdrawer.structure.DrawerProfile;
 
 
 public class MainActivity2 extends ActionBarActivity implements BillingProcessor.IBillingHandler  {
@@ -72,10 +72,10 @@ public class MainActivity2 extends ActionBarActivity implements BillingProcessor
 
         Drawable icon1;
         if (Math.random() >= .5){
-            icon1 = getResources().getDrawable(R.drawable.cat_1);
+            icon1 = getResources().getDrawable(R.drawable.ic_flag);
         }
         else {
-            icon1 = getResources().getDrawable(R.drawable.cat_2);
+            icon1 = getResources().getDrawable(R.drawable.ic_mail);
         }
         drawer.addItem(new DrawerItem()
                         .setImage(icon1)
@@ -83,12 +83,12 @@ public class MainActivity2 extends ActionBarActivity implements BillingProcessor
                         .setTextSecondary(getString(R.string.lorem_ipsum_long))
         );
 
-        Drawable avatar;
+        BitmapDrawable avatar;
         if (Math.random() >= .5){
-            avatar = getResources().getDrawable(R.drawable.cat_1);
+            avatar = (BitmapDrawable) getResources().getDrawable(R.drawable.cat_1);
         }
         else {
-            avatar = getResources().getDrawable(R.drawable.cat_2);
+            avatar = (BitmapDrawable) getResources().getDrawable(R.drawable.cat_2);
         }
 
         Drawable background;
@@ -99,12 +99,15 @@ public class MainActivity2 extends ActionBarActivity implements BillingProcessor
             background = getResources().getDrawable(R.drawable.cat_wide_2);
         }
 
-        drawer.setProfile(new DrawerProfile()
-                        .setAvatar(avatar)
+        //TODO
+        /*
+        drawer.addProfile(new DrawerProfile()
+                        .setAvatar(new RoundedAvatarDrawable(avatar.getBitmap()))
                         .setBackground(background)
                         .setName(getString(R.string.lorem_ipsum_short))
                         .setDescription(getString(R.string.lorem_ipsum_medium))
         );
+        //*/
     }
 
     @Override

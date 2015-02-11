@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="md_profile_switching_anim_time">500</integer>
+    <integer name="md_profile_list_open_anim_time">200</integer>
+</resources>

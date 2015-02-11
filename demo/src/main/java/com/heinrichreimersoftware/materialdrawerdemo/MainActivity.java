@@ -2,7 +2,7 @@ package com.heinrichreimersoftware.materialdrawerdemo;
 
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.drawable.Drawable;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -12,8 +12,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
@@ -27,15 +25,7 @@ public class MainActivity extends ActionBarActivity implements BillingProcessor.
 
     private BillingProcessor bp;
 
-    private Toolbar toolbar;
-
-    private DrawerLayout drawerLayout;
     private DrawerView drawer;
-    private CheckBox checkBoxList;
-    private CheckBox checkBoxFixedList;
-    private CheckBox checkBoxProfile;
-    private CheckBox checkBoxDividers;
-    private CheckBox checkBoxHeaders;
 
     private ActionBarDrawerToggle drawerToggle;
 
@@ -44,18 +34,14 @@ public class MainActivity extends ActionBarActivity implements BillingProcessor.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        bp = new BillingProcessor(this, getString(R.string.in_app_billing_public_license), this);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         drawer = (DrawerView) findViewById(R.id.drawer);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        checkBoxList = (CheckBox) findViewById(R.id.checkBoxList);
-        checkBoxFixedList = (CheckBox) findViewById(R.id.checkBoxFixedList);
-        checkBoxProfile = (CheckBox) findViewById(R.id.checkBoxProfile);
-        checkBoxDividers = (CheckBox) findViewById(R.id.checkBoxDividers);
-        checkBoxHeaders = (CheckBox) findViewById(R.id.checkBoxHeaders);
+        setSupportActionBar(toolbar);
+
+        bp = new BillingProcessor(this, getString(R.string.in_app_billing_public_license), this);
 
 
         drawerToggle = new ActionBarDrawerToggle(
@@ -75,196 +61,107 @@ public class MainActivity extends ActionBarActivity implements BillingProcessor.
             }
         };
 
-        setSupportActionBar(toolbar);
-
         drawerLayout.setStatusBarBackgroundColor(getResources().getColor(R.color.color_primary_dark));
         drawerLayout.setDrawerListener(drawerToggle);
         drawerLayout.closeDrawer(drawer);
 
-        checkBoxList.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+        drawer.addItem(new DrawerItem()
+                        .setTextPrimary(getString(R.string.lorem_ipsum_short))
+                        .setTextSecondary(getString(R.string.lorem_ipsum_long))
+        );
+
+        drawer.addItem(new DrawerItem()
+                        .setImage(getResources().getDrawable(R.drawable.ic_mail))
+                        .setTextPrimary(getString(R.string.lorem_ipsum_short))
+                        .setTextSecondary(getString(R.string.lorem_ipsum_long))
+        );
+
+        drawer.addDivider();
+
+        drawer.addItem(new DrawerItem()
+                        .setRoundedImage((BitmapDrawable) getResources().getDrawable(R.drawable.cat_1))
+                        .setTextPrimary(getString(R.string.lorem_ipsum_short))
+                        .setTextSecondary(getString(R.string.lorem_ipsum_long))
+        );
+
+        drawer.addItem(new DrawerHeaderItem().setTitle(getString(R.string.lorem_ipsum_short)));
+
+        drawer.addItem(new DrawerItem()
+                        .setTextPrimary(getString(R.string.lorem_ipsum_short))
+        );
+
+        drawer.addItem(new DrawerItem()
+                        .setRoundedImage((BitmapDrawable) getResources().getDrawable(R.drawable.cat_2), DrawerItem.SMALL_AVATAR)
+                        .setTextPrimary(getString(R.string.lorem_ipsum_short))
+                        .setTextSecondary(getString(R.string.lorem_ipsum_long), DrawerItem.THREE_LINE)
+        );
+
+        drawer.selectItem(1);
+        drawer.setOnItemClickListener(new DrawerItem.OnItemClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                updateDrawer();
+            public void onClick(DrawerItem item, long id, int position) {
+                drawer.selectItem(position);
+                Toast.makeText(MainActivity.this, "Clicked item #" + position, Toast.LENGTH_SHORT).show();
             }
         });
-        checkBoxFixedList.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+
+        drawer.addFixedItem(new DrawerItem()
+                        .setRoundedImage((BitmapDrawable) getResources().getDrawable(R.drawable.cat_2), DrawerItem.SMALL_AVATAR)
+                        .setTextPrimary(getString(R.string.lorem_ipsum_short))
+        );
+
+        drawer.addFixedItem(new DrawerItem()
+                        .setImage(getResources().getDrawable(R.drawable.ic_flag))
+                        .setTextPrimary(getString(R.string.lorem_ipsum_short))
+        );
+
+        drawer.setOnFixedItemClickListener(new DrawerItem.OnItemClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                updateDrawer();
-            }
-        });
-        checkBoxProfile.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                updateDrawer();
-            }
-        });
-        checkBoxDividers.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                updateDrawer();
-            }
-        });
-        checkBoxHeaders.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                updateDrawer();
+            public void onClick(DrawerItem item, long id, int position) {
+                drawer.selectFixedItem(position);
+                Toast.makeText(MainActivity.this, "Clicked fixed item #" + position, Toast.LENGTH_SHORT).show();
             }
         });
 
-        updateDrawer();
-    }
 
-    public void updateDrawer(){
-        drawer.clearItems();
-        drawer.clearFixedItems();
-        if (checkBoxList.isChecked()){
+        drawer.addProfile(new DrawerProfile()
+                        .setId(1)
+                        .setRoundedAvatar((BitmapDrawable) getResources().getDrawable(R.drawable.cat_1))
+                        .setBackground(getResources().getDrawable(R.drawable.cat_wide_1))
+                        .setName(getString(R.string.lorem_ipsum_short))
+                        .setDescription(getString(R.string.lorem_ipsum_medium))
+        );
 
-            checkBoxDividers.setActivated(true);
+        drawer.addProfile(new DrawerProfile()
+                        .setId(2)
+                        .setRoundedAvatar((BitmapDrawable) getResources().getDrawable(R.drawable.cat_2))
+                        .setBackground(getResources().getDrawable(R.drawable.cat_wide_1))
+                        .setName(getString(R.string.lorem_ipsum_short))
+        );
 
-            if (checkBoxDividers.isChecked()){
-                checkBoxHeaders.setActivated(true);
-            }
-            else {
-                checkBoxHeaders.setActivated(false);
-            }
-
-            drawer.addItem(new DrawerItem()
-                            .setTextPrimary(getString(R.string.lorem_ipsum_short))
-                            .setTextSecondary(getString(R.string.lorem_ipsum_long))
-            );
-
-            Drawable icon1;
-            if (Math.random() >= .5){
-                icon1 = getResources().getDrawable(R.drawable.cat_1);
-            }
-            else {
-                icon1 = getResources().getDrawable(R.drawable.cat_2);
-            }
-            drawer.addItem(new DrawerItem()
-                            .setImage(icon1)
-                            .setTextPrimary(getString(R.string.lorem_ipsum_short))
-                            .setTextSecondary(getString(R.string.lorem_ipsum_long))
-            );
-
-            if (checkBoxDividers.isChecked()){
-                drawer.addDivider();
-            }
-
-            Drawable icon2;
-            if (Math.random() >= .5){
-                icon2 = getResources().getDrawable(R.drawable.cat_1);
-            }
-            else {
-                icon2 = getResources().getDrawable(R.drawable.cat_2);
-            }
-            drawer.addItem(new DrawerItem()
-                            .setImage(icon2, DrawerItem.AVATAR)
-                            .setTextPrimary(getString(R.string.lorem_ipsum_short))
-                            .setTextSecondary(getString(R.string.lorem_ipsum_long))
-            );
-
-            if (checkBoxDividers.isChecked()) {
-                if (checkBoxHeaders.isChecked()) {
-                    drawer.addItem(new DrawerHeaderItem().setTitle(getString(R.string.lorem_ipsum_short)));
-                } else {
-                    drawer.addDivider();
-                }
-            }
-
-            drawer.addItem(new DrawerItem()
-                            .setTextPrimary(getString(R.string.lorem_ipsum_short))
-            );
-
-            Drawable icon3;
-            if (Math.random() >= .5){
-                icon3 = getResources().getDrawable(R.drawable.cat_1);
-            }
-            else {
-                icon3 = getResources().getDrawable(R.drawable.cat_2);
-            }
-            drawer.addItem(new DrawerItem()
-                            .setImage(icon3, DrawerItem.SMALL_AVATAR)
-                            .setTextPrimary(getString(R.string.lorem_ipsum_short))
-                            .setTextSecondary(getString(R.string.lorem_ipsum_long), DrawerItem.THREE_LINE)
-            );
+        drawer.addProfile(new DrawerProfile()
+                        .setId(3)
+                        .setRoundedAvatar((BitmapDrawable) getResources().getDrawable(R.drawable.cat_1))
+                        .setBackground(getResources().getDrawable(R.drawable.cat_wide_2))
+                        .setName(getString(R.string.lorem_ipsum_short))
+                        .setDescription(getString(R.string.lorem_ipsum_medium))
+        );
 
 
-            drawer.selectItem(1);
-            drawer.setOnItemClickListener(new DrawerItem.OnItemClickListener() {
-                @Override
-                public void onClick(DrawerItem item, int id, int position) {
-                    drawer.selectItem(position);
-                    Toast.makeText(MainActivity.this, "Clicked item #" + position, Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-        else {
-            checkBoxDividers.setActivated(false);
-            checkBoxHeaders.setActivated(false);
-        }
-        if (checkBoxFixedList.isChecked()){
-            Drawable icon4;
-            if (Math.random() >= .5){
-                icon4 = getResources().getDrawable(R.drawable.cat_1);
+        drawer.setOnProfileClickListener(new DrawerProfile.OnProfileClickListener() {
+            @Override
+            public void onClick(DrawerProfile profile, long id) {
+                Toast.makeText(MainActivity.this, "Clicked profile *" + id, Toast.LENGTH_SHORT).show();
             }
-            else {
-                icon4 = getResources().getDrawable(R.drawable.cat_2);
+        });
+        drawer.setOnProfileSwitchListener(new DrawerProfile.OnProfileSwitchListener() {
+            @Override
+            public void onSwitch(DrawerProfile oldProfile, long oldId, DrawerProfile newProfile, long newId) {
+                Toast.makeText(MainActivity.this, "Switched from profile *" + oldId + " to profile *" + newId, Toast.LENGTH_SHORT).show();
             }
-            drawer.addFixedItem(new DrawerItem()
-                            .setImage(icon4, DrawerItem.SMALL_AVATAR)
-                            .setTextPrimary(getString(R.string.lorem_ipsum_short))
-            );
-
-            Drawable icon5;
-            if (Math.random() >= .5){
-                icon5 = getResources().getDrawable(R.drawable.cat_1);
-            }
-            else {
-                icon5 = getResources().getDrawable(R.drawable.cat_2);
-            }
-            drawer.addFixedItem(new DrawerItem()
-                            .setImage(icon5)
-                            .setTextPrimary(getString(R.string.lorem_ipsum_short))
-            );
-
-
-            drawer.setOnFixedItemClickListener(new DrawerItem.OnItemClickListener() {
-                @Override
-                public void onClick(DrawerItem item, int id, int position) {
-                    drawer.selectFixedItem(position);
-                    Toast.makeText(MainActivity.this, "Clicked fixed item #" + position, Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-
-        if (checkBoxProfile.isChecked()){
-            Drawable avatar;
-            if (Math.random() >= .5){
-                avatar = getResources().getDrawable(R.drawable.cat_1);
-            }
-            else {
-                avatar = getResources().getDrawable(R.drawable.cat_2);
-            }
-
-            Drawable background;
-            if (Math.random() >= .5){
-                background = getResources().getDrawable(R.drawable.cat_wide_1);
-            }
-            else {
-                background = getResources().getDrawable(R.drawable.cat_wide_2);
-            }
-
-            drawer.setProfile(new DrawerProfile()
-                            .setAvatar(avatar)
-                            .setBackground(background)
-                            .setName(getString(R.string.lorem_ipsum_short))
-                            .setDescription(getString(R.string.lorem_ipsum_medium))
-            );
-        }
-        else {
-            drawer.removeProfile();
-        }
+        });
     }
 
     public void openDrawerFrameLayout(View view){

@@ -22,12 +22,16 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
 import com.heinrichreimersoftware.materialdrawer.DrawerView;
+import com.heinrichreimersoftware.materialdrawer.drawable.RoundedAvatarDrawable;
 
 /**
  * Object to be used with {@link com.heinrichreimersoftware.materialdrawer.DrawerView} to display a profile in the drawer.
  * Can hold an image, a primary text, a secondary text and a listener.
  */
 public class DrawerProfile {
+
+    private long mId = -1;
+
     private Drawable mAvatar;
     private Drawable mBackground;
     private String mName;
@@ -35,6 +39,26 @@ public class DrawerProfile {
 
     private OnProfileClickListener mOnClickListener;
     private DrawerView mDrawerView;
+
+
+    /**
+     * Sets an ID the drawer profile
+     *
+     * @param id ID to set
+     */
+    public DrawerProfile setId(long id) {
+        mId = id;
+        return this;
+    }
+
+    /**
+     * Gets the ID of the drawer profile
+     *
+     * @return ID of the drawer profile
+     */
+    public long getId() {
+        return mId;
+    }
 
 
     /**
@@ -57,6 +81,24 @@ public class DrawerProfile {
         mAvatar = new BitmapDrawable(context.getResources(), avatar);
         notifyDataChanged();
         return this;
+    }
+
+    /**
+     * Sets a rounded avatar image to the drawer profile
+     *
+     * @param image Avatar image to set
+     */
+    public DrawerProfile setRoundedAvatar(BitmapDrawable image) {
+        return setAvatar(new RoundedAvatarDrawable(image.getBitmap()));
+    }
+
+    /**
+     * Sets a rounded avatar image to the drawer profile
+     *
+     * @param image Avatar image to set
+     */
+    public DrawerProfile setRoundedAvatar(Context context, Bitmap image) {
+        return setAvatar(new RoundedAvatarDrawable(new BitmapDrawable(context.getResources(), image).getBitmap()));
     }
 
     /**
@@ -261,7 +303,6 @@ public class DrawerProfile {
      */
     public DrawerProfile attachTo(DrawerView drawerView) {
         mDrawerView = drawerView;
-        notifyDataChanged();
         return this;
     }
 
@@ -275,12 +316,16 @@ public class DrawerProfile {
 
     protected void notifyDataChanged() {
         if (mDrawerView != null) {
-            mDrawerView.setProfile(this);
+            mDrawerView.selectProfile(this);
         }
     }
 
 
     public interface OnProfileClickListener {
-        void onClick(DrawerProfile item);
+        void onClick(DrawerProfile profile, long id);
+    }
+
+    public interface OnProfileSwitchListener {
+        void onSwitch(DrawerProfile oldProfile, long oldId, DrawerProfile newProfile, long newId);
     }
 }

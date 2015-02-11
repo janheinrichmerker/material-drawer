@@ -26,7 +26,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
-import com.heinrichreimersoftware.materialdrawer.structure.DrawerProfile;
 
 import java.util.List;
 
@@ -118,32 +117,8 @@ public class DrawerFrameLayout extends DrawerLayout {
     }
 
 
-    /**
-     * Sets a profile to the drawer
-     *
-     * @param profile Profile to set
-     */
-    public DrawerFrameLayout setProfile(DrawerProfile profile) {
-        mDrawer.setProfile(profile);
-        return this;
-    }
 
-    /**
-     * Gets the profile of the drawer
-     *
-     * @return Profile of the drawer
-     */
-    public DrawerProfile getProfile() {
-        return mDrawer.getProfile();
-    }
-
-    /**
-     * Removes the profile from the drawer
-     */
-    public DrawerFrameLayout removeProfile() {
-        mDrawer.removeProfile();
-        return this;
-    }
+    //TODO add profile functions and all other equivalents
 
 
     /**

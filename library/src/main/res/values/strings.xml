@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="md_content_description_profile_background">Background</string>
+    <string name="md_content_description_profile_background_overlay">Background Overlay</string>
+
+    <string name="md_content_description_profile_avatar">Avatar</string>
+    <string name="md_content_description_profile_avatar_secondary">Secondary Avatar</string>
+
+    <string name="md_content_description_open_profile_list">Secondary Avatar</string>
+</resources>

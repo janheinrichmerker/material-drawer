@@ -14,136 +14,232 @@
 
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <ScrollView
-        android:id="@id/mdScrollView"
-        android:layout_width="match_parent"
+    <LinearLayout android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        android:scrollbarStyle="insideOverlay">
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@id/mdLayout"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:fitsSystemWindows="true">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-            <FrameLayout
-                android:id="@id/mdLayoutProfile"
+            <ScrollView
+                android:id="@id/mdScrollView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:fitsSystemWindows="true">
+                android:fitsSystemWindows="true"
+                android:scrollbarStyle="insideOverlay">
 
-                <ImageView
-                    android:id="@id/mdBackgroundProfile"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:clickable="false"
-                    android:fitsSystemWindows="true"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/md_divider"
-                    android:clickable="false"
-                    android:fitsSystemWindows="true" />
-
-                <RelativeLayout
-                    android:id="@id/mdLayoutProfileContent"
+                <LinearLayout
+                    android:id="@id/mdLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:clickable="false">
+                    android:orientation="vertical"
+                    android:fitsSystemWindows="true">
 
-                    <ImageView
-                        android:id="@id/mdAvatarProfile"
-                        android:layout_width="@dimen/md_big_avatar_size"
-                        android:layout_height="@dimen/md_big_avatar_size"
-                        android:layout_marginTop="@dimen/md_baseline_start"
-                        android:layout_marginLeft="@dimen/md_baseline_start"
-                        android:layout_marginRight="0dp"
-                        android:layout_marginStart="@dimen/md_baseline_start"
-                        android:layout_marginEnd="0dp"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentRight="false"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentEnd="false"
-                        android:scaleType="centerCrop"
-                        android:clickable="false" />
-
-                    <LinearLayout
+                    <FrameLayout
+                        android:id="@id/mdLayoutProfile"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/md_list_item_height_two_line"
-                        android:paddingTop="@dimen/md_baseline_start"
-                        android:paddingLeft="@dimen/md_baseline_start"
-                        android:paddingRight="@dimen/md_baseline_start"
-                        android:paddingBottom="@dimen/md_drawer_list_margin_vertical"
-                        android:layout_alignParentBottom="true"
-                        android:layout_gravity="center_vertical"
-                        android:orientation="vertical"
-                        android:background="@drawable/md_scrim"
-                        android:clickable="false">
+                        android:layout_height="wrap_content"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:fitsSystemWindows="true">
 
-                        <TextView
-                            android:id="@id/mdNameProfile"
+                        <ImageView
+                            android:id="@id/mdProfileBackground"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:clickable="false"
+                            android:fitsSystemWindows="true"
+                            android:contentDescription="@string/md_content_description_profile_background"/>
+
+                        <ImageView
+                            android:id="@id/mdProfileBackgroundOverlay"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:clickable="false"
+                            android:fitsSystemWindows="true"
+                            android:contentDescription="@string/md_content_description_profile_background_overlay"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/md_divider"
+                            android:clickable="false"
+                            android:fitsSystemWindows="true" />
+
+                        <RelativeLayout
+                            android:id="@id/mdLayoutProfileContent"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif-medium"
-                            android:singleLine="true"
-                            android:ellipsize="marquee"
-                            android:textColor="@android:color/white"
-                            style="@style/TextAppearance.AppCompat.Subhead.Inverse"
-                            android:clickable="false" />
+                            android:layout_gravity="bottom"
+                            android:clickable="false">
 
-                        <TextView
-                            android:id="@id/mdDescriptionProfile"
+                            <ImageView
+                                android:id="@id/mdAvatarProfile"
+                                android:layout_width="@dimen/md_big_avatar_size"
+                                android:layout_height="@dimen/md_big_avatar_size"
+                                android:layout_margin="@dimen/md_baseline"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentRight="false"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentEnd="false"
+                                android:scaleType="centerCrop"
+                                android:clickable="false"
+                                android:contentDescription="@string/md_content_description_profile_avatar" />
+
+                            <ImageView
+                                android:id="@id/mdAvatarProfileSecondary"
+                                android:layout_width="@dimen/md_avatar_size"
+                                android:layout_height="@dimen/md_avatar_size"
+                                android:layout_margin="@dimen/md_baseline"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentLeft="false"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentStart="false"
+                                android:layout_alignParentEnd="true"
+                                android:scaleType="centerCrop"
+                                android:clickable="true"
+                                android:contentDescription="@string/md_content_description_profile_avatar_secondary"/>
+
+                            <TextView
+                                android:id="@id/mdAvatarProfileCount"
+                                android:layout_width="@dimen/md_avatar_size"
+                                android:layout_height="@dimen/md_avatar_size"
+                                android:layout_margin="@dimen/md_baseline"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentLeft="false"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentStart="false"
+                                android:layout_alignParentEnd="true"
+                                style="@style/Base.TextAppearance.AppCompat.Body2"
+                                android:clickable="true"
+                                android:background="@drawable/md_more_background"
+                                android:gravity="center"/>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/md_list_item_height_two_line"
+                                android:layout_alignParentBottom="true"
+                                android:background="@drawable/md_scrim"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_gravity="bottom"
+                                android:orientation="horizontal"
+                                android:baselineAligned="false"
+                                android:clickable="false">
+
+                                <LinearLayout
+                                    android:id="@id/mdProfileTextContainer"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:layout_gravity="center_vertical"
+                                    android:minHeight="@dimen/md_list_item_height"
+                                    android:orientation="vertical"
+                                    android:padding="@dimen/md_baseline">
+
+                                    <TextView
+                                        android:id="@id/mdProfileName"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="sans-serif-medium"
+                                        android:singleLine="true"
+                                        android:ellipsize="marquee"
+                                        android:textColor="@android:color/white"
+                                        style="@style/TextAppearance.AppCompat.Subhead.Inverse"
+                                        android:clickable="false" />
+
+                                    <TextView
+                                        android:id="@id/mdProfileDescription"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:ellipsize="marquee"
+                                        style="@style/TextAppearance.AppCompat.Subhead.Inverse"
+                                        android:clickable="false" />
+
+                                </LinearLayout>
+
+                                <ImageView
+                                    android:id="@id/mdOpenProfileListIcon"
+                                    android:layout_width="@dimen/md_big_avatar_size"
+                                    android:layout_height="@dimen/md_big_avatar_size"
+                                    android:padding="@dimen/md_baseline"
+                                    android:background="?attr/selectableItemBackground"
+                                    android:src="@drawable/md_arrow_drop_down"
+                                    android:scaleType="center"
+                                    android:clickable="true"
+                                    android:contentDescription="@string/md_content_description_open_profile_list"
+                                    android:layout_gravity="bottom"/>
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.heinrichreimersoftware.materialdrawer.widget.LinearListView
+                            android:id="@id/mdProfileList"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:ellipsize="marquee"
-                            style="@style/TextAppearance.AppCompat.Subhead.Inverse"
-                            android:clickable="false" />
+                            android:paddingTop="@dimen/md_drawer_list_margin_vertical"
+                            android:paddingBottom="@dimen/md_drawer_list_margin_vertical"
+                            android:orientation="vertical"/>
 
-                    </LinearLayout>
+                        <com.heinrichreimersoftware.materialdrawer.widget.LinearListView
+                            android:id="@id/mdList"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/md_drawer_list_margin_vertical"
+                            android:paddingBottom="@dimen/md_drawer_list_margin_vertical"
+                            android:orientation="vertical" />
 
-                </RelativeLayout>
+                    </FrameLayout>
 
-            </FrameLayout>
+                </LinearLayout>
+
+            </ScrollView>
+
+            <View
+                android:id="@id/mdFixedShadow"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/md_fixed_list_shadow_height"
+                android:layout_gravity="bottom"
+                android:background="@drawable/md_fixed_list_shadow"/>
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@id/mdFixedListContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <View
+                android:id="@id/mdFixedDivider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/md_divider_height"
+                android:background="@color/md_divider" />
 
             <com.heinrichreimersoftware.materialdrawer.widget.LinearListView
-                android:id="@id/mdLinearListView"
+                android:id="@id/mdLinearListViewFixed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/md_drawer_list_margin_vertical"
                 android:paddingBottom="@dimen/md_drawer_list_margin_vertical"
-                android:orientation="vertical" />
+                android:orientation="vertical"
+                android:background="@color/md_drawer_background"/>
 
         </LinearLayout>
-
-    </ScrollView>
-
-    <LinearLayout
-        android:id="@id/mdFixedListContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:orientation="vertical">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/md_fixed_list_shadow_height"
-            android:background="@drawable/md_fixed_list_shadow"/>
-
-        <com.heinrichreimersoftware.materialdrawer.widget.LinearListView
-            android:id="@id/mdLinearListViewFixed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/md_drawer_list_margin_vertical"
-            android:paddingBottom="@dimen/md_drawer_list_margin_vertical"
-            android:orientation="vertical"
-            android:background="@color/md_drawer_background"/>
 
     </LinearLayout>
 

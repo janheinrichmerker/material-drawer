@@ -14,9 +14,8 @@
 
 <resources>
 
-    <dimen name="md_baseline_start">16dp</dimen>
+    <dimen name="md_baseline">16dp</dimen>
     <dimen name="md_baseline_content">72dp</dimen>
-    <dimen name="md_baseline_end">16dp</dimen>
 
     <dimen name="md_drawer_max_width">400dp</dimen>
 
