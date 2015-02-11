@@ -27,6 +27,8 @@ MERGED from material-drawer:library:unspecified:23:5
 MERGED from com.android.support:support-v4:21.0.3:16:5
 MERGED from com.android.support:appcompat-v7:21.0.3:16:5
 MERGED from com.android.support:support-v4:21.0.3:16:5
+MERGED from com.android.support:palette-v7:21.0.3:16:5
+MERGED from com.android.support:support-v4:21.0.3:16:5
 	android:label
 		ADDED from AndroidManifest.xml:10:9
 	android:allowBackup
@@ -73,6 +75,8 @@ MERGED from com.anjlab.android.iab.v3:library:1.0.19:7:5
 MERGED from material-drawer:library:unspecified:19:5
 MERGED from com.android.support:support-v4:21.0.3:15:5
 MERGED from com.android.support:appcompat-v7:21.0.3:15:5
+MERGED from com.android.support:support-v4:21.0.3:15:5
+MERGED from com.android.support:palette-v7:21.0.3:15:5
 MERGED from com.android.support:support-v4:21.0.3:15:5
 	android:targetSdkVersion
 		INJECTED from AndroidManifest.xml:0:0
