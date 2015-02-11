@@ -113,6 +113,10 @@ Get the latest dependency with ["Gradle, please"][4]
 Changes
 -------
 
+* **Version 2.0:**
+    * Multiple profiles (#33)
+    * Rounded avatars
+    * Changable drawer width (#30)
 * **Version 1.4.2:**
     * Changed min SDK to 7 (Android 2.1)
     * Drawer max width can be changed (#30)
