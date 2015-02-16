@@ -26,6 +26,7 @@
     <dimen name="avatar_size">40dp</dimen>
     <dimen name="big_avatar_size">64dp</dimen>
     <dimen name="profile_text_margin_bottom">16dp</dimen>
+    <dimen name="profile_height">150dp</dimen>
 
     <dimen name="divider_height">1dp</dimen>
     <dimen name="divider_margin">8dp</dimen>
