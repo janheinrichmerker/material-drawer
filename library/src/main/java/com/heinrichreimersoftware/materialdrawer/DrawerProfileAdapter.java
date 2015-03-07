@@ -16,6 +16,7 @@
 
 package com.heinrichreimersoftware.materialdrawer;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Build;
@@ -44,6 +45,7 @@ public class DrawerProfileAdapter extends ArrayAdapter<DrawerProfile> {
     }
 
     @Override
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     public View getView(int position, View convertView, ViewGroup parent) {
         DrawerProfile drawerProfile = getItem(position);
 

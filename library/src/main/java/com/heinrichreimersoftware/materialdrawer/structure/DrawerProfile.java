@@ -31,6 +31,7 @@ import com.heinrichreimersoftware.materialdrawer.drawable.RoundedAvatarDrawable;
 public class DrawerProfile {
 
     private long mId = -1;
+    private Object mTag;
 
     private Drawable mAvatar;
     private Drawable mBackground;
@@ -60,6 +61,23 @@ public class DrawerProfile {
         return mId;
     }
 
+    /**
+     * Gets the tag of the drawer item
+     *
+     * @return tag
+     */
+    public Object getTag() {
+        return mTag;
+    }
+
+    /**
+     * Sets the tag of the drawer item
+     * @param tag tag
+     */
+
+    public void setTag(Object tag) {
+        this.mTag = tag;
+    }
 
     /**
      * Sets an avatar image to the drawer profile

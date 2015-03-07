@@ -16,6 +16,7 @@
 
 package com.heinrichreimersoftware.materialdrawer;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.PorterDuff;
@@ -48,6 +49,7 @@ public class DrawerAdapter extends ArrayAdapter<DrawerItem> {
     }
 
     @Override
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     public View getView(int position, View convertView, ViewGroup parent) {
         DrawerItem drawerItem = getItem(position);
 

@@ -6,6 +6,7 @@
     <string name="drawer_close">Menu closed</string>
     <string name="hello_world">Custom drawer implementation for Material design apps.\n\nMade by <b>Heinrich Reimer</b>\n\n<i>If you like this library you can show your enthusiasm by buying me a beer or two.</i></string>
     <string name="hello_world2">Example of using <i>DrawerFrameLayout</i> for the drawer.\nThis drawer has a custom max width of 250dp.\n\nCheck out the sample code on GitHub</string>
+    <string name="hello_world_async">Example of loading drawer items <i>asynchronously using loaders </i>.\n</string>
     <string name="check_box_list">List</string>
     <string name="check_box_fixed_list">Fixed list</string>
     <string name="check_box_profile">Profile</string>
@@ -19,6 +20,7 @@
 
     <string name="drawer_view">DrawerView</string>
     <string name="drawer_frame_layout">DrawerFrameLayout</string>
+    <string name="drawer_async">Drawer async loading</string>
 
     <string name="in_app_billing_public_license" translatable="false">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjhzh8zf3W1ezb2fIlki3Udlr5UikqEVQb4d705GmzWEm9DSB7i3ZQI6vMncxmABK5X5SpljCUsTQ/GFCqJ0QVLjohn6/a95qJ2WxSmdnlYZYmTEUZUh8U4kDLFSlUgFor7VKd0Lij2gWECCuE4ZpWTxwoInbVa2/WBq0f1cYuayXC1YLKGBrImUUrIJg5diB00uIPNSks/oouPA+rKb5ITHq9WV1Di7pRijRwMe3IsjzyW9RqsK6pRusYRO7C5O53F1o9ClVpH+HGDQwjJtqvTZN3XcH3eQHqoKSWLDPnkQthW+ShpiRDlMdSd6wU7F3t8QYxNwRb57EQrdJIChhYwIDAQAB</string>
 

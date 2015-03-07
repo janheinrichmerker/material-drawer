@@ -40,6 +40,7 @@ public class DrawerItem {
     private boolean mIsHeader = false;
 
     private long mId = -1;
+    private Object mTag;
 
     private Drawable mImage;
     private int mImageMode = -1;
@@ -114,6 +115,23 @@ public class DrawerItem {
         return mId;
     }
 
+    /**
+     * Gets the tag of the drawer item
+     *
+     * @return tag
+     */
+    public Object getTag() {
+        return mTag;
+    }
+
+    /**
+     * Sets the tag of the drawer item
+     * @param tag tag
+     */
+
+    public void setTag(Object tag) {
+        this.mTag = tag;
+    }
 
     /**
      * Sets an image with a given image mode to the drawer item

@@ -285,4 +285,28 @@ public class DrawerFrameLayout extends DrawerLayout {
     public void closeDrawer(){
         closeDrawer(mDrawer);
     }
+
+    /**
+     * Check if the given drawer view is currently in an open state.
+     * To be considered "open" the drawer must have settled into its fully
+     * visible state. To check for partial visibility use
+     * {@link #isDrawerVisible(android.view.View)}.
+     *
+     * @return true if the given drawer view is in an open state
+     * @see #isDrawerVisible(android.view.View)
+     */
+    public boolean isDrawerOpen() {
+        return super.isDrawerOpen(mDrawer);
+    }
+
+    /**
+     * Check if a given drawer view is currently visible on-screen. The drawer
+     * may be only peeking onto the screen, fully extended, or anywhere inbetween.
+     *
+     * @return true if the given drawer is visible on-screen
+     * @see #isDrawerOpen(android.view.View)
+     */
+    public boolean isDrawerVisible() {
+        return super.isDrawerVisible(mDrawer);
+    }
 }

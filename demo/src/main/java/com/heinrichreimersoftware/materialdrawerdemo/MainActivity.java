@@ -169,6 +169,11 @@ public class MainActivity extends ActionBarActivity implements BillingProcessor.
         startActivity(intent);
     }
 
+    public void openDrawerAsync(View view){
+        Intent intent = new Intent(this, MainActivityAsync.class);
+        startActivity(intent);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
