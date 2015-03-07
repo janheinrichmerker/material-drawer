@@ -20,6 +20,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.view.View;
 
 import com.heinrichreimersoftware.materialdrawer.DrawerView;
 import com.heinrichreimersoftware.materialdrawer.drawable.RoundedAvatarDrawable;
@@ -38,7 +39,8 @@ public class DrawerProfile {
     private String mName;
     private String mDescription;
 
-    private OnProfileClickListener mOnClickListener;
+    private OnProfileClickListener mOnProfileClickListener;
+    private View.OnClickListener mOnClickListener;
     private DrawerView mDrawerView;
 
 
@@ -281,7 +283,7 @@ public class DrawerProfile {
      * @param listener Listener to set
      */
     public DrawerProfile setOnProfileClickListener(OnProfileClickListener listener) {
-        mOnClickListener = listener;
+        mOnProfileClickListener = listener;
         notifyDataChanged();
         return this;
     }
@@ -292,7 +294,7 @@ public class DrawerProfile {
      * @return Click listener of the drawer profile
      */
     public OnProfileClickListener getOnProfileClickListener() {
-        return mOnClickListener;
+        return mOnProfileClickListener;
     }
 
     /**
@@ -301,14 +303,43 @@ public class DrawerProfile {
      * @return True if the drawer profile has a click listener set to it, false otherwise.
      */
     public boolean hasOnProfileClickListener() {
+        return mOnProfileClickListener != null;
+    }
+
+
+    /**
+     * Gets the click listener of the drawer profile list item, if null the default behaviour (select profile) is used
+     *
+     * @return Click listener of the drawer profile list item
+     */
+    public View.OnClickListener getOnClickListener() {
+        return mOnClickListener;
+    }
+
+    /**
+     * Gets whether the drawer profile has a click listener set to it
+     *
+     * @return True if the drawer profile has a click listener set to it, false otherwise.
+     */
+    public boolean hasOnClickListener() {
         return mOnClickListener != null;
+    }
+
+
+    /**
+     * Sets a click listener to the drawer profile list item
+     *
+     * @param listener Listener to set
+     */
+    public void setOnClickListener(View.OnClickListener listener) {
+        this.mOnClickListener = listener;
     }
 
     /**
      * Removes the click listener from the drawer profile
      */
     public DrawerProfile removeOnProfileClickListener() {
-        mOnClickListener = null;
+        mOnProfileClickListener = null;
         notifyDataChanged();
         return this;
     }

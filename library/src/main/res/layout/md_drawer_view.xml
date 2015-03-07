@@ -193,7 +193,7 @@
                             android:layout_height="wrap_content"
                             android:paddingTop="@dimen/md_drawer_list_margin_vertical"
                             android:paddingBottom="@dimen/md_drawer_list_margin_vertical"
-                            android:background="@color/md_drawer_background"
+                            android:visibility="gone"
                             android:orientation="vertical"/>
 
                         <com.heinrichreimersoftware.materialdrawer.widget.LinearListView
@@ -202,7 +202,6 @@
                             android:layout_height="wrap_content"
                             android:paddingTop="@dimen/md_drawer_list_margin_vertical"
                             android:paddingBottom="@dimen/md_drawer_list_margin_vertical"
-                            android:background="@color/md_drawer_background"
                             android:orientation="vertical" />
 
                     </FrameLayout>

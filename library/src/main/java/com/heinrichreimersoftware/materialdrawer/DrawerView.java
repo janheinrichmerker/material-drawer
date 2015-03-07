@@ -32,6 +32,7 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -170,8 +171,15 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
         linearListViewProfileList.setOnItemClickListener(new LinearListView.OnItemClickListener() {
             @Override
             public void onItemClick(LinearListView parent, View view, int position, long id) {
-                if (position != 0 && profileListOpen) {
-                    selectProfile(mProfileAdapter.getItem(position));
+                if (profileListOpen) {
+                    DrawerProfile drawerProfile = mProfileAdapter.getItem(position);
+                    if (drawerProfile.hasOnClickListener()) {
+                        drawerProfile.getOnClickListener().onClick(view);
+                    } else {
+                        if (position != 0) {
+                            selectProfile(mProfileAdapter.getItem(position));
+                        }
+                    }
                 }
             }
         });
@@ -409,8 +417,11 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
                 }
             }
 
-
+            if (getWidth() > 0 && frameLayoutProfile.getVisibility() != View.VISIBLE) {
+                frameLayoutProfile.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.abc_slide_in_top));
+            }
             frameLayoutProfile.setVisibility(VISIBLE);
+
             layout.setPadding(0, 0, 0, 0);
         } else {
             frameLayoutProfile.setVisibility(GONE);
@@ -439,26 +450,44 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
         Log.d(TAG, "updateListVisibility()");
 
         if (profileListOpen && mProfileAdapter.getCount() > 0) {
-            Log.d(TAG, "updateListVisibility() - show Profile List");
+            if (getWidth() > 0 && linearListViewProfileList.getVisibility() != View.VISIBLE) {
+                Log.d(TAG, "updateListVisibility() - show Profile List animated");
+                linearListViewProfileList.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.abc_fade_in));
+            }
             linearListViewProfileList.setVisibility(VISIBLE);
+
         } else {
-            Log.d(TAG, "updateListVisibility() - hide Profile List");
             linearListViewProfileList.setVisibility(GONE);
         }
 
         if (!profileListOpen && mAdapter.getCount() > 0) {
-            Log.d(TAG, "updateListVisibility() - show Items List");
+            if (getWidth() > 0 && linearListView.getVisibility() != View.VISIBLE) {
+                Log.d(TAG, "updateListVisibility() - show Items List animated");
+                linearListView.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.abc_fade_in));
+            }
             linearListView.setVisibility(VISIBLE);
+
         } else {
-            Log.d(TAG, "updateListVisibility() - hide Items List");
             linearListView.setVisibility(GONE);
         }
 
         if (mAdapterFixed.getCount() > 0) {
+            if (getWidth() > 0 && fixedListContainer.getVisibility() != View.VISIBLE) {
+                Log.d(TAG, "updateListVisibility() - show fixed Items List animated");
+                fixedListContainer.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.abc_slide_in_bottom));
+            }
             fixedListContainer.setVisibility(VISIBLE);
 
             if ((profileListOpen && mProfileAdapter.getCount() > 0) || (!profileListOpen && mAdapter.getCount() > 0)) {
+
+                if (getWidth() > 0 && fixedDivider.getVisibility() != View.VISIBLE) {
+                    fixedDivider.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.abc_fade_in));
+                }
                 fixedDivider.setVisibility(VISIBLE);
+
+                if (getWidth() > 0 && fixedShadow.getVisibility() != View.VISIBLE) {
+                    fixedShadow.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.abc_fade_in));
+                }
                 fixedShadow.setVisibility(VISIBLE);
             } else {
                 fixedDivider.setVisibility(GONE);
@@ -467,8 +496,6 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
         } else {
             fixedListContainer.setVisibility(GONE);
         }
-
-        layout.invalidate();
     }
 
     private boolean animateToProfile(DrawerProfile profile) {
@@ -862,6 +889,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
                 mProfileAdapter.remove(oldProfile);
                 break;
             }
+            ;
         }
         profile.attachTo(this);
         mProfileAdapter.add(profile);

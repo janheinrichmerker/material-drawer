@@ -42,6 +42,10 @@ public class LinearListView extends IcsLinearLayout {
     private static final int LinearListView_entries = 0;
     private static final int LinearListView_dividerThickness = 1;
 
+    // keep track of actual visibility of ListView regardless of what updateEmptyView set
+    // if we call setVisibility(Gone) it should stay gone even if we updateEmptyView
+    private int mOriginalVisibility;
+
     private View mEmptyView;
     private ListAdapter mAdapter;
     private boolean mAreAllItemsSelectable;
@@ -84,6 +88,15 @@ public class LinearListView extends IcsLinearLayout {
         }
 
         a.recycle();
+
+        mOriginalVisibility = getVisibility();
+    }
+
+
+    @Override
+    public void setVisibility(int visibility) {
+        super.setVisibility(visibility);
+        mOriginalVisibility = visibility;
     }
 
     @Override
@@ -231,16 +244,16 @@ public class LinearListView extends IcsLinearLayout {
         if (empty) {
             if (mEmptyView != null) {
                 mEmptyView.setVisibility(View.VISIBLE);
-                setVisibility(View.GONE);
+                super.setVisibility(View.GONE);
             } else {
                 // If the caller just removed our empty view, make sure the list
                 // view is visible
-                setVisibility(View.VISIBLE);
+                super.setVisibility(mOriginalVisibility);
             }
         } else {
             if (mEmptyView != null)
                 mEmptyView.setVisibility(View.GONE);
-            setVisibility(View.VISIBLE);
+            super.setVisibility(mOriginalVisibility);
         }
     }
 
@@ -261,6 +274,7 @@ public class LinearListView extends IcsLinearLayout {
             }
             addViewInLayout(child, -1, child.getLayoutParams(), true);
         }
+
     }
 
     /**
