@@ -309,4 +309,13 @@ public class DrawerFrameLayout extends DrawerLayout {
     public boolean isDrawerVisible() {
         return super.isDrawerVisible(mDrawer);
     }
+
+    /**
+     * Returns the DrawerView associated with the given DrawerFrameLayout. this drawer can be used to add items, open close drawer list etc...
+     * @return drawer
+     * @see com.heinrichreimersoftware.materialdrawer.DrawerView
+     */
+    public DrawerView getDrawer() {
+        return mDrawer;
+    }
 }
