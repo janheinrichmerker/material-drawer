@@ -23,4 +23,9 @@
         <attr name="drawerMaxWidth" format="dimension" />
     </declare-styleable>
 
+    <declare-styleable name="CircleImageView">
+        <attr name="image_border_width" format="dimension" />
+        <attr name="image_border_color" format="color" />
+    </declare-styleable>
+
 </resources>

@@ -45,6 +45,7 @@ import com.heinrichreimersoftware.materialdrawer.animation.StepInterpolator;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerHeaderItem;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerProfile;
+import com.heinrichreimersoftware.materialdrawer.structure.Utilities;
 import com.heinrichreimersoftware.materialdrawer.widget.LinearListView;
 import com.heinrichreimersoftware.materialdrawer.widget.ScrimInsetsFrameLayout;
 import com.nineoldandroids.animation.Animator;
@@ -55,6 +56,7 @@ import com.nineoldandroids.util.Property;
 import com.nineoldandroids.view.ViewHelper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -86,7 +88,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
     private FrameLayout frameLayoutProfile;
     private RelativeLayout relativeLayoutProfileContent;
 
-    private ImageView imageViewProfileAvatar;
+    private com.heinrichreimersoftware.materialdrawer.structure.ChaiOneImageView imageViewProfileAvatar;
     private ImageView imageViewProfileAvatarSecondary;
     private TextView textViewProfileAvatarCount;
 
@@ -113,7 +115,12 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
 
     private boolean profileListOpen = false;
 
-    private static final Property<Drawable, Integer> PROPERTY_LEVEL = new Property<Drawable, Integer>(Integer.class, "level"){
+    private int selectedPosition = -1;
+
+    private HashMap<Integer, Drawable> drawableHashMap = new HashMap<Integer, Drawable>();
+    private HashMap<Integer, Drawable> selectedDrawableHashMap = new HashMap<Integer, Drawable>();
+
+    private static final Property<Drawable, Integer> PROPERTY_LEVEL = new Property<Drawable, Integer>(Integer.class, "level") {
         @Override
         public Integer get(Drawable object) {
             return object.getLevel();
@@ -125,7 +132,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
         }
     };
 
-    private static final Property<ScrollView, Integer> PROPERTY_SCROLL_POSITION = new Property<ScrollView, Integer>(Integer.class, "scrollY"){
+    private static final Property<ScrollView, Integer> PROPERTY_SCROLL_POSITION = new Property<ScrollView, Integer>(Integer.class, "scrollY") {
         @Override
         public Integer get(ScrollView object) {
             return object.getScrollY();
@@ -155,6 +162,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
         Log.d(TAG, "init()");
         inflate(context, R.layout.md_drawer_view, this);
 
+
         findViews();
 
         setClipToPadding(false);
@@ -168,7 +176,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
         linearListViewProfileList.setOnItemClickListener(new LinearListView.OnItemClickListener() {
             @Override
             public void onItemClick(LinearListView parent, View view, int position, long id) {
-                if(position != 0) {
+                if (position != 0) {
                     selectProfile(mProfileAdapter.getItem(position));
                 }
             }
@@ -181,6 +189,22 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
             public void onItemClick(LinearListView parent, View view, int position, long id) {
                 DrawerItem item = mAdapter.getItem(position);
                 if (!item.isHeader()) {
+                    TextView textView = (TextView) view.findViewById(R.id.mdTextPrimary);
+                    textView.setTextColor(getResources().getColor(R.color.selected_color));
+
+                    ImageView imageView = (ImageView) view.findViewById(R.id.mdImage);
+                    imageView.setImageDrawable(selectedDrawableHashMap.get(position));
+
+                    if (selectedPosition != -1 && selectedPosition != position) {
+                        View oldView = parent.getChildAt(selectedPosition);
+                        textView = (TextView) oldView.findViewById(R.id.mdTextPrimary);
+                        textView.setTextColor(getResources().getColor(R.color.font_color));
+                        imageView = (ImageView) oldView.findViewById(R.id.mdImage);
+                        imageView.setImageDrawable(drawableHashMap.get(selectedPosition));
+                    }
+                    selectedPosition = position;
+
+
                     if (item.hasOnItemClickListener()) {
                         item.getOnItemClickListener().onClick(item, item.getId(), position);
                     } else {
@@ -233,7 +257,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
         frameLayoutProfile = (FrameLayout) findViewById(R.id.mdLayoutProfile);
         relativeLayoutProfileContent = (RelativeLayout) findViewById(R.id.mdLayoutProfileContent);
 
-        imageViewProfileAvatar = (ImageView) findViewById(R.id.mdAvatarProfile);
+        imageViewProfileAvatar = (com.heinrichreimersoftware.materialdrawer.structure.ChaiOneImageView) findViewById(R.id.mdAvatarProfile);
         imageViewProfileAvatarSecondary = (ImageView) findViewById(R.id.mdAvatarProfileSecondary);
         textViewProfileAvatarCount = (TextView) findViewById(R.id.mdAvatarProfileCount);
 
@@ -252,7 +276,29 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
         fixedDivider = findViewById(R.id.mdFixedDivider);
         fixedListContainer = (LinearLayout) findViewById(R.id.mdFixedListContainer);
         linearListViewFixed = (LinearListView) findViewById(R.id.mdLinearListViewFixed);
+
+        textViewProfileName.setTypeface(Utilities.getMediumFont(getContext()));
+        textViewProfileDescription.setTypeface(Utilities.getRegularFont(getContext()));
     }
+
+    public TextView getPrimaryTextView() {
+        return textViewProfileDescription;
+    }
+
+    public TextView getSecondaryTextView() {
+        return textViewProfileDescription;
+    }
+
+
+    public ImageView getProfileImageView() {
+        return imageViewProfileAvatar;
+    }
+
+    public void setDrawableHashMap(HashMap<Integer, Drawable> drawableHashMap, HashMap<Integer, Drawable> selectedDrawableHashMap) {
+        this.drawableHashMap = drawableHashMap;
+        this.selectedDrawableHashMap = selectedDrawableHashMap;
+    }
+
 
     private void updateDrawerWidth() {
         Log.d(TAG, "updateDrawerWidth()");
@@ -288,13 +334,13 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
         int aspectRatioHeight = Math.round(getLayoutParams().width / 16 * 9) - statusBarHeight;
         int minHeight = getResources().getDimensionPixelSize(R.dimen.md_baseline);
 
-        if(mProfileAdapter.getItem(0) != null && mProfileAdapter.getItem(0).hasAvatar()){
+        if (mProfileAdapter.getItem(0) != null && mProfileAdapter.getItem(0).hasAvatar()) {
             minHeight += getResources().getDimensionPixelSize(R.dimen.md_big_avatar_size);
         }
-        if(mProfileAdapter.getItem(0) != null && mProfileAdapter.getItem(0).hasName()){
+        if (mProfileAdapter.getItem(0) != null && mProfileAdapter.getItem(0).hasName()) {
             minHeight += getResources().getDimensionPixelSize(R.dimen.md_list_item_height);
         }
-        if(mProfileAdapter.getItem(0) != null && mProfileAdapter.getItem(0).hasDescription()){
+        if (mProfileAdapter.getItem(0) != null && mProfileAdapter.getItem(0).hasDescription()) {
             minHeight += getResources().getDimensionPixelSize(R.dimen.md_baseline);
         }
 
@@ -308,7 +354,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
 
             final DrawerProfile currentProfile = mProfileAdapter.getItem(0);
 
-            if(mProfileAdapter.getCount() > 2){
+            if (mProfileAdapter.getCount() > 2) {
                 /* More than two profiles. Should show a little badge. */
                 imageViewProfileAvatarSecondary.setVisibility(GONE);
 
@@ -321,20 +367,19 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
                     }
                 });
 
-                if(currentProfile.getBackground() instanceof BitmapDrawable){
-                    Palette.generateAsync(((BitmapDrawable) currentProfile.getBackground()).getBitmap(), new Palette.PaletteAsyncListener(){
+                if (currentProfile.getBackground() instanceof BitmapDrawable) {
+                    Palette.generateAsync(((BitmapDrawable) currentProfile.getBackground()).getBitmap(), new Palette.PaletteAsyncListener() {
                         @Override
                         public void onGenerated(Palette palette) {
                             Palette.Swatch vibrantSwatch = palette.getVibrantSwatch();
-                            if(vibrantSwatch != null) {
+                            if (vibrantSwatch != null) {
                                 textViewProfileAvatarCount.setTextColor(vibrantSwatch.getTitleTextColor());
                                 textViewProfileAvatarCount.getBackground().setColorFilter(vibrantSwatch.getRgb(), PorterDuff.Mode.SRC_IN);
                             }
                         }
                     });
                 }
-            }
-            else if (mProfileAdapter.getCount() == 2){
+            } else if (mProfileAdapter.getCount() == 2) {
                 /* Two profiles. Should show the second profile avatar. */
                 final DrawerProfile secondProfile = mProfileAdapter.getItem(1);
                 imageViewProfileAvatarSecondary.setVisibility(VISIBLE);
@@ -349,58 +394,57 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
                 textViewProfileAvatarCount.setVisibility(GONE);
                 closeProfileList();
             }
-                if (currentProfile.getAvatar() != null) {
-                    imageViewProfileAvatar.setImageDrawable(currentProfile.getAvatar());
-                }
-                if (currentProfile.getName() != null && !currentProfile.getName().equals("")) {
-                    textViewProfileName.setText(currentProfile.getName());
+            if (currentProfile.getAvatar() != null) {
+                imageViewProfileAvatar.setImageDrawable(currentProfile.getAvatar());
+            }
+            if (currentProfile.getName() != null && !currentProfile.getName().equals("")) {
+                textViewProfileName.setText(currentProfile.getName());
+            }
+
+            if (currentProfile.getBackground() != null) {
+                imageViewProfileBackground.setImageDrawable(currentProfile.getBackground());
+            } else {
+                int colorPrimary = getResources().getColor(R.color.primary_dark_material_light);
+                TypedArray a = getContext().getTheme().obtainStyledAttributes(new int[]{R.attr.colorPrimary});
+                try {
+                    colorPrimary = a.getColor(0, 0);
+                } finally {
+                    a.recycle();
                 }
 
-                if (currentProfile.getBackground() != null) {
-                    imageViewProfileBackground.setImageDrawable(currentProfile.getBackground());
-                } else {
-                    int colorPrimary = getResources().getColor(R.color.primary_dark_material_light);
-                    TypedArray a = getContext().getTheme().obtainStyledAttributes(new int[]{R.attr.colorPrimary});
-                    try {
-                        colorPrimary = a.getColor(0, 0);
-                    } finally {
-                        a.recycle();
+                imageViewProfileBackground.setImageDrawable(new ColorDrawable(colorPrimary));
+            }
+
+            if (currentProfile.getDescription() != null && !currentProfile.getDescription().equals("")) {
+                textViewProfileDescription.setVisibility(VISIBLE);
+                textViewProfileDescription.setText(currentProfile.getDescription());
+            } else {
+                textViewProfileDescription.setVisibility(GONE);
+            }
+
+            if (currentProfile.hasOnProfileClickListener()) {
+                frameLayoutProfile.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        currentProfile.getOnProfileClickListener().onClick(currentProfile, currentProfile.getId());
                     }
+                });
 
-                    imageViewProfileBackground.setImageDrawable(new ColorDrawable(colorPrimary));
-                }
-
-                if (currentProfile.getDescription() != null && !currentProfile.getDescription().equals("")) {
-                    textViewProfileDescription.setVisibility(VISIBLE);
-                    textViewProfileDescription.setText(currentProfile.getDescription());
-                } else {
-                    textViewProfileDescription.setVisibility(GONE);
-                }
-
-                if (currentProfile.hasOnProfileClickListener()) {
+                frameLayoutProfile.setEnabled(true);
+            } else {
+                if (hasOnProfileClickListener()) {
                     frameLayoutProfile.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            currentProfile.getOnProfileClickListener().onClick(currentProfile, currentProfile.getId());
+                            getOnProfileClickListener().onClick(currentProfile, currentProfile.getId());
                         }
                     });
 
                     frameLayoutProfile.setEnabled(true);
                 } else {
-                    if (hasOnProfileClickListener()) {
-                        frameLayoutProfile.setOnClickListener(new OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                getOnProfileClickListener().onClick(currentProfile, currentProfile.getId());
-                            }
-                        });
-
-                        frameLayoutProfile.setEnabled(true);
-                    }
-                    else{
-                        frameLayoutProfile.setEnabled(false);
-                    }
+                    frameLayoutProfile.setEnabled(false);
                 }
+            }
 
 
             frameLayoutProfile.setVisibility(VISIBLE);
@@ -415,7 +459,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
     private void updateList() {
         Log.d(TAG, "updateList()");
 
-        if (mAdapter.getCount() <= 1){
+        if (mAdapter.getCount() <= 1) {
             updateListVisibility();
         }
     }
@@ -428,13 +472,12 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
         }
     }
 
-    private void updateListVisibility(){
+    private void updateListVisibility() {
         Log.d(TAG, "updateListVisibility()");
 
-        if(profileListOpen && mProfileAdapter.getCount() > 0){
+        if (profileListOpen && mProfileAdapter.getCount() > 0) {
             linearListViewProfileList.setVisibility(VISIBLE);
-        }
-        else{
+        } else {
             linearListViewProfileList.setVisibility(GONE);
         }
 
@@ -459,10 +502,10 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
         }
     }
 
-    private boolean animateToProfile(DrawerProfile profile){
+    private boolean animateToProfile(DrawerProfile profile) {
         Log.d(TAG, "animateToProfile(*" + profile.getId() + ")");
 
-        if(mProfileAdapter.getCount() > 1) {
+        if (mProfileAdapter.getCount() > 1) {
             List<Animator> animators = new ArrayList<>();
             List<Animator.AnimatorListener> listeners = new ArrayList<>();
 
@@ -502,7 +545,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
 
                     imageViewProfileBackgroundOverlay.setVisibility(GONE);
 
-                    if(hasOnProfileSwitchListener()){
+                    if (hasOnProfileSwitchListener()) {
                         onProfileSwitchListener.onSwitch(oldProfile, oldProfile.getId(), newProfile, newProfile.getId());
                     }
                 }
@@ -528,7 +571,8 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
             );
             textOutSet.addListener(new Animator.AnimatorListener() {
                 @Override
-                public void onAnimationStart(Animator animation) {}
+                public void onAnimationStart(Animator animation) {
+                }
 
                 @Override
                 public void onAnimationEnd(Animator animation) {
@@ -547,10 +591,12 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
                 }
 
                 @Override
-                public void onAnimationCancel(Animator animation) {}
+                public void onAnimationCancel(Animator animation) {
+                }
 
                 @Override
-                public void onAnimationRepeat(Animator animation) {}
+                public void onAnimationRepeat(Animator animation) {
+                }
             });
 
             AnimatorSet textInSet = new AnimatorSet();
@@ -578,7 +624,8 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
                     public void onAnimationStart(Animator animation) {
                         linearListViewProfileList.setOnItemClickListener(new LinearListView.OnItemClickListener() {
                             @Override
-                            public void onItemClick(LinearListView parent, View view, int position, long id) {}
+                            public void onItemClick(LinearListView parent, View view, int position, long id) {
+                            }
                         });
                     }
 
@@ -589,7 +636,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
                         linearListViewProfileList.setOnItemClickListener(new LinearListView.OnItemClickListener() {
                             @Override
                             public void onItemClick(LinearListView parent, View view, int position, long id) {
-                                if(position != 0) {
+                                if (position != 0) {
                                     selectProfile(mProfileAdapter.getItem(position));
                                 }
                             }
@@ -597,10 +644,12 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
                     }
 
                     @Override
-                    public void onAnimationCancel(Animator animation) {}
+                    public void onAnimationCancel(Animator animation) {
+                    }
 
                     @Override
-                    public void onAnimationRepeat(Animator animation) {}
+                    public void onAnimationRepeat(Animator animation) {
+                    }
                 });
 
                 AnimatorSet profileInSet = new AnimatorSet();
@@ -615,8 +664,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
                         profileInSet
                 );
                 animators.add(profileSet);
-            }
-            else {
+            } else {
 
                 /* Avatar animation */
 
@@ -692,17 +740,16 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
         return false;
     }
 
-    private void toggleProfileList(){
+    private void toggleProfileList() {
         Log.d(TAG, "toggleProfileList()");
-        if(profileListOpen){
+        if (profileListOpen) {
             closeProfileList();
-        }
-        else{
+        } else {
             openProfileList();
         }
     }
 
-    private void openProfileList(){
+    private void openProfileList() {
         Log.d(TAG, "openProfileList()");
         if (!profileListOpen) {
             Log.d(TAG, "openProfileList() 1");
@@ -741,16 +788,15 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
                 }
             });
             set.start();
-        }
-        else {
+        } else {
             Log.d(TAG, "openProfileList() 2");
             updateListVisibility();
         }
     }
 
-    private void closeProfileList(){
+    private void closeProfileList() {
         Log.d(TAG, "closeProfileList()");
-        if(profileListOpen) {
+        if (profileListOpen) {
             Log.d(TAG, "closeProfileList() 1");
             AnimatorSet set = new AnimatorSet();
             set.playTogether(
@@ -787,8 +833,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
                 }
             });
             set.start();
-        }
-        else {
+        } else {
             Log.d(TAG, "closeProfileList() 2");
             updateListVisibility();
         }
@@ -800,7 +845,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
      *
      * @param drawerMaxWidth Max drawer width to set
      */
-    public DrawerView setDrawerMaxWidth(int drawerMaxWidth){
+    public DrawerView setDrawerMaxWidth(int drawerMaxWidth) {
         this.drawerMaxWidth = drawerMaxWidth;
         updateDrawerWidth();
         return this;
@@ -811,7 +856,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
      *
      * @param drawerMaxWidthResource Max drawer width resource to set
      */
-    public DrawerView setDrawerMaxWidthResource(int drawerMaxWidthResource){
+    public DrawerView setDrawerMaxWidthResource(int drawerMaxWidthResource) {
         drawerMaxWidth = getResources().getDimensionPixelSize(drawerMaxWidthResource);
         updateDrawerWidth();
         return this;
@@ -820,7 +865,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
     /**
      * Resets the max drawer width
      */
-    public DrawerView resetDrawerMaxWidth(){
+    public DrawerView resetDrawerMaxWidth() {
         this.drawerMaxWidth = getResources().getDimensionPixelSize(R.dimen.md_drawer_max_width);
         updateDrawerWidth();
         return this;
@@ -829,7 +874,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
     /**
      * Gets the max drawer width
      */
-    public int getDrawerMaxWidth(){
+    public int getDrawerMaxWidth() {
         return drawerMaxWidth;
     }
 
@@ -840,10 +885,10 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
      * @param profile Profile to add
      */
     public DrawerView addProfile(DrawerProfile profile) {
-        if(profile.getId() <= 0){
+        if (profile.getId() <= 0) {
             profile.setId(System.currentTimeMillis());
         }
-        for (DrawerProfile oldProfile : mProfileAdapter.getItems()){
+        for (DrawerProfile oldProfile : mProfileAdapter.getItems()) {
             if (oldProfile.getId() == profile.getId()) {
                 mProfileAdapter.remove(oldProfile);
                 break;
@@ -851,7 +896,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
         }
         profile.attachTo(this);
         mProfileAdapter.add(profile);
-        if(mProfileAdapter.getCount() == 1){
+        if (mProfileAdapter.getCount() == 1) {
             selectProfile(profile);
         }
         updateProfile();
@@ -875,7 +920,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
      */
     public DrawerProfile findProfileById(long id) {
         for (DrawerProfile profile : mProfileAdapter.getItems()) {
-            if(profile.getId() == id){
+            if (profile.getId() == id) {
                 return profile;
             }
         }
@@ -888,7 +933,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
      * @param profile The profile
      */
     public DrawerView selectProfile(DrawerProfile profile) {
-        if(mProfileAdapter.getItems().contains(profile)){
+        if (mProfileAdapter.getItems().contains(profile)) {
             DrawerProfile oldProfile = mProfileAdapter.getItem(0);
 
             if (mProfileAdapter.getCount() > 1) {
@@ -896,14 +941,13 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
 
                 mProfileAdapter.remove(profile);
                 mProfileAdapter.insert(profile, 0);
-            }
-            else{
+            } else {
                 mProfileAdapter.remove(profile);
                 mProfileAdapter.insert(profile, 0);
 
                 updateProfile();
 
-                if(hasOnProfileSwitchListener()){
+                if (hasOnProfileSwitchListener()) {
                     onProfileSwitchListener.onSwitch(oldProfile, oldProfile.getId(), profile, profile.getId());
                 }
             }
@@ -918,7 +962,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
      */
     public DrawerView selectProfileById(long id) {
         for (DrawerProfile profile : mProfileAdapter.getItems()) {
-            if(profile.getId() == id){
+            if (profile.getId() == id) {
                 selectProfile(profile);
                 return this;
             }
@@ -945,7 +989,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
      */
     public DrawerView removeProfileById(long id) {
         for (DrawerProfile profile : mProfileAdapter.getItems()) {
-            if(profile.getId() == id){
+            if (profile.getId() == id) {
                 profile.detach();
                 mProfileAdapter.remove(profile);
                 updateProfile();
@@ -1050,10 +1094,10 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
     public DrawerView addItems(List<DrawerItem> items) {
         mAdapter.setNotifyOnChange(false);
         for (DrawerItem item : items) {
-            if(item.getId() <= 0){
+            if (item.getId() <= 0) {
                 item.setId(System.currentTimeMillis());
             }
-            for (DrawerItem oldItem : mAdapter.getItems()){
+            for (DrawerItem oldItem : mAdapter.getItems()) {
                 if (oldItem.getId() == item.getId()) {
                     mAdapter.remove(oldItem);
                     break;
@@ -1075,10 +1119,10 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
      * @param item Item to add
      */
     public DrawerView addItem(DrawerItem item) {
-        if(item.getId() <= 0){
+        if (item.getId() <= 0) {
             item.setId(System.currentTimeMillis());
         }
-        for (DrawerItem oldItem : mAdapter.getItems()){
+        for (DrawerItem oldItem : mAdapter.getItems()) {
             if (oldItem.getId() == item.getId()) {
                 mAdapter.remove(oldItem);
                 break;
@@ -1125,7 +1169,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
      * @return Item from the drawer view
      */
     public DrawerItem findItemById(long id) {
-        for (DrawerItem item : mAdapter.getItems()){
+        for (DrawerItem item : mAdapter.getItems()) {
             if (item.getId() == id) {
                 return item;
             }
@@ -1149,7 +1193,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
      *
      * @return Position of the selected item
      */
-    public int getSelectedPosition(){
+    public int getSelectedPosition() {
         return mAdapter.getSelectedPosition();
     }
 
@@ -1162,7 +1206,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
         mAdapterFixed.clearSelection();
 
         int count = mAdapter.getCount();
-        for (int i = 0; i < count; i++){
+        for (int i = 0; i < count; i++) {
             if (mAdapter.getItem(i).getId() == id) {
                 mAdapter.select(i);
                 return this;
@@ -1201,7 +1245,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
      * @param id ID to remove
      */
     public DrawerView removeItemById(long id) {
-        for (DrawerItem item : mAdapter.getItems()){
+        for (DrawerItem item : mAdapter.getItems()) {
             if (item.getId() == id) {
                 mAdapter.remove(item);
                 updateList();
@@ -1270,10 +1314,10 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
     public DrawerView addFixedItems(List<DrawerItem> items) {
         mAdapterFixed.setNotifyOnChange(false);
         for (DrawerItem item : items) {
-            if(item.getId() <= 0){
+            if (item.getId() <= 0) {
                 item.setId(System.currentTimeMillis());
             }
-            for (DrawerItem oldItem : mAdapterFixed.getItems()){
+            for (DrawerItem oldItem : mAdapterFixed.getItems()) {
                 if (oldItem.getId() == item.getId()) {
                     mAdapterFixed.remove(oldItem);
                     break;
@@ -1295,10 +1339,10 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
      * @param item Item to add
      */
     public DrawerView addFixedItem(DrawerItem item) {
-        if(item.getId() <= 0){
+        if (item.getId() <= 0) {
             item.setId(System.currentTimeMillis());
         }
-        for (DrawerItem oldItem : mAdapterFixed.getItems()){
+        for (DrawerItem oldItem : mAdapterFixed.getItems()) {
             if (oldItem.getId() == item.getId()) {
                 mAdapterFixed.remove(oldItem);
                 break;
@@ -1345,7 +1389,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
      * @return Item from the drawer view
      */
     public DrawerItem findFixedItemById(long id) {
-        for (DrawerItem item : mAdapterFixed.getItems()){
+        for (DrawerItem item : mAdapterFixed.getItems()) {
             if (item.getId() == id) {
                 return item;
             }
@@ -1369,7 +1413,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
      *
      * @return Position of the selected item
      */
-    public int getSelectedFixedPosition(){
+    public int getSelectedFixedPosition() {
         return mAdapterFixed.getSelectedPosition();
     }
 
@@ -1382,7 +1426,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
         mAdapter.clearSelection();
 
         int count = mAdapterFixed.getCount();
-        for (int i = 0; i < count; i++){
+        for (int i = 0; i < count; i++) {
             if (mAdapterFixed.getItem(i).getId() == id) {
                 mAdapterFixed.select(i);
                 return this;
@@ -1421,7 +1465,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
      * @param id ID to remove
      */
     public DrawerView removeFixedItemById(long id) {
-        for (DrawerItem item : mAdapterFixed.getItems()){
+        for (DrawerItem item : mAdapterFixed.getItems()) {
             if (item.getId() == id) {
                 mAdapterFixed.remove(item);
                 updateFixedList();
@@ -1498,15 +1542,14 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
         super.onSizeChanged(w, h, oldW, oldH);
 
         if (w != oldW) {
-            if(oldW == 0){
+            if (oldW == 0) {
                 updateListVisibility();
             }
 
-            if(drawerMaxWidth <= 0) {
-                if(getLayoutParams().width != ViewGroup.LayoutParams.MATCH_PARENT && getLayoutParams().width != ViewGroup.LayoutParams.WRAP_CONTENT){
+            if (drawerMaxWidth <= 0) {
+                if (getLayoutParams().width != ViewGroup.LayoutParams.MATCH_PARENT && getLayoutParams().width != ViewGroup.LayoutParams.WRAP_CONTENT) {
                     setDrawerMaxWidth(getLayoutParams().width);
-                }
-                else{
+                } else {
                     resetDrawerMaxWidth();
                 }
             }
@@ -1535,26 +1578,23 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
         if (state instanceof Bundle) {
             Bundle savedInstanceState = (Bundle) state;
 
-            if (savedInstanceState.containsKey(STATE_PROFILE_LIST_OPEN)){
-                if(savedInstanceState.getBoolean(STATE_PROFILE_LIST_OPEN, false)){
+            if (savedInstanceState.containsKey(STATE_PROFILE_LIST_OPEN)) {
+                if (savedInstanceState.getBoolean(STATE_PROFILE_LIST_OPEN, false)) {
                     openProfileList();
-                }
-                else{
+                } else {
                     closeProfileList();
                 }
-            }
-            else{
+            } else {
                 closeProfileList();
             }
-            if (savedInstanceState.containsKey(STATE_LIST_SELECTION)){
+            if (savedInstanceState.containsKey(STATE_LIST_SELECTION)) {
                 int listSelection = savedInstanceState.getInt(STATE_LIST_SELECTION, -1);
-                if(listSelection >= 0 && listSelection < mAdapter.getCount()){
+                if (listSelection >= 0 && listSelection < mAdapter.getCount()) {
                     selectItem(listSelection);
-                }
-                else{
+                } else {
                     if (savedInstanceState.containsKey(STATE_FIXED_LIST_SELECTION)) {
                         int fixedListSelection = savedInstanceState.getInt(STATE_FIXED_LIST_SELECTION, -1);
-                        if(fixedListSelection >= 0 && fixedListSelection < mAdapterFixed.getCount()){
+                        if (fixedListSelection >= 0 && fixedListSelection < mAdapterFixed.getCount()) {
                             selectFixedItem(fixedListSelection);
                         }
                     }
