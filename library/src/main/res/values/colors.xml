@@ -32,4 +32,10 @@
     <color name="md_fixed_list_shadow_start">#0000</color>
     <color name="md_fixed_list_shadow_end">#18000000</color>
 
+    <color name="font_color">#292929</color>
+    <color name="line_color">#cbcbcb</color>
+    <color name="selected_color">#e73800</color>
+    <color name="button_color">#4d4d4d</color>
+    <color name="arc_color">#168c9e</color>
+
 </resources>

@@ -17,7 +17,7 @@
 # http://www.gradle.org/docs/current/userguide/multi_project_builds.html#sec:decoupled_projects
 # org.gradle.parallel=true
 
-org.gradle.java.home=/home/synerzip/Android/others/jdk1.8.0_40
+org.gradle.java.home=/home/synerzip/Android/Sdk
 
 VERSION_NAME=2.0
 VERSION_CODE=11

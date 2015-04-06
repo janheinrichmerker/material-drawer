@@ -32,6 +32,7 @@ import android.widget.TextView;
 
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerHeaderItem;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
+import com.heinrichreimersoftware.materialdrawer.structure.Utilities;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -133,16 +134,20 @@ public class DrawerAdapter extends ArrayAdapter<DrawerItem> {
             if (drawerItem.hasTextPrimary()) {
                 viewHolder.getTextViewPrimary().setText(drawerItem.getTextPrimary());
 
+                viewHolder.getTextViewPrimary().setTypeface(Utilities.getMediumFont(getContext()));
+
                 if (colorAccent != -1) {
                     viewHolder.getTextViewPrimary().setTextColor(colorAccent);
                 }
                 else {
-                    viewHolder.getTextViewPrimary().setTextColor(getContext().getResources().getColor(android.R.color.primary_text_light));
+                    viewHolder.getTextViewPrimary().setTextColor(getContext().getResources().getColor(R.color.font_color));
                 }
 
                 if (drawerItem.hasTextSecondary() && (drawerItem.getTextMode() == DrawerItem.TWO_LINE || drawerItem.getTextMode() == DrawerItem.THREE_LINE)) {
                     viewHolder.getTextViewSecondary().setText(drawerItem.getTextSecondary());
                     viewHolder.getTextViewSecondary().setVisibility(View.VISIBLE);
+
+                    viewHolder.getTextViewSecondary().setTypeface(Utilities.getMediumFont(getContext()));
 
                     if (drawerItem.getTextMode() == DrawerItem.THREE_LINE) {
                         viewHolder.getTextViewSecondary().setMaxLines(2);
@@ -160,7 +165,7 @@ public class DrawerAdapter extends ArrayAdapter<DrawerItem> {
                     viewHolder.getTextViewPrimary().setTextColor(colorAccent);
                 }
                 else {
-                    viewHolder.getTextViewPrimary().setTextColor(getContext().getResources().getColor(android.R.color.primary_text_light));
+                    viewHolder.getTextViewPrimary().setTextColor(getContext().getResources().getColor(R.color.font_color));
                 }
 
                 viewHolder.getTextViewSecondary().setVisibility(View.GONE);
