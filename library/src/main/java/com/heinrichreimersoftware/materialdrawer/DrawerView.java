@@ -42,6 +42,7 @@ import android.widget.TextView;
 import com.heinrichreimersoftware.materialdrawer.animation.AlphaSatColorMatrixEvaluator;
 import com.heinrichreimersoftware.materialdrawer.animation.AnimatableColorMatrixColorFilter;
 import com.heinrichreimersoftware.materialdrawer.animation.StepInterpolator;
+import com.heinrichreimersoftware.materialdrawer.structure.ArcView;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerHeaderItem;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerProfile;
@@ -158,10 +159,13 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
         init(context);
     }
 
+    public void setArcDegree(int degree) {
+    Utilities.degree = degree;
+    }
+
     private void init(Context context) {
         Log.d(TAG, "init()");
         inflate(context, R.layout.md_drawer_view, this);
-
 
         findViews();
 
