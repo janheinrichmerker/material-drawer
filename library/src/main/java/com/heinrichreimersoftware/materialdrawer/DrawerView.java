@@ -160,7 +160,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
     }
 
     public void setArcDegree(int degree) {
-    Utilities.degree = degree;
+        Utilities.degree = degree;
     }
 
     private void init(Context context) {
@@ -286,7 +286,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
     }
 
     public TextView getPrimaryTextView() {
-        return textViewProfileDescription;
+        return textViewProfileName;
     }
 
     public TextView getSecondaryTextView() {
