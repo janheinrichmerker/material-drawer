@@ -8,10 +8,7 @@ import android.graphics.Typeface;
  */
 public class Utilities {
 
-<<<<<<< HEAD
-=======
     public static int degree;
->>>>>>> Added Arcdegree and selection colors
     /**
      * Gets medium font.
      *
