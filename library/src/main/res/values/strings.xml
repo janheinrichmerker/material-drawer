@@ -7,4 +7,7 @@
     <string name="md_content_description_profile_avatar_secondary">Secondary Avatar</string>
 
     <string name="md_content_description_open_profile_list">Secondary Avatar</string>
+
+    <string name="md_content_description_drawer_open">Menu open</string>
+    <string name="md_content_description_drawer_close">Menu closed</string>
 </resources>

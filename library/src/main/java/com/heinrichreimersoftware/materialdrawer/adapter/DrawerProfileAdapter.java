@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.heinrichreimersoftware.materialdrawer;
+package com.heinrichreimersoftware.materialdrawer.adapter;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -29,13 +29,14 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.heinrichreimersoftware.materialdrawer.R;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerProfile;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Adapter to be used with {@link DrawerView} to display a list of drawer items.
+ * Adapter to be used with {@link com.heinrichreimersoftware.materialdrawer.DrawerView} to display a list of drawer items.
  */
 public class DrawerProfileAdapter extends ArrayAdapter<DrawerProfile> {
 

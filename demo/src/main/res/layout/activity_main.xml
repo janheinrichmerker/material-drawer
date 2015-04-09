@@ -43,6 +43,13 @@
                     android:layout_marginTop="@dimen/activity_vertical_margin"
                     android:onClick="openDrawerFrameLayout"/>
 
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/drawer_activity"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:onClick="openDrawerActivity"/>
+
             </LinearLayout>
 
         </ScrollView>

@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Heinrich Reimer
+ * Copyright 2015 Heinrich Reimer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import android.widget.ArrayAdapter;
 import com.heinrichreimersoftware.materialdrawer.drawable.RoundedAvatarDrawable;
 
 /**
- * Object to be used with {@link com.heinrichreimersoftware.materialdrawer.DrawerAdapter} and {@link com.heinrichreimersoftware.materialdrawer.DrawerView} to display a drawer item.
+ * Object to be used with {@link com.heinrichreimersoftware.materialdrawer.adapter.DrawerAdapter} and {@link com.heinrichreimersoftware.materialdrawer.DrawerView} to display a drawer item.
  * Can hold an image, a primary text, a secondary text and a listener.
  */
 public class DrawerItem {
@@ -41,7 +41,7 @@ public class DrawerItem {
 
     private long mId = -1;
 
-    private Drawable mImage;
+    private Drawable mImage = null;
     private int mImageMode = -1;
 
     private String mTextPrimary;
@@ -449,7 +449,6 @@ public class DrawerItem {
      */
     public DrawerItem attachTo(ArrayAdapter<DrawerItem> adapter) {
         mAdapter = adapter;
-        notifyDataChanged();
         return this;
     }
 

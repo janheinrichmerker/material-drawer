@@ -14,16 +14,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.anjlab.android.iab.v3.BillingProcessor;
-import com.anjlab.android.iab.v3.TransactionDetails;
 import com.heinrichreimersoftware.materialdrawer.DrawerView;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerHeaderItem;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerProfile;
 
-public class MainActivity extends ActionBarActivity implements BillingProcessor.IBillingHandler {
-
-    private BillingProcessor bp;
+public class MainActivity extends ActionBarActivity {
 
     private DrawerView drawer;
 
@@ -40,8 +36,6 @@ public class MainActivity extends ActionBarActivity implements BillingProcessor.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
-
-        bp = new BillingProcessor(this, getString(R.string.in_app_billing_public_license), this);
 
 
         drawerToggle = new ActionBarDrawerToggle(
@@ -169,6 +163,11 @@ public class MainActivity extends ActionBarActivity implements BillingProcessor.
         startActivity(intent);
     }
 
+    public void openDrawerActivity(View view){
+        Intent intent = new Intent(this, MainActivity3.class);
+        startActivity(intent);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -188,18 +187,6 @@ public class MainActivity extends ActionBarActivity implements BillingProcessor.
                 i.setData(Uri.parse(url));
                 startActivity(i);
                 break;
-            case R.id.donation1:
-                donate(1);
-                break;
-            case R.id.donation2:
-                donate(2);
-                break;
-            case R.id.donation3:
-                donate(3);
-                break;
-            case R.id.donation4:
-                donate(4);
-                break;
         }
 
         return super.onOptionsItemSelected(item);
@@ -216,64 +203,5 @@ public class MainActivity extends ActionBarActivity implements BillingProcessor.
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         drawerToggle.syncState();
-    }
-
-    /* Donation stuff via in app billing */
-
-    public void donate(int index) {
-        bp.purchase(this, "donate_" + index);
-    }
-
-    @Override
-    public void onBillingInitialized() {}
-
-    @Override
-    public void onProductPurchased(String productId, TransactionDetails transactionDetails) {
-        bp.consumePurchase(productId);
-        Toast.makeText(this, R.string.thank_you, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onBillingError(int errorCode, Throwable error) {
-        int errorMessageResId = 0;
-        switch (errorCode){
-            case 1:
-                errorMessageResId = R.string.donation_error_1;
-                break;
-            case 2:
-                errorMessageResId = R.string.donation_error_2;
-                break;
-            case 3:
-                errorMessageResId = R.string.donation_error_3;
-                break;
-            case 4:
-                errorMessageResId = R.string.donation_error_4;
-                break;
-            case 5:
-                errorMessageResId = R.string.donation_error_5;
-                break;
-            case 6:
-                errorMessageResId = R.string.donation_error_6;
-                break;
-            default:
-                Toast.makeText(this, "Billing error: code = " + errorCode + ", error: " +
-                        (error != null ? error.getMessage() : "?"), Toast.LENGTH_LONG).show();
-        }
-        Toast.makeText(this, getString(errorMessageResId), Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onPurchaseHistoryRestored() {}
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (!bp.handleActivityResult(requestCode, resultCode, data))
-            super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    @Override
-    public void onDestroy() {
-        if (bp != null) bp.release();
-        super.onDestroy();
     }
 }

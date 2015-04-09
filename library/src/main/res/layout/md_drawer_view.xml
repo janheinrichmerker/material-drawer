@@ -151,7 +151,7 @@
                                         android:fontFamily="sans-serif-medium"
                                         android:singleLine="true"
                                         android:ellipsize="marquee"
-                                        android:textColor="@android:color/white"
+                                        android:textColor="@color/md_primary_inverse"
                                         style="@style/TextAppearance.AppCompat.Subhead.Inverse"
                                         android:clickable="false" />
 
@@ -159,7 +159,9 @@
                                         android:id="@id/mdProfileDescription"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
+                                        android:singleLine="true"
                                         android:ellipsize="marquee"
+                                        android:textColor="@color/md_secondary_inverse"
                                         style="@style/TextAppearance.AppCompat.Subhead.Inverse"
                                         android:clickable="false" />
 

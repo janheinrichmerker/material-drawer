@@ -32,8 +32,8 @@ public class DrawerProfile {
 
     private long mId = -1;
 
-    private Drawable mAvatar;
-    private Drawable mBackground;
+    private Drawable mAvatar = null;
+    private Drawable mBackground = null;
     private String mName;
     private String mDescription;
 

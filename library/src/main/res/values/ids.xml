@@ -13,6 +13,10 @@
   -->
 
 <resources>
+    <item type="id" name="mdDrawerLayout" />
+    <item type="id" name="mdToolbar" />
+    <item type="id" name="mdFrame" />
+
     <item type="id" name="mdDrawer" />
 
     <item type="id" name="mdScrollView" />

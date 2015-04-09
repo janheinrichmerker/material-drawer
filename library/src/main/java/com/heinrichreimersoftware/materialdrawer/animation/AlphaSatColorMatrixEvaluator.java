@@ -18,9 +18,8 @@
 
 package com.heinrichreimersoftware.materialdrawer.animation;
 
+import android.animation.TypeEvaluator;
 import android.graphics.ColorMatrix;
-
-import com.nineoldandroids.animation.TypeEvaluator;
 
 public class AlphaSatColorMatrixEvaluator implements TypeEvaluator {
 

@@ -17,6 +17,10 @@
     <color name="md_drawer_background">#f5f5f5</color>
 
     <color name="md_primary">#000</color>
+    <color name="md_secondary">#6a000000</color>
+
+    <color name="md_primary_inverse">#fff</color>
+    <color name="md_secondary_inverse">#6affffff</color>
 
     <color name="md_inset_foreground">#6a000000</color>
 

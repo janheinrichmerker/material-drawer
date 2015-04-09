@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.MaterialDrawer.Light" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.ActionBar</item>
+    </style>
+
+    <style name="Theme.MaterialDrawer.Light.DarkToolbar" parent="Theme.MaterialDrawer.Light">
+        <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+    </style>
+
+    <style name="Theme.MaterialDrawer.Dark" parent="Theme.AppCompat.NoActionBar">
+        <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+    </style>
+
+    <style name="Theme.MaterialDrawer.Dark.LightToolbar" parent="Theme.MaterialDrawer.Dark">
+        <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.ActionBar</item>
+    </style>
+
+</resources>
