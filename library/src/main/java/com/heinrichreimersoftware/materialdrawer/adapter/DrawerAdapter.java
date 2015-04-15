@@ -61,12 +61,11 @@ public class DrawerAdapter extends ArrayAdapter<DrawerItem> {
 
             DrawerHeaderItem drawerHeaderItem = (DrawerHeaderItem) drawerItem;
 
-            if (drawerHeaderItem.hasTitle()){
+            if (drawerHeaderItem.hasTitle()) {
                 viewHolder.getHeaderTitleRoot().setVisibility(View.VISIBLE);
                 viewHolder.getHeaderRoot().setPadding(0, getContext().getResources().getDimensionPixelSize(R.dimen.md_divider_margin), 0, 0);
                 viewHolder.getHeaderTitle().setText(drawerHeaderItem.getTitle());
-            }
-            else{
+            } else {
                 viewHolder.getHeaderTitleRoot().setVisibility(View.GONE);
                 viewHolder.getHeaderRoot().setPadding(0, getContext().getResources().getDimensionPixelSize(R.dimen.md_divider_margin), 0, getContext().getResources().getDimensionPixelSize(R.dimen.md_divider_margin));
             }
@@ -81,7 +80,8 @@ public class DrawerAdapter extends ArrayAdapter<DrawerItem> {
 
             int colorAccent = -1;
 
-            if (position == selectedPosition){
+
+            if (position == selectedPosition) {
                 viewHolder.getRoot().setBackgroundColor(getContext().getResources().getColor(R.color.md_selected));
 
                 TypedArray a = getContext().getTheme().obtainStyledAttributes(new int[]{R.attr.colorAccent});
@@ -90,8 +90,7 @@ public class DrawerAdapter extends ArrayAdapter<DrawerItem> {
                 } finally {
                     a.recycle();
                 }
-            }
-            else{
+            } else {
                 viewHolder.getRoot().setBackgroundColor(getContext().getResources().getColor(android.R.color.transparent));
             }
 
@@ -108,8 +107,7 @@ public class DrawerAdapter extends ArrayAdapter<DrawerItem> {
 
                     if (colorAccent != -1 && drawerItem.getImageMode() == DrawerItem.ICON) {
                         viewHolder.getImageView().setColorFilter(colorAccent, PorterDuff.Mode.SRC_IN);
-                    }
-                    else {
+                    } else {
                         viewHolder.getImageView().getDrawable().clearColorFilter();
                     }
                 }
@@ -126,18 +124,19 @@ public class DrawerAdapter extends ArrayAdapter<DrawerItem> {
                     viewHolder.getImageView().setPadding(0, 0, imagePaddingEnd, 0);
                 }
 
-            }
-            else{
+            } else {
                 viewHolder.getImageView().setVisibility(View.GONE);
             }
 
             if (drawerItem.hasTextPrimary()) {
                 viewHolder.getTextViewPrimary().setText(drawerItem.getTextPrimary());
 
-                if (colorAccent != -1) {
+
+                if (drawerItem.hasPrimaryTextColor()) {
+                    viewHolder.getTextViewPrimary().setTextColor(drawerItem.getTextPrimaryColor());
+                } else if (colorAccent != -1) {
                     viewHolder.getTextViewPrimary().setTextColor(colorAccent);
-                }
-                else {
+                } else {
                     viewHolder.getTextViewPrimary().setTextColor(getContext().getResources().getColor(android.R.color.primary_text_light));
                 }
 
@@ -159,12 +158,15 @@ public class DrawerAdapter extends ArrayAdapter<DrawerItem> {
 
                 if (colorAccent != -1) {
                     viewHolder.getTextViewPrimary().setTextColor(colorAccent);
-                }
-                else {
+                } else {
                     viewHolder.getTextViewPrimary().setTextColor(getContext().getResources().getColor(android.R.color.primary_text_light));
                 }
 
                 viewHolder.getTextViewSecondary().setVisibility(View.GONE);
+            }
+
+            if (drawerItem.hasTextSecondary() && drawerItem.hasSecondaryTextColor()) {
+                viewHolder.getTextViewSecondary().setTextColor(drawerItem.getTextSecondaryColor());
             }
         }
 
@@ -184,22 +186,21 @@ public class DrawerAdapter extends ArrayAdapter<DrawerItem> {
         return items;
     }
 
-    public void select(int position){
+    public void select(int position) {
         if (position >= 0 && position < getCount()) {
             selectedPosition = position;
             notifyDataSetChanged();
-        }
-        else{
+        } else {
             selectedPosition = -1;
             notifyDataSetChanged();
         }
     }
 
-    public void clearSelection(){
+    public void clearSelection() {
         select(-1);
     }
 
-    public int getSelectedPosition(){
+    public int getSelectedPosition() {
         return selectedPosition;
     }
 
