@@ -45,6 +45,8 @@ public class DrawerItem {
     private int mImageMode = -1;
 
     private String mTextPrimary;
+    private int mTextPrimaryColor = -1;
+    private int mTextSecondaryColor = -1;
     private String mTextSecondary;
     private int mTextMode = -1;
 
@@ -114,6 +116,52 @@ public class DrawerItem {
         return mId;
     }
 
+
+    /**
+     * Sets color of the primary text
+     *
+     * @param colorResId color resource id
+     */
+    public DrawerItem setTextPrimaryColor(int colorResId) {
+        mTextPrimaryColor = colorResId;
+        return this;
+    }
+
+    /**
+     * Gets the color of the primary text
+     *
+     * @return color resource id of the primary text
+     */
+    public int getTextPrimaryColor() {
+        return mTextPrimaryColor;
+    }
+
+    public boolean hasPrimaryTextColor() {
+        return mTextPrimaryColor != -1;
+    }
+
+    /**
+     * Sets color of the primary text
+     *
+     * @param colorResId color resource id
+     */
+    public DrawerItem setTextSecondaryColor(int colorResId) {
+        mTextSecondaryColor = colorResId;
+        return this;
+    }
+
+    /**
+     * Gets the color of the secondary text
+     *
+     * @return color resource id of the secondary text
+     */
+    public int getTextSecondaryColor() {
+        return mTextSecondaryColor;
+    }
+
+    public boolean hasSecondaryTextColor() {
+        return mTextSecondaryColor != -1;
+    }
 
     /**
      * Sets an image with a given image mode to the drawer item
