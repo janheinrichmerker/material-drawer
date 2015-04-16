@@ -18,6 +18,7 @@ package com.heinrichreimersoftware.materialdrawer;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.support.v4.widget.DrawerLayout;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -56,8 +57,7 @@ public class DrawerFrameLayout extends DrawerLayout {
         int colorPrimaryDark = a.getColor(0, 0);
         if (colorPrimaryDark != 0) {
             setStatusBarBackgroundColor(colorPrimaryDark);
-        }
-        else{
+        } else {
             setStatusBarBackgroundColor(getResources().getColor(android.R.color.black));
         }
 
@@ -66,8 +66,7 @@ public class DrawerFrameLayout extends DrawerLayout {
         int drawerMaxWidth = a.getDimensionPixelSize(0, 0);
         if (drawerMaxWidth != 0) {
             setDrawerMaxWidth(drawerMaxWidth);
-        }
-        else{
+        } else {
             resetDrawerMaxWidth();
         }
         a.recycle();
@@ -110,7 +109,7 @@ public class DrawerFrameLayout extends DrawerLayout {
      *
      * @param drawerMaxWidth Max drawer width to set
      */
-    public DrawerFrameLayout setDrawerMaxWidth(int drawerMaxWidth){
+    public DrawerFrameLayout setDrawerMaxWidth(int drawerMaxWidth) {
         mDrawer.setDrawerMaxWidth(drawerMaxWidth);
         return this;
     }
@@ -120,7 +119,7 @@ public class DrawerFrameLayout extends DrawerLayout {
      *
      * @param drawerMaxWidthResource Max drawer width resource to set
      */
-    public DrawerFrameLayout setDrawerMaxWidthResource(int drawerMaxWidthResource){
+    public DrawerFrameLayout setDrawerMaxWidthResource(int drawerMaxWidthResource) {
         mDrawer.setDrawerMaxWidthResource(drawerMaxWidthResource);
         return this;
     }
@@ -128,7 +127,7 @@ public class DrawerFrameLayout extends DrawerLayout {
     /**
      * Resets the max drawer width
      */
-    public DrawerFrameLayout resetDrawerMaxWidth(){
+    public DrawerFrameLayout resetDrawerMaxWidth() {
         mDrawer.resetDrawerMaxWidth();
         return this;
     }
@@ -136,7 +135,7 @@ public class DrawerFrameLayout extends DrawerLayout {
     /**
      * Gets the max drawer width
      */
-    public int getDrawerMaxWidth(){
+    public int getDrawerMaxWidth() {
         return mDrawer.getDrawerMaxWidth();
     }
 
@@ -375,7 +374,7 @@ public class DrawerFrameLayout extends DrawerLayout {
      *
      * @return Position of the selected item
      */
-    public int getSelectedPosition(){
+    public int getSelectedPosition() {
         return mDrawer.getSelectedPosition();
     }
 
@@ -546,7 +545,7 @@ public class DrawerFrameLayout extends DrawerLayout {
      *
      * @return Position of the selected item
      */
-    public int getSelectedFixedPosition(){
+    public int getSelectedFixedPosition() {
         return mDrawer.getSelectedFixedPosition();
     }
 
@@ -638,14 +637,43 @@ public class DrawerFrameLayout extends DrawerLayout {
     /**
      * Opens the drawer
      */
-    public void openDrawer(){
+    public void openDrawer() {
         openDrawer(mDrawer);
     }
 
     /**
      * Closes the drawer
      */
-    public void closeDrawer(){
+    public void closeDrawer() {
         closeDrawer(mDrawer);
+    }
+
+    /**
+     * Sets the background color of drawer view
+     *
+     * @param colorResId color resource id taken via getResources().getColor(int color)
+     */
+    public void setDrawerBackgroundColor(int colorResId) {
+        mDrawer.setBackgroundColor(colorResId);
+    }
+
+    /**
+     * Sets the drawable as background of a drawer view
+     *
+     * @param drawable
+     * @deprecated
+     */
+    public void setDrawerBackgroundDrawable(Drawable drawable) {
+        mDrawer.setBackgroundDrawable(drawable);
+    }
+
+    /**
+     * Sets the drawable as background of a drawer view
+     *
+     * @param drawableResId drawable resource id
+     * @deprecated
+     */
+    public void setDrawerBackgroundDrawable(int drawableResId) {
+        mDrawer.setBackgroundResource(drawableResId);
     }
 }
