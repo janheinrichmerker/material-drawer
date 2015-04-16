@@ -2,7 +2,7 @@ material-drawer
 ===============
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-material--drawer-blue.svg?style=flat)](https://android-arsenal.com/details/1/1162)
 
-Custom drawer implementation for Material design apps down to Android 2.1.
+Custom drawer implementation for Material design apps.
 
 Demo
 ----
@@ -13,41 +13,45 @@ A demo app is available on Google Play:
 Screenshots
 -----------
 
-| ![material-drawer](http://i.imgur.com/JEbu2nG.png) | ![material-drawer](http://i.imgur.com/wJaJUcF.png) | ![material-drawer](http://i.imgur.com/QKEwO58.png) |
+| ![material-drawer](http://i.imgur.com/XHgbWaE.png) | ![material-drawer](http://i.imgur.com/uHW9oOh.png) | ![material-drawer](http://i.imgur.com/WXmmc7a.png) |
 |:-:|:-:|:-:|
-| Active state tinting | Scrollable drawer | Few items |
+| Fixed items | Select profile | Custom theme |
+
+Dependency
+----------
+
+*material-drawer* is available on Maven Central
+
+**Gradle dependency:**
+
+    dependencies {
+	    compile 'com.heinrichreimersoftware.materialdrawer:library:2.1'
+    }
+
+Get the latest dependency with ["Gradle, please"][GP]
 
 How-To-Use
 ----------
-**Step 1:** Include it in your layout:
+**Step 1:** Let your [`Activity`][ABA] extend [`DrawerActivity`][DA]:
 
-    <com.heinrichreimersoftware.materialdrawer.DrawerFrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/drawer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
-        
-        <!-- Your main content here -->
-    
-    </com.heinrichreimersoftware.materialdrawer.DrawerFrameLayout>
+    public class MainActivity extends DrawerActivity {}
 
-**Step 2:** Find view:
+**Step 2:** Set your content:
 
-    DrawerFrameLayout drawer = (DrawerFrameLayout) findViewById(R.id.drawer);
+    setContentView(R.layout.activity_main);
 
 **Step 3:** Set a profile:
 
     drawer.setProfile(
             new DrawerProfile()
-                    .setAvatar(getResources().getDrawable(R.drawable.profile_avatar))
-                    .setBackground(getResources().getDrawable(R.drawable.profile_background))
+                    .setRoundedAvatar((BitmapDrawable)getResources().getDrawable(R.drawable.profile_avatar))
+                    .setBackground(getResources().getDrawable(R.drawable.profile_cover))
                     .setName(getString(R.string.profile_name))
                     .setDescription(getString(R.string.profile_description))
                     .setOnProfileClickListener(new DrawerProfile.OnProfileClickListener() {
                         @Override
-                        public void onClick(DrawerProfile drawerProfile) {
-                            Toast.makeText(YourActivity.this, "Clicked profile", Toast.LENGTH_SHORT).show();
+                        public void onClick(DrawerProfile drawerProfile, long id) {
+                            Toast.makeText(MainActivity.this, "Clicked profile #" + id, Toast.LENGTH_SHORT).show();
                         }
                     })
             );
@@ -61,8 +65,8 @@ How-To-Use
                     .setTextSecondary(getString(R.string.description_first_item))
                     .setOnItemClickListener(new DrawerItem.OnItemClickListener() {
                         @Override
-                        public void onClick(DrawerItem drawerItem, int id, int position) {
-                            Toast.makeText(YourActivity.this, "Clicked first item (#" + id + ")", Toast.LENGTH_SHORT).show();
+                        public void onClick(DrawerItem drawerItem, long id, int position) {
+                            Toast.makeText(MainActivity.this, "Clicked first item #" + id, Toast.LENGTH_SHORT).show();
                         }
                     })
             );
@@ -73,50 +77,72 @@ How-To-Use
                     .setTextPrimary(getString(R.string.title_second_item))
                     .setOnItemClickListener(new DrawerItem.OnItemClickListener() {
                         @Override
-                        public void onClick(DrawerItem drawerItem, ind id, int position) {
-                            Toast.makeText(YourActivity.this, "Clicked second item (#" + id + ")", Toast.LENGTH_SHORT).show();
+                        public void onClick(DrawerItem drawerItem, long id, int position) {
+                            Toast.makeText(MainActivity.this, "Clicked second item #" + id, Toast.LENGTH_SHORT).show();
                         }
                     })
             );
 
+**Step 5:** Add `actionBarStyle` to your theme:
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorAccent">@color/color_accent</item>
+        <item name="actionBarStyle">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+    </style>
+
+**Step 6 (Optional):** Change the drawer theme:
+
+The drawer gets themed based on your selected app theme but you can also modify it.
+
+
+    setDrawerTheme(
+            new DrawerTheme(this)
+                    .setBackgroundColorRes(R.color.background)
+                    .setTextColorPrimaryRes(R.color.primary_text)
+                    .setTextColorSecondaryRes(R.color.secondary_text)
+                    .setTextColorPrimaryInverseRes(R.color.primary_text_inverse)
+                    .setTextColorSecondaryInverseRes(R.color.secondary_text_inverse)
+                    .setHighlightColorRes(R.color.highlight)
+    );
+
+**Step 7 (Optional):** Set your own [`Toolbar`][T]:
+
+You can set your own [`Toolbar`][T] as you do with [`ActionBarActivity`][ABA].
+
+    setSupportActionBar(toolbar);
+
 Pro Tip: Lollipop status bar
 ----------------------------
 
-**Step 1:** Add `fitSystemWindows="true"` attribute to your [DrawerFrameLayout][9] in XML.
+**Step 1:** Make your status bar transparent:
 
-**Step 2:** Use [Toolbar][2] instead of [ActionBar][3].
-
-**Step 3:** Make your status bar transparent:
-
-    <style name="Theme.MyApp" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
 **That's it!** *material-drawer* takes care of the rest.
 
-For further information see Chris Banes' [answer][1] on [stackoverflow.com][1].
+Info: [`DrawerFrameLayout`][DFL] & [`DrawerView`][DV]
+----------------------------
 
-Dependency
-----------
-
-*material-drawer* is available on Maven Central
-
-**Gradle dependency:**
-
-    dependencies {
-	    compile 'com.heinrichreimersoftware.materialdrawer:library:1.4.2'
-    }
-
-Get the latest dependency with ["Gradle, please"][4]
+Of course you can use [`DrawerFrameLayout`][DFL] and [`DrawerView`][DV] alone too. See the comments in the Java files for further information.
 
 Changes
 -------
 
+* **Version 2.1:**
+    * Theming engine ([DrawerTheme][DT])
+    * Ripples everywhere
+    * Changed min SDK to 14 (Android 4.0)
+    * Fixed issues with animations
+    * Bug fixes
 * **Version 2.0:**
     * Multiple profiles (#33)
     * Rounded avatars
-    * Changable drawer width (#30)
+    * Changeable drawer width (#30)
 * **Version 1.4.2:**
     * Changed min SDK to 7 (Android 2.1)
     * Drawer max width can be changed (#30)
@@ -128,9 +154,9 @@ Changes
     * Improved colors
     * Fixed issue #27
 * **Version 1.3.2:**
-    * Added [DrawerFrameLayout][9] as [DrawerLayout][11] replacement
+    * Added [DrawerFrameLayout][DFL] as [DrawerLayout][DL] replacement
     * Active state tinting
-    * List headers ([DrawerHeaderItem][10])
+    * List headers ([DrawerHeaderItem][DHI])
     * Fixed spacing
 * **Version 1.2:**
     * Drawer items can now contain an ID
@@ -145,9 +171,16 @@ Open source libraries
 
 _material-drawer_ uses the following open source libraries or files:
 
-* [LinearListView][5] by [@frankiesardo][6] (Apache License 2.0)
-* [ScrimInsetsScrollView][7] from the Google IO app 2014 by [@google][8] (Apache License 2.0)
-* [Android In-App Billing v3][12] by [@anjlab][13] (Apache License 2.0)
+* [LinearListView][1] by [@frankiesardo][2] (Apache License 2.0)
+* [ScrimInsetsScrollView][3] from the Google IO app 2014 by [@google][4] (Apache License 2.0)
+* [ImageLoadingPattern][5] by [@Emanuel Vecchio][6] (Apache License 2.0)
+* [RoundedAvatarDrawable][7] by [@Evelio Tarazona Cáceres][8] (Apache License 2.0)
+
+Stats
+-------
+
+* ~7000 lines of code
+* ~200kb
 
 License
 -------
@@ -166,16 +199,23 @@ License
     See the License for the specific language governing permissions and
     limitations under the License.
 
-[1]: http://stackoverflow.com/questions/26440879/how-do-i-use-drawerlayout-to-display-over-the-actionbar-toolbar-and-under-the-st
-[2]: http://developer.android.com/reference/android/support/v7/widget/Toolbar.html
-[3]: http://developer.android.com/reference/android/support/v7/app/ActionBar.html
-[4]: http://gradleplease.appspot.com/#materialdrawer
-[5]: https://github.com/frankiesardo/LinearListView
-[6]: https://github.com/frankiesardo
-[7]: https://github.com/google/iosched/blob/master/android/src/main/java/com/google/samples/apps/iosched/ui/widget/ScrimInsetsScrollView.java
-[8]: https://github.com/google
-[9]: https://github.com/HeinrichReimer/material-drawer/blob/master/library/src/main/java/com/heinrichreimersoftware/materialdrawer/DrawerFrameLayout.java
-[10]: https://github.com/HeinrichReimer/material-drawer/blob/master/library/src/main/java/com/heinrichreimersoftware/materialdrawer/structure/DrawerHeaderItem.java
-[11]: https://developer.android.com/reference/android/support/v4/widget/DrawerLayout.html
-[12]: https://github.com/anjlab/android-inapp-billing-v3
-[13]: https://github.com/anjlab/
+
+[GP]: http://gradleplease.appspot.com/#com.heinrichreimersoftware.materialdrawer
+
+[1]: https://github.com/frankiesardo/LinearListView
+[2]: https://github.com/frankiesardo
+[3]: https://github.com/google/iosched/blob/master/android/src/main/java/com/google/samples/apps/iosched/ui/widget/ScrimInsetsScrollView.java
+[4]: https://github.com/google
+[5]: https://github.com/rnrneverdies/ImageLoadingPattern
+[6]: https://github.com/rnrneverdies
+[7]: https://gist.github.com/eveliotc/6051367
+[8]: https://github.com/eveliotc
+
+[DA]: https://github.com/HeinrichReimer/material-drawer/blob/master/library/src/main/java/com/heinrichreimersoftware/materialdrawer/DrawerActivity.java
+[ABA]: http://developer.android.com/reference/android/support/v7/app/ActionBarActivity.html
+[T]: http://developer.android.com/reference/android/support/v7/widget/Toolbar.html
+[DT]: https://github.com/HeinrichReimer/material-drawer/blob/master/library/src/main/java/com/heinrichreimersoftware/materialdrawer/theme/DrawerTheme.java
+[DFL]: https://github.com/HeinrichReimer/material-drawer/blob/master/library/src/main/java/com/heinrichreimersoftware/materialdrawer/DrawerFrameLayout.java
+[DV]: https://github.com/HeinrichReimer/material-drawer/blob/master/library/src/main/java/com/heinrichreimersoftware/materialdrawer/DrawerView.java
+[DL]: https://developer.android.com/reference/android/support/v4/widget/DrawerLayout.html
+[DHI]: https://github.com/HeinrichReimer/material-drawer/blob/master/library/src/main/java/com/heinrichreimersoftware/materialdrawer/structure/DrawerHeaderItem.java

@@ -58,6 +58,11 @@ public class DrawerActivity extends ActionBarActivity {
     @Override
     public void setSupportActionBar(@Nullable Toolbar toolbar) {
         if (toolbar != null) {
+            if (toolbar != mToolbar) {
+                ViewGroup parent = (ViewGroup) mToolbar.getParent();
+                parent.removeView(mToolbar);
+            }
+
             super.setSupportActionBar(toolbar);
 
             mDrawerToggle = new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.md_content_description_drawer_open, R.string.md_content_description_drawer_close) {
@@ -121,8 +126,10 @@ public class DrawerActivity extends ActionBarActivity {
      *
      * @param enabled true to enable, false to disable
      */
-    public DrawerActivity setDrawerIndicatorEnabled(boolean enabled){
-        mDrawerToggle.setDrawerIndicatorEnabled(enabled);
+    public DrawerActivity setDrawerIndicatorEnabled(boolean enabled) {
+        if (mDrawerToggle != null) {
+            mDrawerToggle.setDrawerIndicatorEnabled(enabled);
+        }
         return this;
     }
 
@@ -131,8 +138,8 @@ public class DrawerActivity extends ActionBarActivity {
      *
      * @return true if the enhanced drawer indicator is enabled, false otherwise
      */
-    public boolean isDrawerIndicatorEnabled(){
-        return mDrawerToggle.isDrawerIndicatorEnabled();
+    public boolean isDrawerIndicatorEnabled() {
+        return mDrawerToggle != null && mDrawerToggle.isDrawerIndicatorEnabled();
     }
 
 
@@ -141,7 +148,7 @@ public class DrawerActivity extends ActionBarActivity {
      *
      * @param theme Theme to set
      */
-    public DrawerActivity setDrawerTheme(DrawerTheme theme){
+    public DrawerActivity setDrawerTheme(DrawerTheme theme) {
         mDrawer.setDrawerTheme(theme);
         return this;
     }
@@ -149,7 +156,7 @@ public class DrawerActivity extends ActionBarActivity {
     /**
      * Resets the drawer theme
      */
-    public DrawerActivity resetDrawerTheme(){
+    public DrawerActivity resetDrawerTheme() {
         mDrawer.resetDrawerTheme();
         return this;
     }
@@ -157,7 +164,7 @@ public class DrawerActivity extends ActionBarActivity {
     /**
      * Gets the drawer theme
      */
-    public DrawerTheme getDrawerTheme(){
+    public DrawerTheme getDrawerTheme() {
         return mDrawer.getDrawerTheme();
     }
 
@@ -167,7 +174,7 @@ public class DrawerActivity extends ActionBarActivity {
      *
      * @param drawerMaxWidth Max drawer width to set
      */
-    public DrawerActivity setDrawerMaxWidth(int drawerMaxWidth){
+    public DrawerActivity setDrawerMaxWidth(int drawerMaxWidth) {
         mDrawer.setDrawerMaxWidth(drawerMaxWidth);
         return this;
     }
@@ -177,7 +184,7 @@ public class DrawerActivity extends ActionBarActivity {
      *
      * @param drawerMaxWidthResource Max drawer width resource to set
      */
-    public DrawerActivity setDrawerMaxWidthResource(int drawerMaxWidthResource){
+    public DrawerActivity setDrawerMaxWidthResource(int drawerMaxWidthResource) {
         mDrawer.setDrawerMaxWidthResource(drawerMaxWidthResource);
         return this;
     }
@@ -185,7 +192,7 @@ public class DrawerActivity extends ActionBarActivity {
     /**
      * Resets the max drawer width
      */
-    public DrawerActivity resetDrawerMaxWidth(){
+    public DrawerActivity resetDrawerMaxWidth() {
         mDrawer.resetDrawerMaxWidth();
         return this;
     }
@@ -193,7 +200,7 @@ public class DrawerActivity extends ActionBarActivity {
     /**
      * Gets the max drawer width
      */
-    public int getDrawerMaxWidth(){
+    public int getDrawerMaxWidth() {
         return mDrawer.getDrawerMaxWidth();
     }
 
@@ -413,7 +420,7 @@ public class DrawerActivity extends ActionBarActivity {
      * @param id The item ID
      * @return Item from the drawer
      */
-    public DrawerItem findItemById(int id) {
+    public DrawerItem findItemById(long id) {
         mDrawer.findItemById(id);
         return null;
     }
@@ -432,7 +439,7 @@ public class DrawerActivity extends ActionBarActivity {
      *
      * @return Position of the selected item
      */
-    public int getSelectedPosition(){
+    public int getSelectedPosition() {
         return mDrawer.getSelectedPosition();
     }
 
@@ -441,7 +448,7 @@ public class DrawerActivity extends ActionBarActivity {
      *
      * @param id The item ID
      */
-    public void selectItemById(int id) {
+    public void selectItemById(long id) {
         mDrawer.selectItemById(id);
     }
 
@@ -584,7 +591,7 @@ public class DrawerActivity extends ActionBarActivity {
      * @param id The item ID
      * @return Item from the drawer
      */
-    public DrawerItem findFixedItemById(int id) {
+    public DrawerItem findFixedItemById(long id) {
         mDrawer.findFixedItemById(id);
         return null;
     }
@@ -603,7 +610,7 @@ public class DrawerActivity extends ActionBarActivity {
      *
      * @return Position of the selected item
      */
-    public int getSelectedFixedPosition(){
+    public int getSelectedFixedPosition() {
         return mDrawer.getSelectedFixedPosition();
     }
 
@@ -612,7 +619,7 @@ public class DrawerActivity extends ActionBarActivity {
      *
      * @param id The item ID
      */
-    public void selectFixedItemById(int id) {
+    public void selectFixedItemById(long id) {
         mDrawer.selectFixedItemById(id);
     }
 
@@ -695,14 +702,14 @@ public class DrawerActivity extends ActionBarActivity {
     /**
      * Opens the drawer
      */
-    public void openDrawer(){
+    public void openDrawer() {
         mDrawer.openDrawer();
     }
 
     /**
      * Closes the drawer
      */
-    public void closeDrawer(){
+    public void closeDrawer() {
         mDrawer.closeDrawer();
     }
 }

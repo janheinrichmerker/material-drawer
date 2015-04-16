@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright 2014 Heinrich Reimer
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -16,6 +15,8 @@
 
     <dimen name="md_baseline">16dp</dimen>
     <dimen name="md_baseline_content">72dp</dimen>
+
+    <dimen name="md_app_bar_elevation">8dp</dimen>
 
     <dimen name="md_drawer_max_width">400dp</dimen>
 

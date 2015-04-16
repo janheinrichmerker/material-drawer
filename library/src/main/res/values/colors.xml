@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright 2014 Heinrich Reimer
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -15,18 +14,27 @@
 <resources>
     <color name="md_inset_foreground">#42000000</color>
 
-    <color name="md_divider_light">#1e000000</color><!-- 12% opacity -->
-    <color name="md_divider_dark">#1effffff</color><!-- 12% opacity -->
+    <color name="md_divider_light">#1e000000</color>
+    <!-- 12% opacity -->
+    <color name="md_divider_dark">#1effffff</color>
+    <!-- 12% opacity -->
 
-    <color name="md_selected_light">#1e000000</color><!-- 12% opacity -->
-    <color name="md_selected_dark">#1effffff</color><!-- 12% opacity -->
-    <color name="md_ripple_light">#42000000</color><!-- 26% opacity -->
-    <color name="md_ripple_dark">#4dffffff</color><!-- 30% opacity -->
+    <color name="md_selected_light">#1e000000</color>
+    <!-- 12% opacity -->
+    <color name="md_selected_dark">#1effffff</color>
+    <!-- 12% opacity -->
+    <color name="md_ripple_light">#42000000</color>
+    <!-- 26% opacity -->
+    <color name="md_ripple_dark">#4dffffff</color>
+    <!-- 30% opacity -->
 
-    <color name="md_scrim_start">#00000000</color><!-- 0% opacity -->
-    <color name="md_scrim_end">#8a000000</color><!-- 54% opacity -->
+    <color name="md_scrim_start">#00000000</color>
+    <!-- 0% opacity -->
+    <color name="md_scrim_end">#8a000000</color>
+    <!-- 54% opacity -->
 
-    <color name="md_fixed_list_shadow_start">#00000000</color><!-- 0% opacity -->
+    <color name="md_fixed_list_shadow_start">#00000000</color>
+    <!-- 0% opacity -->
     <color name="md_fixed_list_shadow_end">#1e000000</color>
 
 </resources>

@@ -29,7 +29,7 @@ public class AlphaSatColorMatrixEvaluator implements TypeEvaluator {
     float[] elements = new float[20];
 
     public AlphaSatColorMatrixEvaluator() {
-        colorMatrix = new ColorMatrix ();
+        colorMatrix = new ColorMatrix();
     }
 
     public ColorMatrix getColorMatrix() {
@@ -43,12 +43,12 @@ public class AlphaSatColorMatrixEvaluator implements TypeEvaluator {
 
         // Compute the alpha change over period [0, 2]
         float alpha = Math.min(phase, 2f) / 2f;
-        elements [19] = (float)Math.round(alpha * 255);
+        elements[19] = (float) Math.round(alpha * 255);
 
-        // We substract to make the picture look darker, it will automatically clamp
+        // We subtract to make the picture look darker, it will automatically clamp
         // This is spread over period [0, 2.5]
-        float blackening = (float)Math.round((1 - Math.min(phase, 2.5f) / 2.5f) * MAX_BLACKER);
-        elements [4] = elements [9] = elements [14] = -blackening;
+        float blackening = (float) Math.round((1 - Math.min(phase, 2.5f) / 2.5f) * MAX_BLACKER);
+        elements[4] = elements[9] = elements[14] = -blackening;
 
         // Finally we desaturate over [0, 3], taken from ColorMatrix.setSaturation
         float invSat = 1 - Math.max(0, fraction);
@@ -56,9 +56,15 @@ public class AlphaSatColorMatrixEvaluator implements TypeEvaluator {
         float G = 0.715f * invSat;
         float B = 0.072f * invSat;
 
-        elements[0] = R + fraction; elements[1] = G;            elements[2] = B;
-        elements[5] = R;            elements[6] = G + fraction; elements[7] = B;
-        elements[10] = R;           elements[11] = G;           elements[12] = B + fraction;
+        elements[0] = R + fraction;
+        elements[1] = G;
+        elements[2] = B;
+        elements[5] = R;
+        elements[6] = G + fraction;
+        elements[7] = B;
+        elements[10] = R;
+        elements[11] = G;
+        elements[12] = B + fraction;
 
         colorMatrix.set(elements);
         return colorMatrix;

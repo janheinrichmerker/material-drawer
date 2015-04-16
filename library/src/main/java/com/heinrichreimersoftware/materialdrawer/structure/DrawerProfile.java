@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Heinrich Reimer
+ * Copyright 2015 Heinrich Reimer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,7 +49,7 @@ public class DrawerProfile {
      *
      * @param theme Theme to set
      */
-    public DrawerProfile setDrawerTheme(DrawerTheme theme){
+    public DrawerProfile setDrawerTheme(DrawerTheme theme) {
         mDrawerTheme = theme;
         notifyDataChanged();
         return this;
@@ -58,7 +58,7 @@ public class DrawerProfile {
     /**
      * Resets the drawer profile theme
      */
-    public DrawerProfile resetDrawerTheme(Context context){
+    public DrawerProfile resetDrawerTheme(Context context) {
         mDrawerTheme = new DrawerTheme(context);
         notifyDataChanged();
         return this;
@@ -67,14 +67,14 @@ public class DrawerProfile {
     /**
      * Gets the drawer profile theme
      */
-    public DrawerTheme getDrawerTheme(){
+    public DrawerTheme getDrawerTheme() {
         return mDrawerTheme;
     }
 
     /**
-     * Gets wether the drawer profile has its own theme
+     * Gets whether the drawer profile has its own theme
      */
-    public boolean hasDrawerTheme(){
+    public boolean hasDrawerTheme() {
         return mDrawerTheme != null;
     }
 

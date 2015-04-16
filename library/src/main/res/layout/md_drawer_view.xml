@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright 2014 Heinrich Reimer
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -14,7 +13,8 @@
 
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
@@ -51,7 +51,7 @@
                             android:scaleType="centerCrop"
                             android:clickable="false"
                             android:fitsSystemWindows="true"
-                            android:contentDescription="@string/md_content_description_profile_background"/>
+                            android:contentDescription="@string/md_content_description_profile_background" />
 
                         <ImageView
                             android:id="@id/mdProfileBackgroundOverlay"
@@ -60,7 +60,7 @@
                             android:scaleType="centerCrop"
                             android:clickable="false"
                             android:fitsSystemWindows="true"
-                            android:contentDescription="@string/md_content_description_profile_background_overlay"/>
+                            android:contentDescription="@string/md_content_description_profile_background_overlay" />
 
                         <View
                             android:layout_width="match_parent"
@@ -102,7 +102,7 @@
                                 android:layout_alignParentEnd="true"
                                 android:scaleType="centerCrop"
                                 android:clickable="true"
-                                android:contentDescription="@string/md_content_description_profile_avatar_secondary"/>
+                                android:contentDescription="@string/md_content_description_profile_avatar_secondary" />
 
                             <TextView
                                 android:id="@id/mdAvatarProfileCount"
@@ -117,13 +117,13 @@
                                 style="@style/Base.TextAppearance.AppCompat.Body2"
                                 android:clickable="true"
                                 android:background="@drawable/md_more_background"
-                                android:gravity="center"/>
+                                android:gravity="center" />
 
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/md_list_item_height_two_line"
                                 android:layout_alignParentBottom="true"
-                                android:background="@drawable/md_scrim"/>
+                                android:background="@drawable/md_scrim" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -176,7 +176,7 @@
                                     android:scaleType="center"
                                     android:clickable="true"
                                     android:contentDescription="@string/md_content_description_open_profile_list"
-                                    android:layout_gravity="bottom"/>
+                                    android:layout_gravity="bottom" />
 
                             </LinearLayout>
 
@@ -194,7 +194,7 @@
                             android:layout_height="wrap_content"
                             android:paddingTop="@dimen/md_drawer_list_margin_vertical"
                             android:paddingBottom="@dimen/md_drawer_list_margin_vertical"
-                            android:orientation="vertical"/>
+                            android:orientation="vertical" />
 
                         <com.heinrichreimersoftware.materialdrawer.widget.LinearListView
                             android:id="@id/mdList"
@@ -215,7 +215,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/md_fixed_list_shadow_height"
                 android:layout_gravity="bottom"
-                android:background="@drawable/md_fixed_list_shadow"/>
+                android:background="@drawable/md_fixed_list_shadow" />
 
         </FrameLayout>
 
@@ -236,7 +236,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/md_drawer_list_margin_vertical"
                 android:paddingBottom="@dimen/md_drawer_list_margin_vertical"
-                android:orientation="vertical"/>
+                android:orientation="vertical" />
 
         </LinearLayout>
 

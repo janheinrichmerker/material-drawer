@@ -19,6 +19,7 @@ gen/
 .gradle/
 build/
 /*/build/
+gradle.properties
 
 # Local configuration file (sdk path, etc)
 local.properties
@@ -40,26 +41,7 @@ gen-external-apklibs
 
 ## Directory-based project format:
 .idea/
-# if you remove the above rule, at least ignore the following:
-
-# User-specific stuff:
-# .idea/workspace.xml
-# .idea/tasks.xml
-# .idea/dictionaries
-
-# Sensitive or high-churn files:
-# .idea/dataSources.ids
-# .idea/dataSources.xml
-# .idea/sqlDataSources.xml
-# .idea/dynamic.xml
-# .idea/uiDesigner.xml
-
-# Gradle:
-# .idea/gradle.xml
-# .idea/libraries
-
-# Mongo Explorer plugin:
-# .idea/mongoSettings.xml
+.navigation/
 
 ## File-based project format:
 *.ipr
@@ -77,14 +59,11 @@ gen-external-apklibs
 ### Eclipse ###
 *.pydevproject
 .metadata
-.gradle
-bin/
 tmp/
 *.tmp
 *.bak
 *.swp
 *~.nib
-local.properties
 .settings/
 .loadpath
 
@@ -113,10 +92,6 @@ local.properties
 .texlipse
 
 
-### Gradle ###
-.gradle
-build/
-
 # Ignore Gradle GUI config
 gradle-app.setting
 
@@ -125,3 +100,5 @@ gradle-app.setting
 
 *.hprof
 *.keystore
+
+library/gradle.properties

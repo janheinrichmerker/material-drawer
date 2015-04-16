@@ -61,7 +61,7 @@ public class DrawerItem {
      *
      * @param theme Theme to set
      */
-    public DrawerItem setDrawerTheme(DrawerTheme theme){
+    public DrawerItem setDrawerTheme(DrawerTheme theme) {
         mDrawerTheme = theme;
         notifyDataChanged();
         return this;
@@ -70,7 +70,7 @@ public class DrawerItem {
     /**
      * Resets the drawer item theme
      */
-    public DrawerItem resetDrawerTheme(Context context){
+    public DrawerItem resetDrawerTheme(Context context) {
         mDrawerTheme = new DrawerTheme(context);
         notifyDataChanged();
         return this;
@@ -79,14 +79,14 @@ public class DrawerItem {
     /**
      * Gets the drawer item theme
      */
-    public DrawerTheme getDrawerTheme(){
+    public DrawerTheme getDrawerTheme() {
         return mDrawerTheme;
     }
 
     /**
-     * Gets wether the drawer item has its own theme
+     * Gets whether the drawer item has its own theme
      */
-    public boolean hasDrawerTheme(){
+    public boolean hasDrawerTheme() {
         return mDrawerTheme != null;
     }
 

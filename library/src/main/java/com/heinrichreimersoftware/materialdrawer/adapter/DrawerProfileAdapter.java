@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Heinrich Reimer
+ * Copyright 2015 Heinrich Reimer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,7 +51,7 @@ public class DrawerProfileAdapter extends ArrayAdapter<DrawerProfile> {
         DrawerProfile drawerProfile = getItem(position);
         DrawerTheme drawerTheme = this.drawerTheme;
 
-        if(drawerProfile.hasDrawerTheme()){
+        if (drawerProfile.hasDrawerTheme()) {
             drawerTheme = drawerProfile.getDrawerTheme();
         }
 
@@ -63,26 +63,24 @@ public class DrawerProfileAdapter extends ArrayAdapter<DrawerProfile> {
 
         int textColorPrimary = drawerTheme.getTextColorPrimary();
 
-        if (drawerTheme.isLightTheme()){
-            viewHolder.getRoot().setForeground(getContext().getResources().getDrawable(R.drawable.md_list_selector_light));
-        }
-        else {
-            viewHolder.getRoot().setForeground(getContext().getResources().getDrawable(R.drawable.md_list_selector_dark));
+        if (drawerTheme.isLightTheme()) {
+            viewHolder.getRoot().setForeground(getContext().getResources().getDrawable(R.drawable.md_selector_light));
+        } else {
+            viewHolder.getRoot().setForeground(getContext().getResources().getDrawable(R.drawable.md_selector_dark));
         }
 
-        if (drawerTheme.getBackgroundColor() != 0){
+        if (drawerTheme.getBackgroundColor() != 0) {
             viewHolder.getRoot().setBackgroundColor(drawerTheme.getBackgroundColor());
-        }
-        else {
+        } else {
             viewHolder.getRoot().setBackgroundColor(getContext().getResources().getColor(android.R.color.transparent));
         }
 
-        if (position == 0){
+        if (position == 0) {
             viewHolder.getRoot().setSelected(true);
             viewHolder.getRoot().setClickable(false);
 
             textColorPrimary = drawerTheme.getHighlightColor();
-        } else{
+        } else {
             viewHolder.getRoot().setSelected(false);
             viewHolder.getRoot().setClickable(true);
         }
@@ -103,8 +101,7 @@ public class DrawerProfileAdapter extends ArrayAdapter<DrawerProfile> {
                 viewHolder.getImageView().setPadding(0, 0, imagePaddingEnd, 0);
             }
 
-        }
-        else{
+        } else {
             viewHolder.getImageView().setVisibility(View.GONE);
         }
 
@@ -135,7 +132,7 @@ public class DrawerProfileAdapter extends ArrayAdapter<DrawerProfile> {
         return position != 0;
     }
 
-    public void setDrawerTheme(DrawerTheme theme){
+    public void setDrawerTheme(DrawerTheme theme) {
         this.drawerTheme = theme;
         notifyDataSetChanged();
     }

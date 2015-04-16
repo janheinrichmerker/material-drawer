@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.heinrichreimersoftware.materialdrawer.DrawerFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@id/mdDrawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,13 +11,20 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <android.support.v7.widget.Toolbar
+            android:id="@id/mdToolbar"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_width="match_parent"
+            android:minHeight="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:theme="?attr/actionBarStyle"
+            app:contentInsetStart="72dp"
+            android:elevation="@dimen/md_app_bar_elevation" />
+
         <FrameLayout
             android:id="@id/mdFrame"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-        </FrameLayout>
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 

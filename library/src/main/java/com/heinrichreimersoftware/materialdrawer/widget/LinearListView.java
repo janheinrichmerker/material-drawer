@@ -36,7 +36,7 @@ public class LinearListView extends IcsLinearLayout {
 
     private static final int[] R_styleable_LinearListView = new int[]{
         /* 0 */android.R.attr.entries,
-		/* 1 */R.attr.dividerThickness
+        /* 1 */R.attr.dividerThickness
     };
 
     private static final int LinearListView_entries = 0;

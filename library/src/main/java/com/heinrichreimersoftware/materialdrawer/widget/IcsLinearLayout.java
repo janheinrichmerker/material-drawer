@@ -370,7 +370,7 @@ public class IcsLinearLayout extends LinearLayout {
         }
 
         int totalWidth = 0;
-        // Re-measure childs
+        // Re-measure children
         for (int i = 0; i < childCount; i++) {
             final View child = getChildAt(i);
 
@@ -412,7 +412,7 @@ public class IcsLinearLayout extends LinearLayout {
         }
 
         int totalHeight = 0;
-        // Re-measure childs
+        // Re-measure children
         for (int i = 0; i < childCount; i++) {
             final View child = getChildAt(i);
 
