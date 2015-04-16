@@ -21,8 +21,7 @@
     <View
         android:id="@id/mdDivider"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/md_divider_height"
-        android:background="@color/md_divider" />
+        android:layout_height="@dimen/md_divider_height" />
 
     <LinearLayout
         android:id="@id/mdHeaderTitleRoot"
@@ -37,7 +36,6 @@
             android:paddingLeft="@dimen/md_baseline"
             android:paddingRight="@dimen/md_baseline"
             android:fontFamily="sans-serif-medium"
-            android:textColor="@color/md_header"
             android:singleLine="true"
             android:ellipsize="marquee"
             style="@style/TextAppearance.AppCompat.Subhead" />

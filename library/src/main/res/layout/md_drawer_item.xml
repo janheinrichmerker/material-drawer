@@ -53,7 +53,6 @@
                 android:fontFamily="sans-serif-medium"
                 android:singleLine="true"
                 android:ellipsize="marquee"
-                android:textColor="@color/md_primary"
                 style="@style/TextAppearance.AppCompat.Subhead"
                 android:clickable="false" />
 
@@ -64,7 +63,6 @@
                 android:layout_marginTop="@dimen/md_list_item_text_secondary_margin"
                 android:maxLines="2"
                 android:ellipsize="marquee"
-                android:textColor="@color/md_inset_foreground"
                 style="@style/TextAppearance.AppCompat.Body1"
                 android:clickable="false" />
 

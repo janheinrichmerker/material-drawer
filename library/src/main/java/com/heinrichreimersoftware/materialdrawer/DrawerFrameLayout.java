@@ -26,6 +26,7 @@ import android.view.ViewGroup;
 
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerProfile;
+import com.heinrichreimersoftware.materialdrawer.theme.DrawerTheme;
 
 import java.util.List;
 
@@ -75,6 +76,32 @@ public class DrawerFrameLayout extends DrawerLayout {
     @Override
     public void addView(View child, int index, ViewGroup.LayoutParams params) {
         super.addView(child, 0, params);
+    }
+
+
+    /**
+     * Sets the drawer theme
+     *
+     * @param theme Theme to set
+     */
+    public DrawerFrameLayout setDrawerTheme(DrawerTheme theme){
+        mDrawer.setDrawerTheme(theme);
+        return this;
+    }
+
+    /**
+     * Resets the drawer theme
+     */
+    public DrawerFrameLayout resetDrawerTheme(){
+        mDrawer.resetDrawerTheme();
+        return this;
+    }
+
+    /**
+     * Gets the drawer theme
+     */
+    public DrawerTheme getDrawerTheme(){
+        return mDrawer.getDrawerTheme();
     }
 
 

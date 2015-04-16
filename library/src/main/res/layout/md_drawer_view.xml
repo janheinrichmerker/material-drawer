@@ -65,7 +65,7 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@color/md_divider"
+                            android:background="@color/md_divider_dark"
                             android:clickable="false"
                             android:fitsSystemWindows="true" />
 
@@ -151,7 +151,6 @@
                                         android:fontFamily="sans-serif-medium"
                                         android:singleLine="true"
                                         android:ellipsize="marquee"
-                                        android:textColor="@color/md_primary_inverse"
                                         style="@style/TextAppearance.AppCompat.Subhead.Inverse"
                                         android:clickable="false" />
 
@@ -161,12 +160,12 @@
                                         android:layout_height="wrap_content"
                                         android:singleLine="true"
                                         android:ellipsize="marquee"
-                                        android:textColor="@color/md_secondary_inverse"
                                         style="@style/TextAppearance.AppCompat.Subhead.Inverse"
                                         android:clickable="false" />
 
                                 </LinearLayout>
 
+                                <!-- TODO endless ripple (themed) -->
                                 <ImageView
                                     android:id="@id/mdOpenProfileListIcon"
                                     android:layout_width="@dimen/md_big_avatar_size"
@@ -229,8 +228,7 @@
             <View
                 android:id="@id/mdFixedDivider"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/md_divider_height"
-                android:background="@color/md_divider" />
+                android:layout_height="@dimen/md_divider_height" />
 
             <com.heinrichreimersoftware.materialdrawer.widget.LinearListView
                 android:id="@id/mdLinearListViewFixed"
@@ -238,8 +236,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/md_drawer_list_margin_vertical"
                 android:paddingBottom="@dimen/md_drawer_list_margin_vertical"
-                android:orientation="vertical"
-                android:background="@color/md_drawer_background"/>
+                android:orientation="vertical"/>
 
         </LinearLayout>
 

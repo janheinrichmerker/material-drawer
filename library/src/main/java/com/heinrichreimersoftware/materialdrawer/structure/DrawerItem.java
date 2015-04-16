@@ -23,6 +23,7 @@ import android.graphics.drawable.Drawable;
 import android.widget.ArrayAdapter;
 
 import com.heinrichreimersoftware.materialdrawer.drawable.RoundedAvatarDrawable;
+import com.heinrichreimersoftware.materialdrawer.theme.DrawerTheme;
 
 /**
  * Object to be used with {@link com.heinrichreimersoftware.materialdrawer.adapter.DrawerAdapter} and {@link com.heinrichreimersoftware.materialdrawer.DrawerView} to display a drawer item.
@@ -36,6 +37,8 @@ public class DrawerItem {
     public static final int SINGLE_LINE = 3;
     public static final int TWO_LINE = 4;
     public static final int THREE_LINE = 5;
+
+    private DrawerTheme mDrawerTheme;
 
     private boolean mIsHeader = false;
 
@@ -51,6 +54,41 @@ public class DrawerItem {
     private OnItemClickListener mOnClickListener;
 
     private ArrayAdapter<DrawerItem> mAdapter;
+
+
+    /**
+     * Sets the drawer item theme
+     *
+     * @param theme Theme to set
+     */
+    public DrawerItem setDrawerTheme(DrawerTheme theme){
+        mDrawerTheme = theme;
+        notifyDataChanged();
+        return this;
+    }
+
+    /**
+     * Resets the drawer item theme
+     */
+    public DrawerItem resetDrawerTheme(Context context){
+        mDrawerTheme = new DrawerTheme(context);
+        notifyDataChanged();
+        return this;
+    }
+
+    /**
+     * Gets the drawer item theme
+     */
+    public DrawerTheme getDrawerTheme(){
+        return mDrawerTheme;
+    }
+
+    /**
+     * Gets wether the drawer item has its own theme
+     */
+    public boolean hasDrawerTheme(){
+        return mDrawerTheme != null;
+    }
 
 
     /**

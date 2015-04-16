@@ -29,6 +29,7 @@ import android.widget.FrameLayout;
 
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerProfile;
+import com.heinrichreimersoftware.materialdrawer.theme.DrawerTheme;
 
 import java.util.List;
 
@@ -52,18 +53,6 @@ public class DrawerActivity extends ActionBarActivity {
         setSupportActionBar(mToolbar);
 
         mDrawer.closeDrawer();
-
-        /*
-        TypedArray a = getTheme().obtainStyledAttributes(new int[]{R.attr.colorPrimaryDark});
-
-        int colorPrimaryDark = a.getColor(0, 0);
-        if (colorPrimaryDark != 0) {
-            mDrawer.setStatusBarBackgroundColor(colorPrimaryDark);
-        }
-        else{
-            mDrawer.setStatusBarBackgroundColor(getResources().getColor(android.R.color.black));
-        }
-        //*/
     }
 
     @Override
@@ -81,13 +70,6 @@ public class DrawerActivity extends ActionBarActivity {
                 }
             };
             mDrawer.setDrawerListener(mDrawerToggle);
-
-            if (toolbar != mToolbar) {
-                ViewGroup parent = (ViewGroup) mToolbar.getParent();
-                parent.removeView(mToolbar);
-                parent.addView(toolbar, 0);
-                mToolbar = toolbar;
-            }
         }
     }
 
@@ -130,6 +112,53 @@ public class DrawerActivity extends ActionBarActivity {
     @Override
     public void addContentView(View view, ViewGroup.LayoutParams params) {
         mFrame.addView(view, params);
+    }
+
+
+    /**
+     * Enable or disable the drawer indicator. The indicator defaults to enabled.
+     * When the indicator is disabled, the ActionBar will revert to displaying the home-as-up indicator provided by the {@link android.app.Activity}'s theme in the android.R.attr.homeAsUpIndicator attribute instead of the animated drawer glyph.
+     *
+     * @param enabled true to enable, false to disable
+     */
+    public DrawerActivity setDrawerIndicatorEnabled(boolean enabled){
+        mDrawerToggle.setDrawerIndicatorEnabled(enabled);
+        return this;
+    }
+
+    /**
+     * Gets whether the enhanced drawer indicator is enabled
+     *
+     * @return true if the enhanced drawer indicator is enabled, false otherwise
+     */
+    public boolean isDrawerIndicatorEnabled(){
+        return mDrawerToggle.isDrawerIndicatorEnabled();
+    }
+
+
+    /**
+     * Sets the drawer theme
+     *
+     * @param theme Theme to set
+     */
+    public DrawerActivity setDrawerTheme(DrawerTheme theme){
+        mDrawer.setDrawerTheme(theme);
+        return this;
+    }
+
+    /**
+     * Resets the drawer theme
+     */
+    public DrawerActivity resetDrawerTheme(){
+        mDrawer.resetDrawerTheme();
+        return this;
+    }
+
+    /**
+     * Gets the drawer theme
+     */
+    public DrawerTheme getDrawerTheme(){
+        return mDrawer.getDrawerTheme();
     }
 
 

@@ -18,6 +18,7 @@ import com.heinrichreimersoftware.materialdrawer.DrawerView;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerHeaderItem;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerProfile;
+import com.heinrichreimersoftware.materialdrawer.theme.DrawerTheme;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -77,6 +78,12 @@ public class MainActivity extends ActionBarActivity {
                         .setRoundedImage((BitmapDrawable) getResources().getDrawable(R.drawable.cat_1))
                         .setTextPrimary(getString(R.string.lorem_ipsum_short))
                         .setTextSecondary(getString(R.string.lorem_ipsum_long))
+                        .setDrawerTheme(
+                                new DrawerTheme(this)
+                                        .setBackgroundColorRes(R.color.background_material_light)
+                                        .setTextColorPrimaryRes(R.color.primary_text_default_material_light)
+                                        .setTextColorSecondaryRes(R.color.secondary_text_default_material_light)
+                        )
         );
 
         drawer.addItem(new DrawerHeaderItem().setTitle(getString(R.string.lorem_ipsum_short)));
@@ -109,6 +116,12 @@ public class MainActivity extends ActionBarActivity {
         drawer.addFixedItem(new DrawerItem()
                         .setImage(getResources().getDrawable(R.drawable.ic_flag))
                         .setTextPrimary(getString(R.string.lorem_ipsum_short))
+                        .setDrawerTheme(
+                                new DrawerTheme(this)
+                                        .setBackgroundColorRes(R.color.background_material_light)
+                                        .setTextColorPrimaryRes(R.color.primary_text_default_material_light)
+                                        .setTextColorSecondaryRes(R.color.secondary_text_default_material_light)
+                        )
         );
 
         drawer.setOnFixedItemClickListener(new DrawerItem.OnItemClickListener() {
@@ -133,6 +146,14 @@ public class MainActivity extends ActionBarActivity {
                         .setRoundedAvatar((BitmapDrawable) getResources().getDrawable(R.drawable.cat_2))
                         .setBackground(getResources().getDrawable(R.drawable.cat_wide_1))
                         .setName(getString(R.string.lorem_ipsum_short))
+                        .setDrawerTheme(
+                                new DrawerTheme(this)
+                                        .setBackgroundColorRes(R.color.background_material_light)
+                                        .setTextColorPrimaryRes(R.color.primary_text_default_material_light)
+                                        .setTextColorSecondaryRes(R.color.secondary_text_default_material_light)
+                                        .setTextColorPrimaryInverseRes(R.color.primary_text_default_material_light)
+                                        .setTextColorSecondaryInverseRes(R.color.secondary_text_default_material_light)
+                        )
         );
 
         drawer.addProfile(new DrawerProfile()
@@ -156,6 +177,13 @@ public class MainActivity extends ActionBarActivity {
                 Toast.makeText(MainActivity.this, "Switched from profile *" + oldId + " to profile *" + newId, Toast.LENGTH_SHORT).show();
             }
         });
+
+        drawer.setDrawerTheme(
+                new DrawerTheme(this)
+                        .setBackgroundColorRes(R.color.background_material_dark)
+                        .setTextColorPrimaryRes(R.color.primary_text_default_material_dark)
+                        .setTextColorSecondaryRes(R.color.secondary_text_default_material_dark)
+        );
     }
 
     public void openDrawerFrameLayout(View view){

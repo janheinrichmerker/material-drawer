@@ -17,7 +17,6 @@
 package com.heinrichreimersoftware.materialdrawer.adapter;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +30,7 @@ import android.widget.TextView;
 
 import com.heinrichreimersoftware.materialdrawer.R;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerProfile;
+import com.heinrichreimersoftware.materialdrawer.theme.DrawerTheme;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +40,8 @@ import java.util.List;
  */
 public class DrawerProfileAdapter extends ArrayAdapter<DrawerProfile> {
 
+    private DrawerTheme drawerTheme;
+
     public DrawerProfileAdapter(Context context, List<DrawerProfile> dataSet) {
         super(context, R.layout.md_drawer_item, dataSet);
     }
@@ -47,6 +49,11 @@ public class DrawerProfileAdapter extends ArrayAdapter<DrawerProfile> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         DrawerProfile drawerProfile = getItem(position);
+        DrawerTheme drawerTheme = this.drawerTheme;
+
+        if(drawerProfile.hasDrawerTheme()){
+            drawerTheme = drawerProfile.getDrawerTheme();
+        }
 
         if (convertView == null || !(convertView instanceof RelativeLayout)) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.md_drawer_item, parent, false);
@@ -54,21 +61,29 @@ public class DrawerProfileAdapter extends ArrayAdapter<DrawerProfile> {
 
         final ViewHolder viewHolder = new ViewHolder(convertView);
 
-        int colorAccent = -1;
+        int textColorPrimary = drawerTheme.getTextColorPrimary();
+
+        if (drawerTheme.isLightTheme()){
+            viewHolder.getRoot().setForeground(getContext().getResources().getDrawable(R.drawable.md_list_selector_light));
+        }
+        else {
+            viewHolder.getRoot().setForeground(getContext().getResources().getDrawable(R.drawable.md_list_selector_dark));
+        }
+
+        if (drawerTheme.getBackgroundColor() != 0){
+            viewHolder.getRoot().setBackgroundColor(drawerTheme.getBackgroundColor());
+        }
+        else {
+            viewHolder.getRoot().setBackgroundColor(getContext().getResources().getColor(android.R.color.transparent));
+        }
 
         if (position == 0){
-            viewHolder.getRoot().setBackgroundColor(getContext().getResources().getColor(R.color.md_selected));
+            viewHolder.getRoot().setSelected(true);
             viewHolder.getRoot().setClickable(false);
 
-            TypedArray a = getContext().getTheme().obtainStyledAttributes(new int[]{R.attr.colorAccent});
-            try {
-                colorAccent = a.getColor(0, 0);
-            } finally {
-                a.recycle();
-            }
-        }
-        else{
-            viewHolder.getRoot().setBackgroundColor(getContext().getResources().getColor(android.R.color.transparent));
+            textColorPrimary = drawerTheme.getHighlightColor();
+        } else{
+            viewHolder.getRoot().setSelected(false);
             viewHolder.getRoot().setClickable(true);
         }
 
@@ -95,16 +110,11 @@ public class DrawerProfileAdapter extends ArrayAdapter<DrawerProfile> {
 
         if (drawerProfile.hasName()) {
             viewHolder.getTextViewPrimary().setText(drawerProfile.getName());
-
-            if (colorAccent != -1) {
-                viewHolder.getTextViewPrimary().setTextColor(colorAccent);
-            }
-            else {
-                viewHolder.getTextViewPrimary().setTextColor(getContext().getResources().getColor(android.R.color.primary_text_light));
-            }
+            viewHolder.getTextViewPrimary().setTextColor(textColorPrimary);
 
             if (drawerProfile.hasDescription()) {
                 viewHolder.getTextViewSecondary().setText(drawerProfile.getDescription());
+                viewHolder.getTextViewSecondary().setTextColor(drawerTheme.getTextColorSecondary());
                 viewHolder.getTextViewSecondary().setVisibility(View.VISIBLE);
                 viewHolder.getTextViewSecondary().setMaxLines(1);
             } else {
@@ -112,13 +122,7 @@ public class DrawerProfileAdapter extends ArrayAdapter<DrawerProfile> {
             }
         } else if (drawerProfile.hasDescription()) {
             viewHolder.getTextViewPrimary().setText(drawerProfile.getDescription());
-
-            if (colorAccent != -1) {
-                viewHolder.getTextViewPrimary().setTextColor(colorAccent);
-            }
-            else {
-                viewHolder.getTextViewPrimary().setTextColor(getContext().getResources().getColor(android.R.color.primary_text_light));
-            }
+            viewHolder.getTextViewPrimary().setTextColor(textColorPrimary);
 
             viewHolder.getTextViewSecondary().setVisibility(View.GONE);
         }
@@ -129,6 +133,11 @@ public class DrawerProfileAdapter extends ArrayAdapter<DrawerProfile> {
     @Override
     public boolean isEnabled(int position) {
         return position != 0;
+    }
+
+    public void setDrawerTheme(DrawerTheme theme){
+        this.drawerTheme = theme;
+        notifyDataSetChanged();
     }
 
     public List<DrawerProfile> getItems() {

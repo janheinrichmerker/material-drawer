@@ -17,7 +17,6 @@
 package com.heinrichreimersoftware.materialdrawer.adapter;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.PorterDuff;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -33,6 +32,7 @@ import android.widget.TextView;
 import com.heinrichreimersoftware.materialdrawer.R;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerHeaderItem;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
+import com.heinrichreimersoftware.materialdrawer.theme.DrawerTheme;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +44,8 @@ public class DrawerAdapter extends ArrayAdapter<DrawerItem> {
 
     private int selectedPosition = -1;
 
+    private DrawerTheme drawerTheme;
+
     public DrawerAdapter(Context context, List<DrawerItem> dataSet) {
         super(context, R.layout.md_drawer_item, dataSet);
     }
@@ -51,6 +53,11 @@ public class DrawerAdapter extends ArrayAdapter<DrawerItem> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         DrawerItem drawerItem = getItem(position);
+        DrawerTheme drawerTheme = this.drawerTheme;
+
+        if(drawerItem.hasDrawerTheme()){
+            drawerTheme = drawerItem.getDrawerTheme();
+        }
 
         if (drawerItem.isHeader()) {
             if (convertView == null || convertView instanceof LinearLayout) {
@@ -59,12 +66,23 @@ public class DrawerAdapter extends ArrayAdapter<DrawerItem> {
 
             final HeaderViewHolder viewHolder = new HeaderViewHolder(convertView);
 
+            if (drawerTheme.isLightTheme()){
+                viewHolder.getHeaderDivider().setBackgroundColor(getContext().getResources().getColor(R.color.md_divider_light));
+            }
+            else {
+                viewHolder.getHeaderDivider().setBackgroundColor(getContext().getResources().getColor(R.color.md_divider_dark));
+            }
+
             DrawerHeaderItem drawerHeaderItem = (DrawerHeaderItem) drawerItem;
+
+
+            viewHolder.getHeaderRoot().setBackgroundColor(drawerTheme.getBackgroundColor());
 
             if (drawerHeaderItem.hasTitle()){
                 viewHolder.getHeaderTitleRoot().setVisibility(View.VISIBLE);
                 viewHolder.getHeaderRoot().setPadding(0, getContext().getResources().getDimensionPixelSize(R.dimen.md_divider_margin), 0, 0);
                 viewHolder.getHeaderTitle().setText(drawerHeaderItem.getTitle());
+                viewHolder.getHeaderTitle().setTextColor(drawerTheme.getTextColorSecondary());
             }
             else{
                 viewHolder.getHeaderTitleRoot().setVisibility(View.GONE);
@@ -79,20 +97,30 @@ public class DrawerAdapter extends ArrayAdapter<DrawerItem> {
 
             final ViewHolder viewHolder = new ViewHolder(convertView);
 
-            int colorAccent = -1;
+            int iconTint = -1;
+            int textColorPrimary = drawerTheme.getTextColorPrimary();
+
+            if (drawerTheme.isLightTheme()){
+                viewHolder.getRoot().setForeground(getContext().getResources().getDrawable(R.drawable.md_list_selector_light));
+            }
+            else {
+                viewHolder.getRoot().setForeground(getContext().getResources().getDrawable(R.drawable.md_list_selector_dark));
+            }
+
+            if (drawerTheme.getBackgroundColor() != 0){
+                viewHolder.getRoot().setBackgroundColor(drawerTheme.getBackgroundColor());
+            }
+            else {
+                viewHolder.getRoot().setBackgroundColor(getContext().getResources().getColor(android.R.color.transparent));
+            }
 
             if (position == selectedPosition){
-                viewHolder.getRoot().setBackgroundColor(getContext().getResources().getColor(R.color.md_selected));
+                viewHolder.getRoot().setSelected(true);
 
-                TypedArray a = getContext().getTheme().obtainStyledAttributes(new int[]{R.attr.colorAccent});
-                try {
-                    colorAccent = a.getColor(0, 0);
-                } finally {
-                    a.recycle();
-                }
+                textColorPrimary = iconTint = drawerTheme.getHighlightColor();
             }
             else{
-                viewHolder.getRoot().setBackgroundColor(getContext().getResources().getColor(android.R.color.transparent));
+                viewHolder.getRoot().setSelected(false);
             }
 
             if (drawerItem.hasImage()) {
@@ -106,8 +134,8 @@ public class DrawerAdapter extends ArrayAdapter<DrawerItem> {
                 } else {
                     imageSize = getContext().getResources().getDimensionPixelSize(R.dimen.md_icon_size);
 
-                    if (colorAccent != -1 && drawerItem.getImageMode() == DrawerItem.ICON) {
-                        viewHolder.getImageView().setColorFilter(colorAccent, PorterDuff.Mode.SRC_IN);
+                    if (iconTint != -1 && drawerItem.getImageMode() == DrawerItem.ICON) {
+                        viewHolder.getImageView().setColorFilter(iconTint, PorterDuff.Mode.SRC_IN);
                     }
                     else {
                         viewHolder.getImageView().getDrawable().clearColorFilter();
@@ -133,16 +161,11 @@ public class DrawerAdapter extends ArrayAdapter<DrawerItem> {
 
             if (drawerItem.hasTextPrimary()) {
                 viewHolder.getTextViewPrimary().setText(drawerItem.getTextPrimary());
-
-                if (colorAccent != -1) {
-                    viewHolder.getTextViewPrimary().setTextColor(colorAccent);
-                }
-                else {
-                    viewHolder.getTextViewPrimary().setTextColor(getContext().getResources().getColor(android.R.color.primary_text_light));
-                }
+                viewHolder.getTextViewPrimary().setTextColor(textColorPrimary);
 
                 if (drawerItem.hasTextSecondary() && (drawerItem.getTextMode() == DrawerItem.TWO_LINE || drawerItem.getTextMode() == DrawerItem.THREE_LINE)) {
                     viewHolder.getTextViewSecondary().setText(drawerItem.getTextSecondary());
+                    viewHolder.getTextViewSecondary().setTextColor(drawerTheme.getTextColorSecondary());
                     viewHolder.getTextViewSecondary().setVisibility(View.VISIBLE);
 
                     if (drawerItem.getTextMode() == DrawerItem.THREE_LINE) {
@@ -156,13 +179,7 @@ public class DrawerAdapter extends ArrayAdapter<DrawerItem> {
                 }
             } else if (drawerItem.hasTextSecondary()) {
                 viewHolder.getTextViewPrimary().setText(drawerItem.getTextPrimary());
-
-                if (colorAccent != -1) {
-                    viewHolder.getTextViewPrimary().setTextColor(colorAccent);
-                }
-                else {
-                    viewHolder.getTextViewPrimary().setTextColor(getContext().getResources().getColor(android.R.color.primary_text_light));
-                }
+                viewHolder.getTextViewPrimary().setTextColor(textColorPrimary);
 
                 viewHolder.getTextViewSecondary().setVisibility(View.GONE);
             }
@@ -174,6 +191,11 @@ public class DrawerAdapter extends ArrayAdapter<DrawerItem> {
     @Override
     public boolean isEnabled(int position) {
         return getItem(position).hasOnItemClickListener();
+    }
+
+    public void setDrawerTheme(DrawerTheme theme){
+        this.drawerTheme = theme;
+        notifyDataSetChanged();
     }
 
     public List<DrawerItem> getItems() {
@@ -241,17 +263,23 @@ public class DrawerAdapter extends ArrayAdapter<DrawerItem> {
 
     private static class HeaderViewHolder {
         LinearLayout mHeaderRoot;
+        View mHeaderDivider;
         LinearLayout mHeaderTitleRoot;
         TextView mHeaderTitle;
 
         public HeaderViewHolder(View root) {
             mHeaderRoot = (LinearLayout) root;
+            mHeaderDivider = root.findViewById(R.id.mdDivider);
             mHeaderTitleRoot = (LinearLayout) root.findViewById(R.id.mdHeaderTitleRoot);
             mHeaderTitle = (TextView) root.findViewById(R.id.mdHeaderTitle);
         }
 
         public LinearLayout getHeaderRoot() {
             return mHeaderRoot;
+        }
+
+        public View getHeaderDivider() {
+            return mHeaderDivider;
         }
 
         public LinearLayout getHeaderTitleRoot() {

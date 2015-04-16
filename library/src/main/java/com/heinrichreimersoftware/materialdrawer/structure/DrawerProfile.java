@@ -23,12 +23,15 @@ import android.graphics.drawable.Drawable;
 
 import com.heinrichreimersoftware.materialdrawer.DrawerView;
 import com.heinrichreimersoftware.materialdrawer.drawable.RoundedAvatarDrawable;
+import com.heinrichreimersoftware.materialdrawer.theme.DrawerTheme;
 
 /**
  * Object to be used with {@link com.heinrichreimersoftware.materialdrawer.DrawerView} to display a profile in the drawer.
  * Can hold an image, a primary text, a secondary text and a listener.
  */
 public class DrawerProfile {
+
+    private DrawerTheme mDrawerTheme;
 
     private long mId = -1;
 
@@ -39,6 +42,41 @@ public class DrawerProfile {
 
     private OnProfileClickListener mOnClickListener;
     private DrawerView mDrawerView;
+
+
+    /**
+     * Sets the drawer profile theme
+     *
+     * @param theme Theme to set
+     */
+    public DrawerProfile setDrawerTheme(DrawerTheme theme){
+        mDrawerTheme = theme;
+        notifyDataChanged();
+        return this;
+    }
+
+    /**
+     * Resets the drawer profile theme
+     */
+    public DrawerProfile resetDrawerTheme(Context context){
+        mDrawerTheme = new DrawerTheme(context);
+        notifyDataChanged();
+        return this;
+    }
+
+    /**
+     * Gets the drawer profile theme
+     */
+    public DrawerTheme getDrawerTheme(){
+        return mDrawerTheme;
+    }
+
+    /**
+     * Gets wether the drawer profile has its own theme
+     */
+    public boolean hasDrawerTheme(){
+        return mDrawerTheme != null;
+    }
 
 
     /**
