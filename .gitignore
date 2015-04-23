@@ -99,5 +99,3 @@ gradle-app.setting
 
 *.hprof
 *.keystore
-
-library/gradle.properties
