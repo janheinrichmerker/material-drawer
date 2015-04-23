@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -35,6 +36,8 @@ public class MainActivity3 extends DrawerActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
+
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
         setDrawerTheme(
                 new DrawerTheme(this)
