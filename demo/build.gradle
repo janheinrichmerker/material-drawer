@@ -21,5 +21,5 @@ android {
 
 dependencies {
     compile project(':library')
-    compile 'com.android.support:appcompat-v7:22.+'
+    compile 'com.android.support:appcompat-v7:22.1.0'
 }
