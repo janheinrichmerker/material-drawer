@@ -36,7 +36,8 @@ import java.util.List;
 public class DrawerActivity extends AppCompatActivity {
 
     private DrawerFrameLayout mDrawer;
-    private Toolbar mToolbar;
+    private Toolbar mDefaultToolbar;
+    private Toolbar mCurrentToolbar = null;
     private FrameLayout mFrame;
 
     private ActionBarDrawerToggle mDrawerToggle;
@@ -47,20 +48,25 @@ public class DrawerActivity extends AppCompatActivity {
         super.setContentView(R.layout.md_drawer_activity);
 
         mDrawer = (DrawerFrameLayout) findViewById(R.id.mdDrawerLayout);
-        mToolbar = (Toolbar) findViewById(R.id.mdToolbar);
+        mDefaultToolbar = (Toolbar) findViewById(R.id.mdToolbar);
         mFrame = (FrameLayout) findViewById(R.id.mdFrame);
 
-        setSupportActionBar(mToolbar);
+        setSupportActionBar(mDefaultToolbar);
 
         mDrawer.closeDrawer();
     }
 
+    /**
+     * Set a {@link Toolbar} to act as the {@link android.support.v7.app.ActionBar}ActionBar for this Activity window.
+     * You must take care of hiding the old {@link Toolbar} if necessary.
+     *
+     * @param toolbar Toolbar to set as the Activity's action bar
+     */
     @Override
     public void setSupportActionBar(@Nullable Toolbar toolbar) {
         if (toolbar != null) {
-            if (toolbar != mToolbar) {
-                ViewGroup parent = (ViewGroup) mToolbar.getParent();
-                parent.removeView(mToolbar);
+            if (toolbar != mDefaultToolbar && mDefaultToolbar.getVisibility() != View.GONE) {
+                mDefaultToolbar.setVisibility(View.GONE);
             }
 
             super.setSupportActionBar(toolbar);
@@ -74,6 +80,7 @@ public class DrawerActivity extends AppCompatActivity {
                     invalidateOptionsMenu();
                 }
             };
+            mDrawerToggle.syncState();
             mDrawer.setDrawerListener(mDrawerToggle);
         }
     }

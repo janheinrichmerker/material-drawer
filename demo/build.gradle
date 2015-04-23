@@ -8,8 +8,8 @@ android {
         applicationId "com.heinrichreimersoftware.materialdrawerdemo"
         minSdkVersion 14
         targetSdkVersion 22
-        versionCode 8
-        versionName "2.1"
+        versionCode 10
+        versionName "2.1.2"
     }
     buildTypes {
         release {
