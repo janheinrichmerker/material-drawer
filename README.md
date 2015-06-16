@@ -4,6 +4,10 @@ material-drawer
 
 Custom drawer implementation for Material design apps.
 
+Information
+----
+I'm currently not actively developing this library because of school work. Until August I'll only merge pull requests. Thanks for your patience.
+
 Demo
 ----
 A demo app is available on Google Play:
@@ -174,7 +178,7 @@ _material-drawer_ uses the following open source libraries or files:
 * [LinearListView][1] by [@frankiesardo][2] (Apache License 2.0)
 * [ScrimInsetsScrollView][3] from the Google IO app 2014 by [@google][4] (Apache License 2.0)
 * [ImageLoadingPattern][5] by [@Emanuel Vecchio][6] (Apache License 2.0)
-* [RoundedAvatarDrawable][7] by [@Evelio Tarazona Cáceres][8] (Apache License 2.0)
+* [RoundedAvatarDrawable][7] by [@Evelio Tarazona CÃ¡ceres][8] (Apache License 2.0)
 
 Stats
 -------
