@@ -20,7 +20,7 @@ import android.support.v4.app.Fragment;
 
 public class DrawerFragmentItem extends DrawerItem {
 
-    Fragment mFragment;
+    private Fragment mFragment;
 
     /**
      * Sets a fragment to the drawer item

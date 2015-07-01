@@ -206,7 +206,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
                     if (item.hasOnItemClickListener()) {
                         item.getOnItemClickListener().onClick(item, item.getId(), position);
                     } else {
-                        if (hasOnItemClickListener()) {
+                        if (hasOnFixedItemClickListener()) {
                             mOnFixedItemClickListener.onClick(item, item.getId(), position);
                         }
                     }
@@ -367,16 +367,18 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
                 });
 
                 if (currentProfile.getBackground() instanceof BitmapDrawable) {
-                    Palette.generateAsync(((BitmapDrawable) currentProfile.getBackground()).getBitmap(), new Palette.PaletteAsyncListener() {
-                        @Override
-                        public void onGenerated(Palette palette) {
-                            Palette.Swatch vibrantSwatch = palette.getVibrantSwatch();
-                            if (vibrantSwatch != null) {
-                                textViewProfileAvatarCount.setTextColor(vibrantSwatch.getTitleTextColor());
-                                textViewProfileAvatarCount.getBackground().setColorFilter(vibrantSwatch.getRgb(), PorterDuff.Mode.SRC_IN);
-                            }
-                        }
-                    });
+                    new Palette.Builder(((BitmapDrawable) currentProfile.getBackground()).getBitmap())
+                            .resizeBitmapSize(500)
+                            .generate(new Palette.PaletteAsyncListener() {
+                                @Override
+                                public void onGenerated(Palette palette) {
+                                    Palette.Swatch vibrantSwatch = palette.getVibrantSwatch();
+                                    if (vibrantSwatch != null) {
+                                        textViewProfileAvatarCount.setTextColor(vibrantSwatch.getTitleTextColor());
+                                        textViewProfileAvatarCount.getBackground().setColorFilter(vibrantSwatch.getRgb(), PorterDuff.Mode.SRC_IN);
+                                    }
+                                }
+                            });
                 }
 
                 imageViewProfileAvatarSecondary.setVisibility(INVISIBLE);
@@ -542,6 +544,21 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
                 @Override
                 public void onAnimationEnd(Animator animation) {
                     imageViewProfileBackground.setImageDrawable(newProfile.getBackground());
+
+                    if (newProfile.getBackground() instanceof BitmapDrawable) {
+                        new Palette.Builder(((BitmapDrawable) newProfile.getBackground()).getBitmap())
+                                .resizeBitmapSize(500)
+                                .generate(new Palette.PaletteAsyncListener() {
+                                    @Override
+                                    public void onGenerated(Palette palette) {
+                                        Palette.Swatch vibrantSwatch = palette.getVibrantSwatch();
+                                        if (vibrantSwatch != null) {
+                                            textViewProfileAvatarCount.setTextColor(vibrantSwatch.getTitleTextColor());
+                                            textViewProfileAvatarCount.getBackground().setColorFilter(vibrantSwatch.getRgb(), PorterDuff.Mode.SRC_IN);
+                                        }
+                                    }
+                                });
+                    }
 
                     imageViewProfileBackgroundOverlay.setVisibility(GONE);
 
@@ -1340,7 +1357,6 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
      */
     public DrawerView setOnItemClickListener(DrawerItem.OnItemClickListener listener) {
         mOnItemClickListener = listener;
-        updateList();
         return this;
     }
 
@@ -1367,7 +1383,6 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
      */
     public DrawerView removeOnItemClickListener() {
         mOnItemClickListener = null;
-        updateList();
         return this;
     }
 
@@ -1588,7 +1603,6 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
      */
     public DrawerView setOnFixedItemClickListener(DrawerItem.OnItemClickListener listener) {
         mOnFixedItemClickListener = listener;
-        updateFixedList();
         return this;
     }
 
@@ -1615,7 +1629,6 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
      */
     public DrawerView removeOnFixedItemClickListener() {
         mOnFixedItemClickListener = null;
-        updateFixedList();
         return this;
     }
 

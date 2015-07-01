@@ -165,7 +165,6 @@
 
                                 </LinearLayout>
 
-                                <!-- TODO endless ripple (themed) -->
                                 <ImageView
                                     android:id="@id/mdOpenProfileListIcon"
                                     android:layout_width="@dimen/md_big_avatar_size"

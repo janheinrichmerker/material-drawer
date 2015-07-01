@@ -20,11 +20,15 @@ import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.heinrichreimersoftware.materialdrawer.DrawerActivity;
+import com.heinrichreimersoftware.materialdrawer.structure.DrawerFragmentItem;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerProfile;
 import com.heinrichreimersoftware.materialdrawer.theme.DrawerTheme;
@@ -53,11 +57,23 @@ public class MainActivity3 extends DrawerActivity {
                                 new DrawerTheme(getDrawerTheme())
                                         .setBackgroundColorRes(R.color.material_blue_grey_800)
                         ),
-                new DrawerItem()
+                new DrawerFragmentItem()
+                        .setFragment(new ListFragment())
+                        .setTextPrimary(getString(R.string.lorem_ipsum_medium)),
+                new DrawerFragmentItem()
+                        .setFragment(new Fragment())
                         .setImage(getResources().getDrawable(R.drawable.ic_flag))
                         .setTextPrimary(getString(R.string.lorem_ipsum_short))
                         .setTextSecondary(getString(R.string.lorem_ipsum_long))
         );
+        setOnItemClickListener(new DrawerItem.OnItemClickListener() {
+            @Override
+            public void onClick(DrawerItem item, long id, int position) {
+                selectItem(position);
+                Toast.makeText(MainActivity3.this, "Clicked item #" + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+
         addProfile(new DrawerProfile()
                         .setId(1)
                         .setRoundedAvatar((BitmapDrawable) getResources().getDrawable(R.drawable.cat_2))
