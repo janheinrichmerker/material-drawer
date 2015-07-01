@@ -1,5 +1,7 @@
 material-drawer
 ===============
+[ ![Download](https://api.bintray.com/packages/heinrichreimer/maven/material-drawer/images/download.svg) ](https://bintray.com/heinrichreimer/maven/material-drawer/_latestVersion)
+
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-material--drawer-blue.svg?style=flat)](https://android-arsenal.com/details/1/1162)
 
 Custom drawer implementation for Material design apps.
@@ -24,12 +26,12 @@ Screenshots
 Dependency
 ----------
 
-*material-drawer* is available on Maven Central
+*material-drawer* is available on jCenter
 
 **Gradle dependency:**
 
     dependencies {
-	    compile 'com.heinrichreimersoftware.materialdrawer:library:2.1'
+	    compile 'com.heinrichreimersoftware.materialdrawer:library:2.1.3'
     }
 
 Get the latest dependency with ["Gradle, please"][GP]
@@ -137,6 +139,11 @@ Of course you can use [`DrawerFrameLayout`][DFL] and [`DrawerView`][DV] alone to
 Changes
 -------
 
+* **Version 2.1.3:**
+    * Better use of [Palette][P]
+    * [Fragment][F]s support ([DrawerFragementItem][DFI])
+    * Enable/disable the drawer toggle
+    * Bug fixes
 * **Version 2.1:**
     * Theming engine ([DrawerTheme][DT])
     * Ripples everywhere
@@ -223,3 +230,6 @@ License
 [DV]: https://github.com/HeinrichReimer/material-drawer/blob/master/library/src/main/java/com/heinrichreimersoftware/materialdrawer/DrawerView.java
 [DL]: https://developer.android.com/reference/android/support/v4/widget/DrawerLayout.html
 [DHI]: https://github.com/HeinrichReimer/material-drawer/blob/master/library/src/main/java/com/heinrichreimersoftware/materialdrawer/structure/DrawerHeaderItem.java
+[DFI]: https://github.com/HeinrichReimer/material-drawer/blob/master/library/src/main/java/com/heinrichreimersoftware/materialdrawer/structure/DrawerFragementItem.java
+[P]: http://developer.android.com/reference/android/support/v7/graphics/Palette.html
+[F]: http://developer.android.com/reference/android/support/v4/app/Fragment.html
