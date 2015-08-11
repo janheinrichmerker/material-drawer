@@ -43,7 +43,11 @@ public class AlphaSatColorMatrixEvaluator implements TypeEvaluator {
 
         // Compute the alpha change over period [0, 2]
         float alpha = Math.min(phase, 2f) / 2f;
-        elements[19] = (float) Math.round(alpha * 255);
+        
+        // This fix will prevent transparent pixels in the original bitmap from appearing black.
+        // See http://stackoverflow.com/questions/27262022/how-to-implement-loading-images-pattern-opacity-exposure-and-saturation-fro/31938452#31938452
+        elements[18] = alpha; 
+        //elements[19] = (float) Math.round(alpha * 255);
 
         // We subtract to make the picture look darker, it will automatically clamp
         // This is spread over period [0, 2.5]
