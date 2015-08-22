@@ -7,8 +7,8 @@ material-drawer
 Custom drawer implementation for Material design apps.
 
 Information
-----
-I'm currently not actively developing this library because of school work. Until August I'll only merge pull requests. Thanks for your patience.
+===========
+I'm currently not actively developing this library because of school work. Yet I'll merge pull requests.
 
 Demo
 ----
