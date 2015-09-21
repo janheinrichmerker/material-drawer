@@ -30,14 +30,16 @@
 
         <TextView
             android:id="@id/mdHeaderTitle"
+            style="@style/TextAppearance.AppCompat.Subhead"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="start"
             android:paddingLeft="@dimen/md_baseline"
             android:paddingRight="@dimen/md_baseline"
-            android:fontFamily="sans-serif-medium"
             android:singleLine="true"
-            android:ellipsize="marquee"
-            style="@style/TextAppearance.AppCompat.Subhead" />
+            android:textAlignment="textStart" />
 
     </LinearLayout>
 

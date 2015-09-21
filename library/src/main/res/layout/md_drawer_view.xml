@@ -34,33 +34,33 @@
                     android:id="@id/mdLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:fitsSystemWindows="true">
+                    android:fitsSystemWindows="true"
+                    android:orientation="vertical">
 
                     <FrameLayout
                         android:id="@id/mdLayoutProfile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:foreground="?attr/selectableItemBackground"
-                        android:fitsSystemWindows="true">
+                        android:fitsSystemWindows="true"
+                        android:foreground="?attr/selectableItemBackground">
 
                         <ImageView
                             android:id="@id/mdProfileBackground"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
                             android:clickable="false"
+                            android:contentDescription="@string/md_content_description_profile_background"
                             android:fitsSystemWindows="true"
-                            android:contentDescription="@string/md_content_description_profile_background" />
+                            android:scaleType="centerCrop" />
 
                         <ImageView
                             android:id="@id/mdProfileBackgroundOverlay"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
                             android:clickable="false"
+                            android:contentDescription="@string/md_content_description_profile_background_overlay"
                             android:fitsSystemWindows="true"
-                            android:contentDescription="@string/md_content_description_profile_background_overlay" />
+                            android:scaleType="centerCrop" />
 
                         <View
                             android:layout_width="match_parent"
@@ -80,43 +80,43 @@
                                 android:id="@id/mdAvatarProfile"
                                 android:layout_width="@dimen/md_big_avatar_size"
                                 android:layout_height="@dimen/md_big_avatar_size"
-                                android:layout_margin="@dimen/md_baseline"
-                                android:layout_alignParentTop="true"
+                                android:layout_alignParentEnd="false"
                                 android:layout_alignParentLeft="true"
                                 android:layout_alignParentRight="false"
                                 android:layout_alignParentStart="true"
-                                android:layout_alignParentEnd="false"
-                                android:scaleType="centerCrop"
+                                android:layout_alignParentTop="true"
+                                android:layout_margin="@dimen/md_baseline"
                                 android:clickable="false"
-                                android:contentDescription="@string/md_content_description_profile_avatar" />
+                                android:contentDescription="@string/md_content_description_profile_avatar"
+                                android:scaleType="centerCrop" />
 
                             <ImageView
                                 android:id="@id/mdAvatarProfileSecondary"
                                 android:layout_width="@dimen/md_avatar_size"
                                 android:layout_height="@dimen/md_avatar_size"
-                                android:layout_margin="@dimen/md_baseline"
-                                android:layout_alignParentTop="true"
+                                android:layout_alignParentEnd="true"
                                 android:layout_alignParentLeft="false"
                                 android:layout_alignParentRight="true"
                                 android:layout_alignParentStart="false"
-                                android:layout_alignParentEnd="true"
-                                android:scaleType="centerCrop"
+                                android:layout_alignParentTop="true"
+                                android:layout_margin="@dimen/md_baseline"
                                 android:clickable="true"
-                                android:contentDescription="@string/md_content_description_profile_avatar_secondary" />
+                                android:contentDescription="@string/md_content_description_profile_avatar_secondary"
+                                android:scaleType="centerCrop" />
 
                             <TextView
                                 android:id="@id/mdAvatarProfileCount"
+                                style="@style/Base.TextAppearance.AppCompat.Body2"
                                 android:layout_width="@dimen/md_avatar_size"
                                 android:layout_height="@dimen/md_avatar_size"
-                                android:layout_margin="@dimen/md_baseline"
-                                android:layout_alignParentTop="true"
+                                android:layout_alignParentEnd="true"
                                 android:layout_alignParentLeft="false"
                                 android:layout_alignParentRight="true"
                                 android:layout_alignParentStart="false"
-                                android:layout_alignParentEnd="true"
-                                style="@style/Base.TextAppearance.AppCompat.Body2"
-                                android:clickable="true"
+                                android:layout_alignParentTop="true"
+                                android:layout_margin="@dimen/md_baseline"
                                 android:background="@drawable/md_more_background"
+                                android:clickable="true"
                                 android:gravity="center" />
 
                             <View
@@ -130,38 +130,42 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentBottom="true"
                                 android:layout_gravity="bottom"
-                                android:orientation="horizontal"
                                 android:baselineAligned="false"
-                                android:clickable="false">
+                                android:clickable="false"
+                                android:orientation="horizontal">
 
                                 <LinearLayout
                                     android:id="@id/mdProfileTextContainer"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
                                     android:layout_gravity="center_vertical"
+                                    android:layout_weight="1"
                                     android:minHeight="@dimen/md_list_item_height"
                                     android:orientation="vertical"
                                     android:padding="@dimen/md_baseline">
 
                                     <TextView
                                         android:id="@id/mdProfileName"
+                                        style="@style/TextAppearance.AppCompat.Subhead.Inverse"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:fontFamily="sans-serif-medium"
-                                        android:singleLine="true"
+                                        android:clickable="false"
                                         android:ellipsize="marquee"
-                                        style="@style/TextAppearance.AppCompat.Subhead.Inverse"
-                                        android:clickable="false" />
+                                        android:fontFamily="sans-serif-medium"
+                                        android:gravity="start"
+                                        android:singleLine="true"
+                                        android:textAlignment="textStart" />
 
                                     <TextView
                                         android:id="@id/mdProfileDescription"
+                                        style="@style/TextAppearance.AppCompat.Subhead.Inverse"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:singleLine="true"
+                                        android:clickable="false"
                                         android:ellipsize="marquee"
-                                        style="@style/TextAppearance.AppCompat.Subhead.Inverse"
-                                        android:clickable="false" />
+                                        android:gravity="start"
+                                        android:singleLine="true"
+                                        android:textAlignment="textStart" />
 
                                 </LinearLayout>
 
@@ -169,13 +173,13 @@
                                     android:id="@id/mdOpenProfileListIcon"
                                     android:layout_width="@dimen/md_big_avatar_size"
                                     android:layout_height="@dimen/md_big_avatar_size"
-                                    android:padding="@dimen/md_baseline"
+                                    android:layout_gravity="bottom"
                                     android:background="?attr/selectableItemBackground"
-                                    android:src="@drawable/md_arrow_drop_down"
-                                    android:scaleType="center"
                                     android:clickable="true"
                                     android:contentDescription="@string/md_content_description_open_profile_list"
-                                    android:layout_gravity="bottom" />
+                                    android:padding="@dimen/md_baseline"
+                                    android:scaleType="center"
+                                    android:src="@drawable/md_arrow_drop_down" />
 
                             </LinearLayout>
 
@@ -191,17 +195,17 @@
                             android:id="@id/mdProfileList"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingTop="@dimen/md_drawer_list_margin_vertical"
+                            android:orientation="vertical"
                             android:paddingBottom="@dimen/md_drawer_list_margin_vertical"
-                            android:orientation="vertical" />
+                            android:paddingTop="@dimen/md_drawer_list_margin_vertical" />
 
                         <com.heinrichreimersoftware.materialdrawer.widget.LinearListView
                             android:id="@id/mdList"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingTop="@dimen/md_drawer_list_margin_vertical"
+                            android:orientation="vertical"
                             android:paddingBottom="@dimen/md_drawer_list_margin_vertical"
-                            android:orientation="vertical" />
+                            android:paddingTop="@dimen/md_drawer_list_margin_vertical" />
 
                     </FrameLayout>
 
@@ -233,9 +237,9 @@
                 android:id="@id/mdLinearListViewFixed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/md_drawer_list_margin_vertical"
+                android:orientation="vertical"
                 android:paddingBottom="@dimen/md_drawer_list_margin_vertical"
-                android:orientation="vertical" />
+                android:paddingTop="@dimen/md_drawer_list_margin_vertical" />
 
         </LinearLayout>
 

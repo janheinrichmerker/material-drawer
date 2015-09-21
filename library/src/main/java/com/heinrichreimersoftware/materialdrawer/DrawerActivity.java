@@ -181,6 +181,14 @@ public class DrawerActivity extends AppCompatActivity {
         mFrame.addView(view, params);
     }
 
+    /**
+     * Gets whether the enhanced drawer indicator is enabled
+     *
+     * @return true if the enhanced drawer indicator is enabled, false otherwise
+     */
+    public boolean isDrawerIndicatorEnabled() {
+        return mDrawerToggle != null && mDrawerToggle.isDrawerIndicatorEnabled();
+    }
 
     /**
      * Enable or disable the drawer indicator. The indicator defaults to enabled.
@@ -193,15 +201,6 @@ public class DrawerActivity extends AppCompatActivity {
             mDrawerToggle.setDrawerIndicatorEnabled(enabled);
         }
         return this;
-    }
-
-    /**
-     * Gets whether the enhanced drawer indicator is enabled
-     *
-     * @return true if the enhanced drawer indicator is enabled, false otherwise
-     */
-    public boolean isDrawerIndicatorEnabled() {
-        return mDrawerToggle != null && mDrawerToggle.isDrawerIndicatorEnabled();
     }
 
     /**
@@ -239,21 +238,6 @@ public class DrawerActivity extends AppCompatActivity {
     }
 
     /**
-     * When DrawerToggle is constructed with a Toolbar, it sets the click listener on
-     * the Navigation icon. If you want to listen for clicks on the Navigation icon when
-     * DrawerToggle is disabled ({@link #setDrawerIndicatorEnabled(boolean)}, you should call this
-     * method with your listener and DrawerToggle will forward click events to that listener
-     * when drawer indicator is disabled.
-     *
-     * @see #setDrawerIndicatorEnabled(boolean)
-     */
-    public void setToolbarNavigationClickListener(View.OnClickListener listener) {
-        if (mDrawerToggle != null) {
-            mDrawerToggle.setToolbarNavigationClickListener(listener);
-        }
-    }
-
-    /**
      * Returns the fallback listener for Navigation icon click events.
      *
      * @return The click listener which receives Navigation click events from Toolbar when
@@ -269,14 +253,35 @@ public class DrawerActivity extends AppCompatActivity {
         return null;
     }
 
+    /**
+     * When DrawerToggle is constructed with a Toolbar, it sets the click listener on
+     * the Navigation icon. If you want to listen for clicks on the Navigation icon when
+     * DrawerToggle is disabled ({@link #setDrawerIndicatorEnabled(boolean)}, you should call this
+     * method with your listener and DrawerToggle will forward click events to that listener
+     * when drawer indicator is disabled.
+     *
+     * @see #setDrawerIndicatorEnabled(boolean)
+     */
+    public void setToolbarNavigationClickListener(View.OnClickListener listener) {
+        if (mDrawerToggle != null) {
+            mDrawerToggle.setToolbarNavigationClickListener(listener);
+        }
+    }
 
     /**
-     * Sets the drawer theme
-     *
-     * @param theme Theme to set
+     * Gets whether debug logging is enabled
      */
-    public DrawerActivity setDrawerTheme(DrawerTheme theme) {
-        mDrawer.setDrawerTheme(theme);
+    public boolean getLoggingEnabled() {
+        return mDrawer.getLoggingEnabled();
+    }
+
+    /**
+     * Sets whether debug logging is enabled
+     *
+     * @param loggingEnabled whether or not to enable debug logging
+     */
+    public DrawerActivity setLoggingEnabled(boolean loggingEnabled) {
+        mDrawer.setLoggingEnabled(loggingEnabled);
         return this;
     }
 
@@ -295,14 +300,13 @@ public class DrawerActivity extends AppCompatActivity {
         return mDrawer.getDrawerTheme();
     }
 
-
     /**
-     * Sets the max drawer width
+     * Sets the drawer theme
      *
-     * @param drawerMaxWidth Max drawer width to set
+     * @param theme Theme to set
      */
-    public DrawerActivity setDrawerMaxWidth(int drawerMaxWidth) {
-        mDrawer.setDrawerMaxWidth(drawerMaxWidth);
+    public DrawerActivity setDrawerTheme(DrawerTheme theme) {
+        mDrawer.setDrawerTheme(theme);
         return this;
     }
 
@@ -331,6 +335,15 @@ public class DrawerActivity extends AppCompatActivity {
         return mDrawer.getDrawerMaxWidth();
     }
 
+    /**
+     * Sets the max drawer width
+     *
+     * @param drawerMaxWidth Max drawer width to set
+     */
+    public DrawerActivity setDrawerMaxWidth(int drawerMaxWidth) {
+        mDrawer.setDrawerMaxWidth(drawerMaxWidth);
+        return this;
+    }
 
     /**
      * Adds a profile to the drawer view
@@ -409,6 +422,14 @@ public class DrawerActivity extends AppCompatActivity {
         return this;
     }
 
+    /**
+     * Gets the profile click listener of the drawer
+     *
+     * @return Profile click listener of the drawer
+     */
+    public DrawerProfile.OnProfileClickListener getOnProfileClickListener() {
+        return mDrawer.getOnProfileClickListener();
+    }
 
     /**
      * Sets a profile click listener to the drawer
@@ -418,15 +439,6 @@ public class DrawerActivity extends AppCompatActivity {
     public DrawerActivity setOnProfileClickListener(DrawerProfile.OnProfileClickListener listener) {
         mDrawer.setOnProfileClickListener(listener);
         return this;
-    }
-
-    /**
-     * Gets the profile click listener of the drawer
-     *
-     * @return Profile click listener of the drawer
-     */
-    public DrawerProfile.OnProfileClickListener getOnProfileClickListener() {
-        return mDrawer.getOnProfileClickListener();
     }
 
     /**
@@ -446,6 +458,14 @@ public class DrawerActivity extends AppCompatActivity {
         return this;
     }
 
+    /**
+     * Gets the profile switch listener of the drawer
+     *
+     * @return Profile switch listener of the drawer
+     */
+    public DrawerProfile.OnProfileSwitchListener getOnProfileSwitchListener() {
+        return mDrawer.getOnProfileSwitchListener();
+    }
 
     /**
      * Sets a profile switch listener to the drawer
@@ -455,15 +475,6 @@ public class DrawerActivity extends AppCompatActivity {
     public DrawerActivity setOnProfileSwitchListener(DrawerProfile.OnProfileSwitchListener listener) {
         mDrawer.setOnProfileSwitchListener(listener);
         return this;
-    }
-
-    /**
-     * Gets the profile switch listener of the drawer
-     *
-     * @return Profile switch listener of the drawer
-     */
-    public DrawerProfile.OnProfileSwitchListener getOnProfileSwitchListener() {
-        return mDrawer.getOnProfileSwitchListener();
     }
 
     /**
@@ -617,6 +628,14 @@ public class DrawerActivity extends AppCompatActivity {
         return this;
     }
 
+    /**
+     * Gets the item click listener of the drawer
+     *
+     * @return Item click listener of the drawer
+     */
+    public DrawerItem.OnItemClickListener getOnItemClickListener() {
+        return mOnItemClickListener;
+    }
 
     /**
      * Sets an item click listener to the drawer
@@ -626,15 +645,6 @@ public class DrawerActivity extends AppCompatActivity {
     public DrawerActivity setOnItemClickListener(DrawerItem.OnItemClickListener listener) {
         mOnItemClickListener = listener;
         return this;
-    }
-
-    /**
-     * Gets the item click listener of the drawer
-     *
-     * @return Item click listener of the drawer
-     */
-    public DrawerItem.OnItemClickListener getOnItemClickListener() {
-        return mOnItemClickListener;
     }
 
     /**
@@ -788,6 +798,14 @@ public class DrawerActivity extends AppCompatActivity {
         return this;
     }
 
+    /**
+     * Gets the fixed item click listener of the drawer
+     *
+     * @return Item click listener of the drawer
+     */
+    public DrawerItem.OnItemClickListener getOnFixedItemClickListener() {
+        return mOnFixedItemClickListener;
+    }
 
     /**
      * Sets a fixed item click listener to the drawer
@@ -797,15 +815,6 @@ public class DrawerActivity extends AppCompatActivity {
     public DrawerActivity setOnFixedItemClickListener(DrawerItem.OnItemClickListener listener) {
         mOnFixedItemClickListener = listener;
         return this;
-    }
-
-    /**
-     * Gets the fixed item click listener of the drawer
-     *
-     * @return Item click listener of the drawer
-     */
-    public DrawerItem.OnItemClickListener getOnFixedItemClickListener() {
-        return mOnFixedItemClickListener;
     }
 
     /**

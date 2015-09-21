@@ -35,6 +35,11 @@ public class DrawerTheme {
     private int backgroundColor;
 
     /**
+     * Used for the translucent status bar background
+     */
+    private int statusBarBackgroundColor;
+
+    /**
      * Used for the drawer / drawer item / drawer profile list text
      */
     private int textColorPrimary;
@@ -64,6 +69,7 @@ public class DrawerTheme {
         context = theme.getContext();
 
         backgroundColor = theme.getBackgroundColor();
+        statusBarBackgroundColor =
         textColorPrimary = theme.getTextColorPrimary();
         textColorSecondary = theme.getTextColorSecondary();
         textColorPrimaryInverse = theme.getTextColorPrimaryInverse();
@@ -78,6 +84,7 @@ public class DrawerTheme {
         TypedArray array = context.obtainStyledAttributes(attrs);
 
         backgroundColor = array.getColor(0, 0);
+        statusBarBackgroundColor = context.getResources().getColor(R.color.md_inset_foreground);
         textColorPrimary = array.getColor(1, 0);
         textColorSecondary = array.getColor(2, 0);
         textColorPrimaryInverse = array.getColor(3, 0);
@@ -99,11 +106,6 @@ public class DrawerTheme {
         return context;
     }
 
-    public DrawerTheme setBackgroundColor(int backgroundColor) {
-        this.backgroundColor = backgroundColor;
-        return this;
-    }
-
     public DrawerTheme setBackgroundColorRes(@ColorRes int backgroundColorRes) {
         this.backgroundColor = context.getResources().getColor(backgroundColorRes);
         return this;
@@ -113,8 +115,22 @@ public class DrawerTheme {
         return backgroundColor;
     }
 
-    public DrawerTheme setTextColorPrimary(int textColorPrimary) {
-        this.textColorPrimary = textColorPrimary;
+    public DrawerTheme setBackgroundColor(int backgroundColor) {
+        this.backgroundColor = backgroundColor;
+        return this;
+    }
+
+    public DrawerTheme setStatusBarBackgroundColorRes(@ColorRes int statusBarBackgroundColorRes) {
+        this.statusBarBackgroundColor = context.getResources().getColor(statusBarBackgroundColorRes);
+        return this;
+    }
+
+    public int getStatusBarBackgroundColor() {
+        return statusBarBackgroundColor;
+    }
+
+    public DrawerTheme setStatusBarBackgroundColor(int statusBarBackgroundColor) {
+        this.statusBarBackgroundColor = statusBarBackgroundColor;
         return this;
     }
 
@@ -127,8 +143,8 @@ public class DrawerTheme {
         return textColorPrimary;
     }
 
-    public DrawerTheme setTextColorSecondary(int textColorSecondary) {
-        this.textColorSecondary = textColorSecondary;
+    public DrawerTheme setTextColorPrimary(int textColorPrimary) {
+        this.textColorPrimary = textColorPrimary;
         return this;
     }
 
@@ -141,8 +157,8 @@ public class DrawerTheme {
         return textColorSecondary;
     }
 
-    public DrawerTheme setTextColorPrimaryInverse(int textColorPrimaryInverse) {
-        this.textColorPrimaryInverse = textColorPrimaryInverse;
+    public DrawerTheme setTextColorSecondary(int textColorSecondary) {
+        this.textColorSecondary = textColorSecondary;
         return this;
     }
 
@@ -155,8 +171,8 @@ public class DrawerTheme {
         return textColorPrimaryInverse;
     }
 
-    public DrawerTheme setTextColorSecondaryInverse(int textColorSecondaryInverse) {
-        this.textColorSecondaryInverse = textColorSecondaryInverse;
+    public DrawerTheme setTextColorPrimaryInverse(int textColorPrimaryInverse) {
+        this.textColorPrimaryInverse = textColorPrimaryInverse;
         return this;
     }
 
@@ -169,8 +185,8 @@ public class DrawerTheme {
         return textColorSecondaryInverse;
     }
 
-    public DrawerTheme setHighlightColor(int highlightColor) {
-        this.highlightColor = highlightColor;
+    public DrawerTheme setTextColorSecondaryInverse(int textColorSecondaryInverse) {
+        this.textColorSecondaryInverse = textColorSecondaryInverse;
         return this;
     }
 
@@ -181,5 +197,10 @@ public class DrawerTheme {
 
     public int getHighlightColor() {
         return highlightColor;
+    }
+
+    public DrawerTheme setHighlightColor(int highlightColor) {
+        this.highlightColor = highlightColor;
+        return this;
     }
 }

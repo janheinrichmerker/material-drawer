@@ -10,4 +10,6 @@
 
     <string name="md_content_description_drawer_open">Menu open</string>
     <string name="md_content_description_drawer_close">Menu closed</string>
+
+    <string name="md_label_plus">+%1$d</string>
 </resources>

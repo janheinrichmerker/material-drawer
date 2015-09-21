@@ -20,50 +20,54 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:minHeight="@dimen/md_list_item_height"
+        android:paddingBottom="@dimen/md_list_item_margin"
+        android:paddingEnd="@dimen/md_baseline"
         android:paddingLeft="@dimen/md_baseline"
         android:paddingRight="@dimen/md_baseline"
         android:paddingStart="@dimen/md_baseline"
-        android:paddingEnd="@dimen/md_baseline"
-        android:paddingTop="@dimen/md_list_item_margin"
-        android:paddingBottom="@dimen/md_list_item_margin"
-        android:gravity="center_vertical">
+        android:paddingTop="@dimen/md_list_item_margin">
 
         <ImageView
             android:id="@id/mdImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
+            android:clickable="false"
             android:cropToPadding="false"
-            android:clickable="false" />
+            android:scaleType="centerCrop" />
 
         <LinearLayout
             android:id="@id/mdTextRoot"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:clickable="false">
+            android:clickable="false"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@id/mdTextPrimary"
+                style="@style/TextAppearance.AppCompat.Subhead"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-medium"
-                android:singleLine="true"
+                android:clickable="false"
                 android:ellipsize="marquee"
-                style="@style/TextAppearance.AppCompat.Subhead"
-                android:clickable="false" />
+                android:fontFamily="sans-serif-medium"
+                android:gravity="start"
+                android:singleLine="true"
+                android:textAlignment="textStart" />
 
             <TextView
                 android:id="@id/mdTextSecondary"
+                style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/md_list_item_text_secondary_margin"
-                android:maxLines="2"
+                android:clickable="false"
                 android:ellipsize="marquee"
-                style="@style/TextAppearance.AppCompat.Body1"
-                android:clickable="false" />
+                android:gravity="start"
+                android:maxLines="2"
+                android:textAlignment="textStart" />
 
         </LinearLayout>
 

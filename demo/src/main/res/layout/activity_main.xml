@@ -12,12 +12,13 @@
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
-            android:layout_height="?attr/actionBarSize"
             android:layout_width="match_parent"
-            android:minHeight="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:contentInsetStart="72dp" />
+            android:elevation="@dimen/md_app_bar_elevation"
+            android:minHeight="?attr/actionBarSize"
+            app:contentInsetStart="72dp"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -30,25 +31,28 @@
                 android:padding="@dimen/md_baseline">
 
                 <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/md_baseline"
+                    android:gravity="start"
                     android:text="@string/hello_world"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/md_baseline"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+                    android:textAlignment="textStart"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textDirection="anyRtl"/>
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/drawer_frame_layout"
                     android:layout_marginBottom="@dimen/md_baseline"
-                    android:onClick="openDrawerFrameLayout" />
+                    android:onClick="openDrawerFrameLayout"
+                    android:text="@string/drawer_frame_layout" />
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/drawer_activity"
                     android:layout_marginBottom="@dimen/md_baseline"
-                    android:onClick="openDrawerActivity" />
+                    android:onClick="openDrawerActivity"
+                    android:text="@string/drawer_activity" />
 
             </LinearLayout>
 

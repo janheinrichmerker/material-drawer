@@ -18,9 +18,9 @@ package com.heinrichreimersoftware.materialdrawer;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -48,7 +48,7 @@ public class DrawerFrameLayout extends DrawerLayout {
         inflate(context, R.layout.md_drawer_frame_layout, this);
         mDrawer = (DrawerView) findViewById(R.id.mdDrawer);
 
-        setDrawerShadow(R.drawable.md_drawer_shadow, Gravity.START);
+        setDrawerShadow(R.drawable.md_drawer_shadow, GravityCompat.START);
 
 
         TypedArray a = getContext().getTheme().obtainStyledAttributes(new int[]{R.attr.colorPrimaryDark});
@@ -76,14 +76,20 @@ public class DrawerFrameLayout extends DrawerLayout {
         super.addView(child, 0, params);
     }
 
+    /**
+     * Gets whether debug logging is enabled
+     */
+    public boolean getLoggingEnabled() {
+        return mDrawer.getLoggingEnabled();
+    }
 
     /**
-     * Sets the drawer theme
+     * Sets whether debug logging is enabled
      *
-     * @param theme Theme to set
+     * @param loggingEnabled whether or not to enable debug logging
      */
-    public DrawerFrameLayout setDrawerTheme(DrawerTheme theme) {
-        mDrawer.setDrawerTheme(theme);
+    public DrawerFrameLayout setLoggingEnabled(boolean loggingEnabled) {
+        mDrawer.setLoggingEnabled(loggingEnabled);
         return this;
     }
 
@@ -102,14 +108,13 @@ public class DrawerFrameLayout extends DrawerLayout {
         return mDrawer.getDrawerTheme();
     }
 
-
     /**
-     * Sets the max drawer width
+     * Sets the drawer theme
      *
-     * @param drawerMaxWidth Max drawer width to set
+     * @param theme Theme to set
      */
-    public DrawerFrameLayout setDrawerMaxWidth(int drawerMaxWidth) {
-        mDrawer.setDrawerMaxWidth(drawerMaxWidth);
+    public DrawerFrameLayout setDrawerTheme(DrawerTheme theme) {
+        mDrawer.setDrawerTheme(theme);
         return this;
     }
 
@@ -138,6 +143,15 @@ public class DrawerFrameLayout extends DrawerLayout {
         return mDrawer.getDrawerMaxWidth();
     }
 
+    /**
+     * Sets the max drawer width
+     *
+     * @param drawerMaxWidth Max drawer width to set
+     */
+    public DrawerFrameLayout setDrawerMaxWidth(int drawerMaxWidth) {
+        mDrawer.setDrawerMaxWidth(drawerMaxWidth);
+        return this;
+    }
 
     /**
      * Adds a profile to the drawer view
@@ -216,6 +230,14 @@ public class DrawerFrameLayout extends DrawerLayout {
         return this;
     }
 
+    /**
+     * Gets the profile click listener of the drawer
+     *
+     * @return Profile click listener of the drawer
+     */
+    public DrawerProfile.OnProfileClickListener getOnProfileClickListener() {
+        return mDrawer.getOnProfileClickListener();
+    }
 
     /**
      * Sets a profile click listener to the drawer
@@ -225,15 +247,6 @@ public class DrawerFrameLayout extends DrawerLayout {
     public DrawerFrameLayout setOnProfileClickListener(DrawerProfile.OnProfileClickListener listener) {
         mDrawer.setOnProfileClickListener(listener);
         return this;
-    }
-
-    /**
-     * Gets the profile click listener of the drawer
-     *
-     * @return Profile click listener of the drawer
-     */
-    public DrawerProfile.OnProfileClickListener getOnProfileClickListener() {
-        return mDrawer.getOnProfileClickListener();
     }
 
     /**
@@ -253,6 +266,14 @@ public class DrawerFrameLayout extends DrawerLayout {
         return this;
     }
 
+    /**
+     * Gets the profile switch listener of the drawer
+     *
+     * @return Profile switch listener of the drawer
+     */
+    public DrawerProfile.OnProfileSwitchListener getOnProfileSwitchListener() {
+        return mDrawer.getOnProfileSwitchListener();
+    }
 
     /**
      * Sets a profile switch listener to the drawer
@@ -262,15 +283,6 @@ public class DrawerFrameLayout extends DrawerLayout {
     public DrawerFrameLayout setOnProfileSwitchListener(DrawerProfile.OnProfileSwitchListener listener) {
         mDrawer.setOnProfileSwitchListener(listener);
         return this;
-    }
-
-    /**
-     * Gets the profile switch listener of the drawer
-     *
-     * @return Profile switch listener of the drawer
-     */
-    public DrawerProfile.OnProfileSwitchListener getOnProfileSwitchListener() {
-        return mDrawer.getOnProfileSwitchListener();
     }
 
     /**
@@ -424,6 +436,14 @@ public class DrawerFrameLayout extends DrawerLayout {
         return this;
     }
 
+    /**
+     * Gets the item click listener of the drawer
+     *
+     * @return Item click listener of the drawer
+     */
+    public DrawerItem.OnItemClickListener getOnItemClickListener() {
+        return mDrawer.getOnItemClickListener();
+    }
 
     /**
      * Sets an item click listener to the drawer
@@ -433,15 +453,6 @@ public class DrawerFrameLayout extends DrawerLayout {
     public DrawerFrameLayout setOnItemClickListener(DrawerItem.OnItemClickListener listener) {
         mDrawer.setOnItemClickListener(listener);
         return this;
-    }
-
-    /**
-     * Gets the item click listener of the drawer
-     *
-     * @return Item click listener of the drawer
-     */
-    public DrawerItem.OnItemClickListener getOnItemClickListener() {
-        return mDrawer.getOnItemClickListener();
     }
 
     /**
@@ -595,6 +606,14 @@ public class DrawerFrameLayout extends DrawerLayout {
         return this;
     }
 
+    /**
+     * Gets the fixed item click listener of the drawer
+     *
+     * @return Item click listener of the drawer
+     */
+    public DrawerItem.OnItemClickListener getOnFixedItemClickListener() {
+        return mDrawer.getOnFixedItemClickListener();
+    }
 
     /**
      * Sets a fixed item click listener to the drawer
@@ -604,15 +623,6 @@ public class DrawerFrameLayout extends DrawerLayout {
     public DrawerFrameLayout setOnFixedItemClickListener(DrawerItem.OnItemClickListener listener) {
         mDrawer.setOnFixedItemClickListener(listener);
         return this;
-    }
-
-    /**
-     * Gets the fixed item click listener of the drawer
-     *
-     * @return Item click listener of the drawer
-     */
-    public DrawerItem.OnItemClickListener getOnFixedItemClickListener() {
-        return mDrawer.getOnFixedItemClickListener();
     }
 
     /**
