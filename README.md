@@ -1,6 +1,6 @@
 material-drawer
 ===============
-[![Download](https://img.shields.io/github/release/HeinrichReimer/material-drawer.svg?label=maven)](https://jitpack.io/#com.heinrichreimersoftware/material-drawer)
+[![Download](https://img.shields.io/github/release/HeinrichReimer/material-drawer.svg)](https://jitpack.io/#com.heinrichreimersoftware/material-drawer)
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-material--drawer-blue.svg?style=flat)](https://android-arsenal.com/details/1/1162)
 
