@@ -1,14 +1,17 @@
-material-drawer
+[DEPRECATED] material-drawer
 ===============
+
+Deprecation
+===========
+I'm not developing this library anymore. If you want a nav drawer I suggest you to use [@mikepenz's](https://github.com/mikepenz) [MaterialDrawer](https://github.com/mikepenz/MaterialDrawer).
+
+Information
+===========
 [ ![Download](https://api.bintray.com/packages/heinrichreimer/maven/material-drawer/images/download.svg) ](https://bintray.com/heinrichreimer/maven/material-drawer/_latestVersion)
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-material--drawer-blue.svg?style=flat)](https://android-arsenal.com/details/1/1162)
 
 Custom drawer implementation for Material design apps.
-
-Information
-===========
-I'm currently not actively developing this library because of school work. Yet I'll merge pull requests.
 
 Demo
 ----
