@@ -121,7 +121,10 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
     private DrawerTheme drawerTheme;
     private int statusBarHeight = 0;
     private int drawerMaxWidth = -1;
-    private boolean profileListOpen = false;
+	//Before
+//--private boolean profileListOpen = false;
+	//After Salvador Montiel
+    private boolean profileListOpen = true;
     private boolean isInViewHierarchy = false;
     private boolean loggingEnabled = false;
 
@@ -375,7 +378,10 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
                     imageViewProfileAvatarSecondary.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            selectProfile(secondProfile);
+							//Before
+//-------					selectProfile(secondProfile);
+							//After Salvador Montiel
+                            selectProfile(mProfileAdapter.getItem(1));
                         }
                     });
                     imageViewProfileAvatarSecondary.setVisibility(VISIBLE);
