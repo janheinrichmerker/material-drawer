@@ -33,7 +33,7 @@ repositories {
 ````
 ````gradle
 dependencies {
-    compile 'com.heinrichreimersoftware:material-drawer:2.2.0'
+    compile 'com.heinrichreimersoftware:material-drawer:2.3.0'
 }
 ````
 
