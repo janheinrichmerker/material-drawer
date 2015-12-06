@@ -18,6 +18,7 @@ package com.heinrichreimersoftware.materialdrawer;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.AttributeSet;
@@ -30,9 +31,10 @@ import com.heinrichreimersoftware.materialdrawer.theme.DrawerTheme;
 
 import java.util.List;
 
+@SuppressWarnings("unused")
 public class DrawerFrameLayout extends DrawerLayout {
 
-    private DrawerView mDrawer;
+    private final DrawerView mDrawer;
 
     public DrawerFrameLayout(Context context) {
         this(context, null);
@@ -57,7 +59,7 @@ public class DrawerFrameLayout extends DrawerLayout {
         if (colorPrimaryDark != 0) {
             setStatusBarBackgroundColor(colorPrimaryDark);
         } else {
-            setStatusBarBackgroundColor(getResources().getColor(android.R.color.black));
+            setStatusBarBackgroundColor(ContextCompat.getColor(getContext(), android.R.color.black));
         }
 
         a = getContext().obtainStyledAttributes(attrs, new int[]{R.attr.drawerMaxWidth});
@@ -367,8 +369,7 @@ public class DrawerFrameLayout extends DrawerLayout {
      * @return Item from the drawer
      */
     public DrawerItem findItemById(long id) {
-        mDrawer.findItemById(id);
-        return null;
+        return mDrawer.findItemById(id);
     }
 
     /**
@@ -537,8 +538,7 @@ public class DrawerFrameLayout extends DrawerLayout {
      * @return Item from the drawer
      */
     public DrawerItem findFixedItemById(long id) {
-        mDrawer.findFixedItemById(id);
-        return null;
+        return mDrawer.findFixedItemById(id);
     }
 
     /**

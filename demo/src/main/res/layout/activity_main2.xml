@@ -1,5 +1,6 @@
 <com.heinrichreimersoftware.materialdrawer.DrawerFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -19,7 +20,8 @@
             android:elevation="@dimen/md_app_bar_elevation"
             android:minHeight="?attr/actionBarSize"
             app:contentInsetStart="72dp"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            tools:ignore="UnusedAttribute" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -32,7 +34,7 @@
                 android:padding="@dimen/md_baseline"
                 android:text="@string/hello_world2"
                 android:textAlignment="textStart"
-                android:textDirection="anyRtl" />
+                tools:ignore="UnusedAttribute" />
 
         </ScrollView>
 

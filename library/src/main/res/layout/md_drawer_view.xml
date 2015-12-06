@@ -11,7 +11,8 @@
   limitations under the License.
   -->
 
-<merge xmlns:android="http://schemas.android.com/apk/res/android">
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -154,7 +155,8 @@
                                         android:fontFamily="sans-serif-medium"
                                         android:gravity="start"
                                         android:singleLine="true"
-                                        android:textAlignment="textStart" />
+                                        android:textAlignment="textStart"
+                                        tools:ignore="UnusedAttribute" />
 
                                     <TextView
                                         android:id="@id/mdProfileDescription"
@@ -165,7 +167,8 @@
                                         android:ellipsize="marquee"
                                         android:gravity="start"
                                         android:singleLine="true"
-                                        android:textAlignment="textStart" />
+                                        android:textAlignment="textStart"
+                                        tools:ignore="UnusedAttribute" />
 
                                 </LinearLayout>
 

@@ -34,17 +34,6 @@ import android.widget.LinearLayout;
  * {@link android.widget.FrameLayout} so it can receive the margin.
  */
 public class IcsLinearLayout extends LinearLayout {
-    private static final int[] R_styleable_LinearLayout = new int[]{
-        /* 0 */ android.R.attr.divider,
-        /* 1 */ android.R.attr.measureWithLargestChild,
-        /* 2 */ android.R.attr.showDividers,
-        /* 3 */ android.R.attr.dividerPadding,
-    };
-    private static final int LinearLayout_divider = 0;
-    private static final int LinearLayout_measureWithLargestChild = 1;
-    private static final int LinearLayout_showDividers = 2;
-    private static final int LinearLayout_dividerPadding = 3;
-
     /**
      * Don't show any dividers.
      */
@@ -61,14 +50,20 @@ public class IcsLinearLayout extends LinearLayout {
      * Show a divider at the end of the group.
      */
     public static final int SHOW_DIVIDER_END = 4;
-
-
+    private static final int[] R_styleable_LinearLayout = new int[]{
+        /* 0 */ android.R.attr.divider,
+        /* 1 */ android.R.attr.measureWithLargestChild,
+        /* 2 */ android.R.attr.showDividers,
+        /* 3 */ android.R.attr.dividerPadding,
+    };
+    private static final int LinearLayout_divider = 0;
+    private static final int LinearLayout_measureWithLargestChild = 1;
+    private static final int LinearLayout_showDividers = 2;
+    private static final int LinearLayout_dividerPadding = 3;
     private static final boolean IS_HONEYCOMB = Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB;
-
-
-    private Drawable mDivider;
     protected int mDividerWidth;
     protected int mDividerHeight;
+    private Drawable mDivider;
     private int mShowDividers;
     private int mDividerPadding;
     private boolean mClipDivider;
@@ -89,6 +84,14 @@ public class IcsLinearLayout extends LinearLayout {
     }
 
     /**
+     * @return A flag set indicating how dividers should be shown around items.
+     * @see #setShowDividers(int)
+     */
+    public int getShowDividers() {
+        return mShowDividers;
+    }
+
+    /**
      * Set how dividers should be shown between items in this layout
      *
      * @param showDividers One or more of {@link #SHOW_DIVIDER_BEGINNING},
@@ -101,14 +104,6 @@ public class IcsLinearLayout extends LinearLayout {
             invalidate(); //XXX This is required if you are toggling a divider off
         }
         mShowDividers = showDividers;
-    }
-
-    /**
-     * @return A flag set indicating how dividers should be shown around items.
-     * @see #setShowDividers(int)
-     */
-    public int getShowDividers() {
-        return mShowDividers;
     }
 
     /**
@@ -135,6 +130,17 @@ public class IcsLinearLayout extends LinearLayout {
     }
 
     /**
+     * Get the padding size used to inset dividers in pixels
+     *
+     * @see #setShowDividers(int)
+     * @see #setDividerDrawable(android.graphics.drawable.Drawable)
+     * @see #setDividerPadding(int)
+     */
+    public int getDividerPadding() {
+        return mDividerPadding;
+    }
+
+    /**
      * Set padding displayed on both ends of dividers.
      *
      * @param padding Padding value in pixels that will be applied to each end
@@ -144,17 +150,6 @@ public class IcsLinearLayout extends LinearLayout {
      */
     public void setDividerPadding(int padding) {
         mDividerPadding = padding;
-    }
-
-    /**
-     * Get the padding size used to inset dividers in pixels
-     *
-     * @see #setShowDividers(int)
-     * @see #setDividerDrawable(android.graphics.drawable.Drawable)
-     * @see #setDividerPadding(int)
-     */
-    public int getDividerPadding() {
-        return mDividerPadding;
     }
 
     /**
@@ -206,7 +201,7 @@ public class IcsLinearLayout extends LinearLayout {
         super.onDraw(canvas);
     }
 
-    void drawDividersVertical(Canvas canvas) {
+    private void drawDividersVertical(Canvas canvas) {
         final int count = getChildCount();
         for (int i = 0; i < count; i++) {
             final View child = getChildAt(i);
@@ -222,7 +217,7 @@ public class IcsLinearLayout extends LinearLayout {
 
         if (hasDividerBeforeChildAt(count)) {
             final View child = getChildAt(count - 1);
-            int bottom = 0;
+            int bottom;
             if (child == null) {
                 bottom = getHeight() - getPaddingBottom() - mDividerHeight;
             } else {
@@ -233,7 +228,7 @@ public class IcsLinearLayout extends LinearLayout {
         }
     }
 
-    void drawDividersHorizontal(Canvas canvas) {
+    private void drawDividersHorizontal(Canvas canvas) {
         final int count = getChildCount();
         for (int i = 0; i < count; i++) {
             final View child = getChildAt(i);
@@ -249,7 +244,7 @@ public class IcsLinearLayout extends LinearLayout {
 
         if (hasDividerBeforeChildAt(count)) {
             final View child = getChildAt(count - 1);
-            int right = 0;
+            int right;
             if (child == null) {
                 right = getWidth() - getPaddingRight() - mDividerWidth;
             } else {
@@ -260,7 +255,7 @@ public class IcsLinearLayout extends LinearLayout {
         }
     }
 
-    void drawHorizontalDivider(Canvas canvas, int top) {
+    private void drawHorizontalDivider(Canvas canvas, int top) {
         if (mClipDivider && !IS_HONEYCOMB) {
             canvas.save();
             canvas.clipRect(getPaddingLeft() + mDividerPadding, top,
@@ -274,7 +269,7 @@ public class IcsLinearLayout extends LinearLayout {
         }
     }
 
-    void drawVerticalDivider(Canvas canvas, int left) {
+    private void drawVerticalDivider(Canvas canvas, int left) {
         if (mClipDivider && !IS_HONEYCOMB) {
             canvas.save();
             canvas.clipRect(left, getPaddingTop() + mDividerPadding,

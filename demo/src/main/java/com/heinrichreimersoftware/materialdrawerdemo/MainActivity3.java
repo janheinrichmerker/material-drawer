@@ -22,6 +22,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -45,24 +46,20 @@ public class MainActivity3 extends DrawerActivity {
 
         setDrawerTheme(
                 new DrawerTheme(this)
-                        .setBackgroundColorRes(R.color.background_material_dark)
-                        .setTextColorPrimaryRes(R.color.primary_text_default_material_dark)
-                        .setTextColorSecondaryRes(R.color.secondary_text_default_material_dark)
+                        .setBackgroundColorRes(R.color.window_background_3)
+                        .setTextColorPrimaryRes(R.color.text_color_primary_3)
+                        .setTextColorSecondaryRes(R.color.text_color_secondary_3)
         );
 
         addItems(new DrawerItem()
                         .setTextPrimary(getString(R.string.lorem_ipsum_short))
-                        .setTextSecondary(getString(R.string.lorem_ipsum_long))
-                        .setDrawerTheme(
-                                new DrawerTheme(getDrawerTheme())
-                                        .setBackgroundColorRes(R.color.material_blue_grey_800)
-                        ),
+                        .setTextSecondary(getString(R.string.lorem_ipsum_long)),
                 new DrawerFragmentItem()
                         .setFragment(new ListFragment())
                         .setTextPrimary(getString(R.string.lorem_ipsum_medium)),
                 new DrawerFragmentItem()
                         .setFragment(new Fragment())
-                        .setImage(getResources().getDrawable(R.drawable.ic_flag))
+                        .setImage(ContextCompat.getDrawable(this, R.drawable.ic_flag_white))
                         .setTextPrimary(getString(R.string.lorem_ipsum_short))
                         .setTextSecondary(getString(R.string.lorem_ipsum_long))
         );
@@ -76,14 +73,14 @@ public class MainActivity3 extends DrawerActivity {
 
         addProfile(new DrawerProfile()
                         .setId(1)
-                        .setRoundedAvatar((BitmapDrawable) getResources().getDrawable(R.drawable.cat_2))
-                        .setBackground(getResources().getDrawable(R.drawable.cat_wide_1))
+                        .setRoundedAvatar((BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.cat_2))
+                        .setBackground(ContextCompat.getDrawable(this, R.drawable.cat_wide_1))
                         .setName(getString(R.string.lorem_ipsum_short))
         );
         addProfile(new DrawerProfile()
                         .setId(2)
-                        .setRoundedAvatar((BitmapDrawable) getResources().getDrawable(R.drawable.cat_1))
-                        .setBackground(getResources().getDrawable(R.drawable.cat_wide_2))
+                        .setRoundedAvatar((BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.cat_1))
+                        .setBackground(ContextCompat.getDrawable(this, R.drawable.cat_wide_2))
                         .setName(getString(R.string.lorem_ipsum_short))
                         .setDescription(getString(R.string.lorem_ipsum_medium))
         );

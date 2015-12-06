@@ -25,8 +25,8 @@ public class AlphaSatColorMatrixEvaluator implements TypeEvaluator {
 
     private static final int MAX_BLACKER = 50;
 
-    private ColorMatrix colorMatrix;
-    float[] elements = new float[20];
+    private final ColorMatrix colorMatrix;
+    private final float[] elements = new float[20];
 
     public AlphaSatColorMatrixEvaluator() {
         colorMatrix = new ColorMatrix();

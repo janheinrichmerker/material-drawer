@@ -21,6 +21,7 @@ import android.content.res.Configuration;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        drawerLayout.setStatusBarBackgroundColor(getResources().getColor(R.color.color_primary_dark));
+        drawerLayout.setStatusBarBackgroundColor(ContextCompat.getColor(this, R.color.color_primary_dark));
         drawerLayout.setDrawerListener(drawerToggle);
         drawerLayout.closeDrawer(drawer);
 
@@ -82,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         );
 
         drawer.addItem(new DrawerItem()
-                        .setImage(getResources().getDrawable(R.drawable.ic_mail))
+                        .setImage(ContextCompat.getDrawable(this, R.drawable.ic_email))
                         .setTextPrimary(getString(R.string.lorem_ipsum_short))
                         .setTextSecondary(getString(R.string.lorem_ipsum_long))
         );
@@ -90,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         drawer.addDivider();
 
         drawer.addItem(new DrawerItem()
-                        .setRoundedImage((BitmapDrawable) getResources().getDrawable(R.drawable.cat_1))
+                        .setRoundedImage((BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.cat_1))
                         .setTextPrimary(getString(R.string.lorem_ipsum_short))
                         .setTextSecondary(getString(R.string.lorem_ipsum_long))
         );
@@ -102,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         );
 
         drawer.addItem(new DrawerItem()
-                        .setRoundedImage((BitmapDrawable) getResources().getDrawable(R.drawable.cat_2), DrawerItem.SMALL_AVATAR)
+                        .setRoundedImage((BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.cat_2), DrawerItem.SMALL_AVATAR)
                         .setTextPrimary(getString(R.string.lorem_ipsum_short))
                         .setTextSecondary(getString(R.string.lorem_ipsum_long), DrawerItem.THREE_LINE)
         );
@@ -118,12 +119,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         drawer.addFixedItem(new DrawerItem()
-                        .setRoundedImage((BitmapDrawable) getResources().getDrawable(R.drawable.cat_2), DrawerItem.SMALL_AVATAR)
+                        .setRoundedImage((BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.cat_2), DrawerItem.SMALL_AVATAR)
                         .setTextPrimary(getString(R.string.lorem_ipsum_short))
         );
 
         drawer.addFixedItem(new DrawerItem()
-                        .setImage(getResources().getDrawable(R.drawable.ic_flag))
+                        .setImage(ContextCompat.getDrawable(this, R.drawable.ic_flag))
                         .setTextPrimary(getString(R.string.lorem_ipsum_short))
         );
 
@@ -138,23 +139,23 @@ public class MainActivity extends AppCompatActivity {
 
         drawer.addProfile(new DrawerProfile()
                         .setId(1)
-                        .setRoundedAvatar((BitmapDrawable) getResources().getDrawable(R.drawable.cat_1))
-                        .setBackground(getResources().getDrawable(R.drawable.cat_wide_1))
+                        .setRoundedAvatar((BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.cat_1))
+                        .setBackground(ContextCompat.getDrawable(this, R.drawable.cat_wide_1))
                         .setName(getString(R.string.lorem_ipsum_short))
                         .setDescription(getString(R.string.lorem_ipsum_medium))
         );
 
         drawer.addProfile(new DrawerProfile()
                         .setId(2)
-                        .setRoundedAvatar((BitmapDrawable) getResources().getDrawable(R.drawable.cat_2))
-                        .setBackground(getResources().getDrawable(R.drawable.cat_wide_1))
+                        .setRoundedAvatar((BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.cat_2))
+                        .setBackground(ContextCompat.getDrawable(this, R.drawable.cat_wide_1))
                         .setName(getString(R.string.lorem_ipsum_short))
         );
 
         drawer.addProfile(new DrawerProfile()
                         .setId(3)
-                        .setRoundedAvatar((BitmapDrawable) getResources().getDrawable(R.drawable.cat_1))
-                        .setBackground(getResources().getDrawable(R.drawable.cat_wide_2))
+                        .setRoundedAvatar((BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.cat_1))
+                        .setBackground(ContextCompat.getDrawable(this, R.drawable.cat_wide_2))
                         .setName(getString(R.string.lorem_ipsum_short))
                         .setDescription(getString(R.string.lorem_ipsum_medium))
         );

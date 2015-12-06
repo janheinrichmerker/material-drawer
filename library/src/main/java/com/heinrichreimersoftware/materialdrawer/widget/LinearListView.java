@@ -45,8 +45,7 @@ public class LinearListView extends IcsLinearLayout {
     private View mEmptyView;
     private ListAdapter mAdapter;
     private boolean mAreAllItemsSelectable;
-    private OnItemClickListener mOnItemClickListener;
-    private DataSetObserver mDataObserver = new DataSetObserver() {
+    private final DataSetObserver mDataObserver = new DataSetObserver() {
 
         @Override
         public void onChanged() {
@@ -59,6 +58,7 @@ public class LinearListView extends IcsLinearLayout {
         }
 
     };
+    private OnItemClickListener mOnItemClickListener;
 
     public LinearListView(Context context) {
         this(context, null);
@@ -79,13 +79,14 @@ public class LinearListView extends IcsLinearLayout {
 
         CharSequence[] entries = a.getTextArray(LinearListView_entries);
         if (entries != null) {
-            setAdapter(new ArrayAdapter<CharSequence>(context,
+            setAdapter(new ArrayAdapter<>(context,
                     android.R.layout.simple_list_item_1, entries));
         }
 
         a.recycle();
     }
 
+    @SuppressWarnings("SuspiciousNameCombination")
     @Override
     public void setOrientation(int orientation) {
         if (orientation != getOrientation()) {
@@ -141,25 +142,11 @@ public class LinearListView extends IcsLinearLayout {
     }
 
     /**
-     * Interface definition for a callback to be invoked when an item in this
-     * LinearListView has been clicked.
+     * @return The callback to be invoked with an item in this LinearListView has
+     * been clicked, or null id no callback has been set.
      */
-    public interface OnItemClickListener {
-
-        /**
-         * Callback method to be invoked when an item in this LinearListView has
-         * been clicked.
-         * <p/>
-         * Implementers can call getItemAtPosition(position) if they need to
-         * access the data associated with the selected item.
-         *
-         * @param parent   The LinearListView where the click happened.
-         * @param view     The view within the LinearListView that was clicked (this
-         *                 will be a view provided by the adapter)
-         * @param position The position of the view in the adapter.
-         * @param id       The row id of the item that was clicked.
-         */
-        void onItemClick(LinearListView parent, View view, int position, long id);
+    public final OnItemClickListener getOnItemClickListener() {
+        return mOnItemClickListener;
     }
 
     /**
@@ -170,14 +157,6 @@ public class LinearListView extends IcsLinearLayout {
      */
     public void setOnItemClickListener(OnItemClickListener listener) {
         mOnItemClickListener = listener;
-    }
-
-    /**
-     * @return The callback to be invoked with an item in this LinearListView has
-     * been clicked, or null id no callback has been set.
-     */
-    public final OnItemClickListener getOnItemClickListener() {
-        return mOnItemClickListener;
     }
 
     /**
@@ -200,17 +179,6 @@ public class LinearListView extends IcsLinearLayout {
     }
 
     /**
-     * Sets the view to show if the adapter is empty
-     */
-    public void setEmptyView(View emptyView) {
-        mEmptyView = emptyView;
-
-        final ListAdapter adapter = getAdapter();
-        final boolean empty = ((adapter == null) || adapter.isEmpty());
-        updateEmptyStatus(empty);
-    }
-
-    /**
      * When the current adapter is empty, the LinearListView can display a special
      * view call the empty view. The empty view is used to provide feedback to
      * the user that no data is available in this LinearListView.
@@ -219,6 +187,17 @@ public class LinearListView extends IcsLinearLayout {
      */
     public View getEmptyView() {
         return mEmptyView;
+    }
+
+    /**
+     * Sets the view to show if the adapter is empty
+     */
+    public void setEmptyView(View emptyView) {
+        mEmptyView = emptyView;
+
+        final ListAdapter adapter = getAdapter();
+        final boolean empty = ((adapter == null) || adapter.isEmpty());
+        updateEmptyStatus(empty);
     }
 
     /**
@@ -264,6 +243,28 @@ public class LinearListView extends IcsLinearLayout {
     }
 
     /**
+     * Interface definition for a callback to be invoked when an item in this
+     * LinearListView has been clicked.
+     */
+    public interface OnItemClickListener {
+
+        /**
+         * Callback method to be invoked when an item in this LinearListView has
+         * been clicked.
+         * <p/>
+         * Implementers can call getItemAtPosition(position) if they need to
+         * access the data associated with the selected item.
+         *
+         * @param parent   The LinearListView where the click happened.
+         * @param view     The view within the LinearListView that was clicked (this
+         *                 will be a view provided by the adapter)
+         * @param position The position of the view in the adapter.
+         * @param id       The row id of the item that was clicked.
+         */
+        void onItemClick(LinearListView parent, View view, int position, long id);
+    }
+
+    /**
      * Internal OnClickListener that this view associate of each of its children
      * so that they can respond to OnItemClick listener's events. Avoid setting
      * an OnClickListener manually. If you need it you can wrap the child in a
@@ -271,7 +272,7 @@ public class LinearListView extends IcsLinearLayout {
      */
     private class InternalOnClickListener implements OnClickListener {
 
-        int mPosition;
+        private final int mPosition;
 
         public InternalOnClickListener(int position) {
             mPosition = position;

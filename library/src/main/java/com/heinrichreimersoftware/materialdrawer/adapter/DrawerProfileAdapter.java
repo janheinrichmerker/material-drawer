@@ -18,13 +18,13 @@ package com.heinrichreimersoftware.materialdrawer.adapter;
 
 import android.content.Context;
 import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -64,15 +64,15 @@ public class DrawerProfileAdapter extends ArrayAdapter<DrawerProfile> {
         int textColorPrimary = drawerTheme.getTextColorPrimary();
 
         if (drawerTheme.isLightTheme()) {
-            viewHolder.getRoot().setForeground(getContext().getResources().getDrawable(R.drawable.md_selector_light));
+            viewHolder.getRoot().setForeground(ContextCompat.getDrawable(getContext(), R.drawable.md_selector_light));
         } else {
-            viewHolder.getRoot().setForeground(getContext().getResources().getDrawable(R.drawable.md_selector_dark));
+            viewHolder.getRoot().setForeground(ContextCompat.getDrawable(getContext(), R.drawable.md_selector_dark));
         }
 
         if (drawerTheme.getBackgroundColor() != 0) {
             viewHolder.getRoot().setBackgroundColor(drawerTheme.getBackgroundColor());
         } else {
-            viewHolder.getRoot().setBackgroundColor(getContext().getResources().getColor(android.R.color.transparent));
+            viewHolder.getRoot().setBackgroundColor(ContextCompat.getColor(getContext(), android.R.color.transparent));
         }
 
         if (position == 0) {
@@ -146,16 +146,14 @@ public class DrawerProfileAdapter extends ArrayAdapter<DrawerProfile> {
     }
 
     private static class ViewHolder {
-        FrameLayout mRoot;
-        ImageView mImageView;
-        LinearLayout mTextRoot;
-        TextView mTextViewPrimary;
-        TextView mTextViewSecondary;
+        private final FrameLayout mRoot;
+        private final ImageView mImageView;
+        private final TextView mTextViewPrimary;
+        private final TextView mTextViewSecondary;
 
         public ViewHolder(View root) {
             mRoot = (FrameLayout) root;
             mImageView = (ImageView) root.findViewById(R.id.mdImage);
-            mTextRoot = (LinearLayout) root.findViewById(R.id.mdTextRoot);
             mTextViewPrimary = (TextView) root.findViewById(R.id.mdTextPrimary);
             mTextViewSecondary = (TextView) root.findViewById(R.id.mdTextSecondary);
         }
@@ -168,40 +166,12 @@ public class DrawerProfileAdapter extends ArrayAdapter<DrawerProfile> {
             return mImageView;
         }
 
-        public LinearLayout getTextRoot() {
-            return mTextRoot;
-        }
-
         public TextView getTextViewPrimary() {
             return mTextViewPrimary;
         }
 
         public TextView getTextViewSecondary() {
             return mTextViewSecondary;
-        }
-    }
-
-    private static class HeaderViewHolder {
-        LinearLayout mHeaderRoot;
-        LinearLayout mHeaderTitleRoot;
-        TextView mHeaderTitle;
-
-        public HeaderViewHolder(View root) {
-            mHeaderRoot = (LinearLayout) root;
-            mHeaderTitleRoot = (LinearLayout) root.findViewById(R.id.mdHeaderTitleRoot);
-            mHeaderTitle = (TextView) root.findViewById(R.id.mdHeaderTitle);
-        }
-
-        public LinearLayout getHeaderRoot() {
-            return mHeaderRoot;
-        }
-
-        public LinearLayout getHeaderTitleRoot() {
-            return mHeaderTitleRoot;
-        }
-
-        public TextView getHeaderTitle() {
-            return mHeaderTitle;
         }
     }
 }

@@ -12,7 +12,6 @@
     <string name="lorem_ipsum_medium" translatable="false">Lorem ipsum dolor sit amet</string>
     <string name="lorem_ipsum_long" translatable="false">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</string>
 
-    <string name="drawer_view">DrawerView</string>
     <string name="drawer_frame_layout">DrawerFrameLayout</string>
     <string name="drawer_activity">DrawerActivity</string>
 

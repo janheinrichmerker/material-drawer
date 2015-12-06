@@ -30,6 +30,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.text.TextUtilsCompat;
 import android.support.v7.graphics.Palette;
 import android.util.AttributeSet;
@@ -64,6 +65,7 @@ import java.util.Locale;
 /**
  * View to be used with {@link android.support.v4.widget.DrawerLayout} to display a drawer which is fully compliant with the Material Design specification.
  */
+@SuppressWarnings("unused")
 public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFrameLayout.OnInsetsCallback {
 
     public static final String STATE_PROFILE_LIST_OPEN = "mdProfileListOpen";
@@ -146,7 +148,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
         findViews();
 
         setClipToPadding(false);
-        setInsetForeground(new ColorDrawable(getResources().getColor(R.color.md_inset_foreground)));
+        setInsetForeground(new ColorDrawable(ContextCompat.getColor(getContext(), R.color.md_inset_foreground)));
 
         setOnInsetsCallback(this);
 
@@ -249,9 +251,9 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
         setInsetForeground(new ColorDrawable(drawerTheme.getStatusBarBackgroundColor()));
 
         if (drawerTheme.isLightTheme()) {
-            fixedDivider.setBackgroundColor(getContext().getResources().getColor(R.color.md_divider_light));
+            fixedDivider.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.md_divider_light));
         } else {
-            fixedDivider.setBackgroundColor(getContext().getResources().getColor(R.color.md_divider_dark));
+            fixedDivider.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.md_divider_dark));
         }
 
         linearListViewFixed.setBackgroundColor(drawerTheme.getBackgroundColor());
@@ -369,13 +371,12 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
                 imageViewOpenProfileListIcon.setVisibility(VISIBLE);
             } else if (mProfileAdapter.getCount() == 2) {
                 /* Two profiles. Should show the second profile avatar. */
-                final DrawerProfile secondProfile = mProfileAdapter.getItem(1);
-                if (secondProfile.hasAvatar()) {
-                    imageViewProfileAvatarSecondary.setImageDrawable(secondProfile.getAvatar());
+                if (mProfileAdapter.getItem(1).hasAvatar()) {
+                    imageViewProfileAvatarSecondary.setImageDrawable(mProfileAdapter.getItem(1).getAvatar());
                     imageViewProfileAvatarSecondary.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            selectProfile(secondProfile);
+                            selectProfile(mProfileAdapter.getItem(1));
                         }
                     });
                     imageViewProfileAvatarSecondary.setVisibility(VISIBLE);
@@ -401,7 +402,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
             if (mProfileAdapter.getItem(0).getBackground() != null) {
                 imageViewProfileBackground.setImageDrawable(mProfileAdapter.getItem(0).getBackground());
             } else {
-                imageViewProfileBackground.setImageDrawable(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
+                imageViewProfileBackground.setImageDrawable(new ColorDrawable(ContextCompat.getColor(getContext(), android.R.color.transparent)));
             }
 
             if (mProfileAdapter.getItem(0).getDescription() != null && !mProfileAdapter.getItem(0).getDescription().equals("")) {

@@ -37,4 +37,7 @@
     <!-- 0% opacity -->
     <color name="md_fixed_list_shadow_end">#1e000000</color>
 
+    <color name="md_ripple_material_dark">#33ffffff</color>
+    <color name="md_ripple_material_light">#1f000000</color>
+
 </resources>

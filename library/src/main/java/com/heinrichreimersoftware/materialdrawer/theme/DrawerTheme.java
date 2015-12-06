@@ -21,13 +21,13 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 
 import com.heinrichreimersoftware.materialdrawer.R;
 
 public class DrawerTheme {
 
-    private Context context;
-
+    private final Context context;
 
     /**
      * Used for the drawer / drawer item / drawer profile list background
@@ -66,7 +66,7 @@ public class DrawerTheme {
 
 
     public DrawerTheme(@NonNull DrawerTheme theme) {
-        context = theme.getContext();
+        context = theme.context;
 
         backgroundColor = theme.getBackgroundColor();
         statusBarBackgroundColor =
@@ -84,7 +84,7 @@ public class DrawerTheme {
         TypedArray array = context.obtainStyledAttributes(attrs);
 
         backgroundColor = array.getColor(0, 0);
-        statusBarBackgroundColor = context.getResources().getColor(R.color.md_inset_foreground);
+        statusBarBackgroundColor = ContextCompat.getColor(context, R.color.md_inset_foreground);
         textColorPrimary = array.getColor(1, 0);
         textColorSecondary = array.getColor(2, 0);
         textColorPrimaryInverse = array.getColor(3, 0);
@@ -102,12 +102,8 @@ public class DrawerTheme {
         return (1 - (0.299 * Color.red(color) + 0.587 * Color.green(color) + 0.114 * Color.blue(color)) / 255) < 0.5;
     }
 
-    public Context getContext() {
-        return context;
-    }
-
     public DrawerTheme setBackgroundColorRes(@ColorRes int backgroundColorRes) {
-        this.backgroundColor = context.getResources().getColor(backgroundColorRes);
+        this.backgroundColor = ContextCompat.getColor(context, backgroundColorRes);
         return this;
     }
 
@@ -121,7 +117,7 @@ public class DrawerTheme {
     }
 
     public DrawerTheme setStatusBarBackgroundColorRes(@ColorRes int statusBarBackgroundColorRes) {
-        this.statusBarBackgroundColor = context.getResources().getColor(statusBarBackgroundColorRes);
+        this.statusBarBackgroundColor = ContextCompat.getColor(context, statusBarBackgroundColorRes);
         return this;
     }
 
@@ -135,7 +131,7 @@ public class DrawerTheme {
     }
 
     public DrawerTheme setTextColorPrimaryRes(@ColorRes int textColorPrimaryRes) {
-        this.textColorPrimary = context.getResources().getColor(textColorPrimaryRes);
+        this.textColorPrimary = ContextCompat.getColor(context, textColorPrimaryRes);
         return this;
     }
 
@@ -149,7 +145,7 @@ public class DrawerTheme {
     }
 
     public DrawerTheme setTextColorSecondaryRes(@ColorRes int textColorSecondaryRes) {
-        this.textColorSecondary = context.getResources().getColor(textColorSecondaryRes);
+        this.textColorSecondary = ContextCompat.getColor(context, textColorSecondaryRes);
         return this;
     }
 
@@ -163,7 +159,7 @@ public class DrawerTheme {
     }
 
     public DrawerTheme setTextColorPrimaryInverseRes(@ColorRes int textColorPrimaryInverseRes) {
-        this.textColorPrimaryInverse = context.getResources().getColor(textColorPrimaryInverseRes);
+        this.textColorPrimaryInverse = ContextCompat.getColor(context, textColorPrimaryInverseRes);
         return this;
     }
 
@@ -177,7 +173,7 @@ public class DrawerTheme {
     }
 
     public DrawerTheme setTextColorSecondaryInverseRes(@ColorRes int textColorSecondaryInverseRes) {
-        this.textColorSecondaryInverse = context.getResources().getColor(textColorSecondaryInverseRes);
+        this.textColorSecondaryInverse = ContextCompat.getColor(context, textColorSecondaryInverseRes);
         return this;
     }
 
@@ -191,7 +187,7 @@ public class DrawerTheme {
     }
 
     public DrawerTheme setHighlightColorRes(@ColorRes int highlightColorRes) {
-        this.highlightColor = context.getResources().getColor(highlightColorRes);
+        this.highlightColor = ContextCompat.getColor(context, highlightColorRes);
         return this;
     }
 

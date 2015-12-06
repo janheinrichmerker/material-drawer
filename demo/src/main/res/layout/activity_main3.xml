@@ -1,5 +1,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -8,7 +9,8 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:elevation="@dimen/md_app_bar_elevation"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:ignore="UnusedAttribute">
 
         <TextView
             android:layout_width="match_parent"
@@ -17,8 +19,7 @@
             android:padding="@dimen/md_baseline"
             android:text="@string/hello_world3"
             android:textAlignment="textStart"
-            android:textColor="?android:attr/textColorPrimaryInverse"
-            android:textDirection="anyRtl" />
+            android:textColor="?android:attr/textColorPrimaryInverse" />
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"

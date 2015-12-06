@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.heinrichreimersoftware.materialdrawerdemo">
 
     <application
         android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
@@ -18,14 +20,17 @@
         </activity>
         <activity
             android:name=".MainActivity2"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            tools:ignore="UnusedAttribute">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.heinrichreimersoftware.materialdrawerdemo.MainActivity" />
         </activity>
         <activity
             android:name=".MainActivity3"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme3"
+            tools:ignore="UnusedAttribute">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.heinrichreimersoftware.materialdrawerdemo.MainActivity" />

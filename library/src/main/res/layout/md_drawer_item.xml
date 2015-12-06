@@ -12,6 +12,7 @@
   -->
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@id/mdRoot"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -35,10 +36,10 @@
             android:layout_height="wrap_content"
             android:clickable="false"
             android:cropToPadding="false"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            tools:ignore="ContentDescription" />
 
         <LinearLayout
-            android:id="@id/mdTextRoot"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -55,7 +56,8 @@
                 android:fontFamily="sans-serif-medium"
                 android:gravity="start"
                 android:singleLine="true"
-                android:textAlignment="textStart" />
+                android:textAlignment="textStart"
+                tools:ignore="UnusedAttribute" />
 
             <TextView
                 android:id="@id/mdTextSecondary"
@@ -67,7 +69,8 @@
                 android:ellipsize="marquee"
                 android:gravity="start"
                 android:maxLines="2"
-                android:textAlignment="textStart" />
+                android:textAlignment="textStart"
+                tools:ignore="UnusedAttribute" />
 
         </LinearLayout>
 

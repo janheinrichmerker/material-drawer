@@ -21,6 +21,7 @@ import android.content.res.Configuration;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -38,8 +39,6 @@ import java.util.List;
 
 public class MainActivity2 extends AppCompatActivity {
 
-    private Toolbar toolbar;
-
     private DrawerFrameLayout drawer;
 
     private ActionBarDrawerToggle drawerToggle;
@@ -49,7 +48,7 @@ public class MainActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         drawer = (DrawerFrameLayout) findViewById(R.id.drawer);
 
@@ -92,8 +91,8 @@ public class MainActivity2 extends AppCompatActivity {
 
         drawer.addProfile(new DrawerProfile()
                         .setId(1)
-                        .setRoundedAvatar((BitmapDrawable) getResources().getDrawable(R.drawable.cat_2))
-                        .setBackground(getResources().getDrawable(R.drawable.cat_wide_1))
+                        .setRoundedAvatar((BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.cat_2))
+                        .setBackground(ContextCompat.getDrawable(this, R.drawable.cat_wide_1))
                         .setName(getString(R.string.lorem_ipsum_short))
         );
     }

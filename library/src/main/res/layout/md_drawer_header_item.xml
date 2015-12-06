@@ -12,6 +12,7 @@
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@id/mdHeaderRoot"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -39,7 +40,8 @@
             android:paddingLeft="@dimen/md_baseline"
             android:paddingRight="@dimen/md_baseline"
             android:singleLine="true"
-            android:textAlignment="textStart" />
+            android:textAlignment="textStart"
+            tools:ignore="UnusedAttribute" />
 
     </LinearLayout>
 

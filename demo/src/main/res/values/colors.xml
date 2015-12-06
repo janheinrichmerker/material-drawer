@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Brown 500 -->
     <color name="color_primary">#795548</color>
+    <!-- Brown 700 -->
     <color name="color_primary_dark">#5D4037</color>
-    <color name="color_accent">#FF5722</color>
+    <!-- Deep Orange A400 -->
+    <color name="color_accent">#FF3D00</color>
+
+    <!-- Teal 600 -->
+    <color name="color_primary_3">#00897B</color>
+    <!-- Teal 800 -->
+    <color name="color_primary_dark_3">#00695C</color>
+    <!-- Cyan A200 -->
+    <color name="color_accent_3">#18FFFF</color>
+    <!-- Blue Grey 800 -->
+    <color name="window_background_3">#263238</color>
+    <!-- White 100% -->
+    <color name="text_color_primary_3">#FFFFFF</color>
+    <!-- White 70% -->
+    <color name="text_color_secondary_3">#B3FFFFFF</color>
 </resources>

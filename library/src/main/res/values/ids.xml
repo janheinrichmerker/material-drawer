@@ -12,51 +12,50 @@
   -->
 
 <resources>
-    <item type="id" name="mdDrawerLayout" />
-    <item type="id" name="mdToolbar" />
-    <item type="id" name="mdFrame" />
+    <item name="mdDrawerLayout" type="id" />
+    <item name="mdToolbar" type="id" />
+    <item name="mdFrame" type="id" />
 
-    <item type="id" name="mdDrawer" />
+    <item name="mdDrawer" type="id" />
 
-    <item type="id" name="mdScrollView" />
+    <item name="mdScrollView" type="id" />
 
-    <item type="id" name="mdLayout" />
+    <item name="mdLayout" type="id" />
 
-    <item type="id" name="mdLayoutProfile" />
-    <item type="id" name="mdLayoutProfileContent" />
+    <item name="mdLayoutProfile" type="id" />
+    <item name="mdLayoutProfileContent" type="id" />
 
-    <item type="id" name="mdAvatarProfile" />
-    <item type="id" name="mdAvatarProfileSecondary" />
-    <item type="id" name="mdAvatarProfileCount" />
+    <item name="mdAvatarProfile" type="id" />
+    <item name="mdAvatarProfileSecondary" type="id" />
+    <item name="mdAvatarProfileCount" type="id" />
 
-    <item type="id" name="mdProfileBackground" />
-    <item type="id" name="mdProfileBackgroundOverlay" />
-    <item type="id" name="mdProfileTextContainer" />
-    <item type="id" name="mdProfileName" />
-    <item type="id" name="mdProfileDescription" />
+    <item name="mdProfileBackground" type="id" />
+    <item name="mdProfileBackgroundOverlay" type="id" />
+    <item name="mdProfileTextContainer" type="id" />
+    <item name="mdProfileName" type="id" />
+    <item name="mdProfileDescription" type="id" />
 
-    <item type="id" name="mdOpenProfileListContainer" />
-    <item type="id" name="mdOpenProfileListIcon" />
+    <item name="mdOpenProfileListContainer" type="id" />
+    <item name="mdOpenProfileListIcon" type="id" />
 
-    <item type="id" name="mdProfileList" />
+    <item name="mdProfileList" type="id" />
 
 
-    <item type="id" name="mdListContainer" />
-    <item type="id" name="mdList" />
+    <item name="mdListContainer" type="id" />
+    <item name="mdList" type="id" />
 
-    <item type="id" name="mdFixedShadow" />
-    <item type="id" name="mdFixedDivider" />
-    <item type="id" name="mdFixedListContainer" />
-    <item type="id" name="mdLinearListViewFixed" />
+    <item name="mdFixedShadow" type="id" />
+    <item name="mdFixedDivider" type="id" />
+    <item name="mdFixedListContainer" type="id" />
+    <item name="mdLinearListViewFixed" type="id" />
 
-    <item type="id" name="mdRoot" />
-    <item type="id" name="mdImage" />
-    <item type="id" name="mdTextRoot" />
-    <item type="id" name="mdTextPrimary" />
-    <item type="id" name="mdTextSecondary" />
+    <item name="mdRoot" type="id" />
+    <item name="mdImage" type="id" />
+    <item name="mdTextPrimary" type="id" />
+    <item name="mdTextSecondary" type="id" />
 
-    <item type="id" name="mdHeaderRoot" />
-    <item type="id" name="mdDivider" />
-    <item type="id" name="mdHeaderTitleRoot" />
-    <item type="id" name="mdHeaderTitle" />
+    <item name="mdHeaderRoot" type="id" />
+    <item name="mdDivider" type="id" />
+    <item name="mdHeaderTitleRoot" type="id" />
+    <item name="mdHeaderTitle" type="id" />
 </resources>

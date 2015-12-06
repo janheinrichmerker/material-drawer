@@ -16,7 +16,7 @@
     <dimen name="md_baseline">16dp</dimen>
     <dimen name="md_baseline_content">72dp</dimen>
 
-    <dimen name="md_app_bar_elevation">8dp</dimen>
+    <dimen name="md_app_bar_elevation">4dp</dimen>
 
     <dimen name="md_drawer_max_width">400dp</dimen>
 

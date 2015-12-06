@@ -19,6 +19,7 @@ package com.heinrichreimersoftware.materialdrawer.adapter;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,9 +68,9 @@ public class DrawerAdapter extends ArrayAdapter<DrawerItem> {
             final HeaderViewHolder viewHolder = new HeaderViewHolder(convertView);
 
             if (drawerTheme.isLightTheme()) {
-                viewHolder.getHeaderDivider().setBackgroundColor(getContext().getResources().getColor(R.color.md_divider_light));
+                viewHolder.getHeaderDivider().setBackgroundColor(ContextCompat.getColor(getContext(), R.color.md_divider_light));
             } else {
-                viewHolder.getHeaderDivider().setBackgroundColor(getContext().getResources().getColor(R.color.md_divider_dark));
+                viewHolder.getHeaderDivider().setBackgroundColor(ContextCompat.getColor(getContext(), R.color.md_divider_dark));
             }
 
             DrawerHeaderItem drawerHeaderItem = (DrawerHeaderItem) drawerItem;
@@ -99,15 +100,15 @@ public class DrawerAdapter extends ArrayAdapter<DrawerItem> {
             int textColorPrimary = drawerTheme.getTextColorPrimary();
 
             if (drawerTheme.isLightTheme()) {
-                viewHolder.getRoot().setForeground(getContext().getResources().getDrawable(R.drawable.md_selector_light));
+                viewHolder.getRoot().setForeground(ContextCompat.getDrawable(getContext(), R.drawable.md_selector_light));
             } else {
-                viewHolder.getRoot().setForeground(getContext().getResources().getDrawable(R.drawable.md_selector_dark));
+                viewHolder.getRoot().setForeground(ContextCompat.getDrawable(getContext(), R.drawable.md_selector_dark));
             }
 
             if (drawerTheme.getBackgroundColor() != 0) {
                 viewHolder.getRoot().setBackgroundColor(drawerTheme.getBackgroundColor());
             } else {
-                viewHolder.getRoot().setBackgroundColor(getContext().getResources().getColor(android.R.color.transparent));
+                viewHolder.getRoot().setBackgroundColor(ContextCompat.getColor(getContext(), android.R.color.transparent));
             }
 
             if (position == selectedPosition) {
@@ -192,7 +193,7 @@ public class DrawerAdapter extends ArrayAdapter<DrawerItem> {
     }
 
     public List<DrawerItem> getItems() {
-        List<DrawerItem> items = new ArrayList<DrawerItem>();
+        List<DrawerItem> items = new ArrayList<>();
         for (int i = 0; i < getCount(); i++) {
             items.add(getItem(i));
         }
@@ -218,16 +219,14 @@ public class DrawerAdapter extends ArrayAdapter<DrawerItem> {
     }
 
     private static class ViewHolder {
-        FrameLayout mRoot;
-        ImageView mImageView;
-        LinearLayout mTextRoot;
-        TextView mTextViewPrimary;
-        TextView mTextViewSecondary;
+        private final FrameLayout mRoot;
+        private final ImageView mImageView;
+        private final TextView mTextViewPrimary;
+        private final TextView mTextViewSecondary;
 
         public ViewHolder(View root) {
             mRoot = (FrameLayout) root;
             mImageView = (ImageView) root.findViewById(R.id.mdImage);
-            mTextRoot = (LinearLayout) root.findViewById(R.id.mdTextRoot);
             mTextViewPrimary = (TextView) root.findViewById(R.id.mdTextPrimary);
             mTextViewSecondary = (TextView) root.findViewById(R.id.mdTextSecondary);
         }
@@ -240,10 +239,6 @@ public class DrawerAdapter extends ArrayAdapter<DrawerItem> {
             return mImageView;
         }
 
-        public LinearLayout getTextRoot() {
-            return mTextRoot;
-        }
-
         public TextView getTextViewPrimary() {
             return mTextViewPrimary;
         }
@@ -254,10 +249,10 @@ public class DrawerAdapter extends ArrayAdapter<DrawerItem> {
     }
 
     private static class HeaderViewHolder {
-        LinearLayout mHeaderRoot;
-        View mHeaderDivider;
-        LinearLayout mHeaderTitleRoot;
-        TextView mHeaderTitle;
+        private final LinearLayout mHeaderRoot;
+        private final View mHeaderDivider;
+        private final LinearLayout mHeaderTitleRoot;
+        private final TextView mHeaderTitle;
 
         public HeaderViewHolder(View root) {
             mHeaderRoot = (LinearLayout) root;

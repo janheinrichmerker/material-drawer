@@ -144,7 +144,7 @@ Changes
 
 * **Version 2.1.3:**
     * Better use of [Palette][P]
-    * [Fragment][F]s support ([DrawerFragementItem][DFI])
+    * [Fragment][F]s support ([DrawerFragmentItem][DFI])
     * Enable/disable the drawer toggle
     * Bug fixes
 * **Version 2.1:**
@@ -233,6 +233,6 @@ License
 [DV]: https://github.com/HeinrichReimer/material-drawer/blob/master/library/src/main/java/com/heinrichreimersoftware/materialdrawer/DrawerView.java
 [DL]: https://developer.android.com/reference/android/support/v4/widget/DrawerLayout.html
 [DHI]: https://github.com/HeinrichReimer/material-drawer/blob/master/library/src/main/java/com/heinrichreimersoftware/materialdrawer/structure/DrawerHeaderItem.java
-[DFI]: https://github.com/HeinrichReimer/material-drawer/blob/master/library/src/main/java/com/heinrichreimersoftware/materialdrawer/structure/DrawerFragementItem.java
+[DFI]: https://github.com/HeinrichReimer/material-drawer/blob/master/library/src/main/java/com/heinrichreimersoftware/materialdrawer/structure/DrawerFragmentItem.java
 [P]: http://developer.android.com/reference/android/support/v7/graphics/Palette.html
 [F]: http://developer.android.com/reference/android/support/v4/app/Fragment.html

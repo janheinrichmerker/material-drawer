@@ -16,6 +16,7 @@
 
 package com.heinrichreimersoftware.materialdrawer;
 
+import android.annotation.SuppressLint;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -38,6 +39,8 @@ import com.heinrichreimersoftware.materialdrawer.theme.DrawerTheme;
 
 import java.util.List;
 
+@SuppressWarnings("unused")
+@SuppressLint("Registered")
 public class DrawerActivity extends AppCompatActivity {
 
     private DrawerFrameLayout mDrawer;
@@ -559,8 +562,7 @@ public class DrawerActivity extends AppCompatActivity {
      * @return Item from the drawer
      */
     public DrawerItem findItemById(long id) {
-        mDrawer.findItemById(id);
-        return null;
+        return mDrawer.findItemById(id);
     }
 
     /**
@@ -729,8 +731,7 @@ public class DrawerActivity extends AppCompatActivity {
      * @return Item from the drawer
      */
     public DrawerItem findFixedItemById(long id) {
-        mDrawer.findFixedItemById(id);
-        return null;
+        return mDrawer.findFixedItemById(id);
     }
 
     /**

@@ -5,7 +5,6 @@ import android.graphics.ColorMatrixColorFilter;
 
 public class AnimatableColorMatrixColorFilter {
     private ColorMatrixColorFilter mFilter;
-    private ColorMatrix mMatrix;
 
     public AnimatableColorMatrixColorFilter(ColorMatrix matrix) {
         setColorMatrix(matrix);
@@ -16,11 +15,6 @@ public class AnimatableColorMatrixColorFilter {
     }
 
     public void setColorMatrix(ColorMatrix matrix) {
-        mMatrix = matrix;
         mFilter = new ColorMatrixColorFilter(matrix);
-    }
-
-    public ColorMatrix getColorMatrix() {
-        return mMatrix;
     }
 }

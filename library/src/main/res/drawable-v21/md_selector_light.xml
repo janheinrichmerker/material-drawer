@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="@color/ripple_material_light">
+    android:color="@color/md_ripple_material_light">
 
     <item
         android:id="@android:id/mask"
@@ -8,11 +8,11 @@
     <item>
         <selector>
             <item
-                android:state_activated="true"
-                android:drawable="@color/md_selected_light" />
+                android:drawable="@color/md_selected_light"
+                android:state_activated="true" />
             <item
-                android:state_selected="true"
-                android:drawable="@color/md_selected_light" />
+                android:drawable="@color/md_selected_light"
+                android:state_selected="true" />
         </selector>
     </item>
 

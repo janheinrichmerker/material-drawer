@@ -19,6 +19,7 @@ package com.heinrichreimersoftware.materialdrawer.structure;
 /**
  * {@link DrawerItem} which should only display a divider.
  */
+@SuppressWarnings("unused")
 @Deprecated
 public class DrawerDividerItem extends DrawerHeaderItem {
 }

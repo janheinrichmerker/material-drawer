@@ -101,12 +101,6 @@ public class RoundedAvatarDrawable extends Drawable {
         invalidateSelf();
     }
 
-    @Override
-    public void setDither(boolean dither) {
-        mPaint.setDither(dither);
-        invalidateSelf();
-    }
-
     public Bitmap getBitmap() {
         return mBitmap;
     }
