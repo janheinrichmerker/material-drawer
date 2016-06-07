@@ -3,7 +3,7 @@
 material-drawer
 ===============
 
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-material--drawer-blue.svg)](https://android-arsenal.com/details/1/1162)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-material--drawer-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/1162)
 [![JitPack](https://jitpack.io/v/com.heinrichreimersoftware/material-drawer.svg)](https://jitpack.io/#com.heinrichreimersoftware/material-drawer)
 [![Build Status](https://travis-ci.org/HeinrichReimer/material-drawer.svg?branch=master)](https://travis-ci.org/HeinrichReimer/material-drawer)
 [![Apache License 2.0](https://img.shields.io/github/license/HeinrichReimer/material-drawer.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
@@ -170,12 +170,6 @@ _material-drawer_ uses the following open source libraries or files:
 * [ScrimInsetsScrollView][3] from the Google IO app 2014 by [@google][4] (Apache License 2.0)
 * [ImageLoadingPattern][5] by [@Emanuel Vecchio][6] (Apache License 2.0)
 * [RoundedAvatarDrawable][7] by [@Evelio Tarazona Cáceres][8] (Apache License 2.0)
-
-Stats
--------
-
-* ~7000 lines of code
-* ~200kb
 
 License
 -------
