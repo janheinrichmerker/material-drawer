@@ -2,12 +2,12 @@ apply plugin: 'com.android.library'
 
 def versionMajor = 2
 def versionMinor = 3
-def versionPatch = 0
+def versionPatch = 1
 def versionBuild = 0 // bump for dogfood builds, public betas, etc.
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    buildToolsVersion "23.0.3"
 
     defaultConfig {
         minSdkVersion 14
@@ -27,7 +27,7 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:23.1.1'
-    compile 'com.android.support:appcompat-v7:23.1.1'
-    compile 'com.android.support:palette-v7:23.1.1'
+    compile 'com.android.support:support-v4:23.4.0'
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:palette-v7:23.4.0'
 }

@@ -1,3 +1,5 @@
+![Icon](http://i.imgur.com/AcsG8mf.png)
+
 material-drawer
 ===============
 
@@ -38,7 +40,7 @@ repositories {
 ````
 ````gradle
 dependencies {
-    compile 'com.heinrichreimersoftware:material-drawer:2.3.0'
+    compile 'com.heinrichreimersoftware:material-drawer:2.3.1'
 }
 ````
 
