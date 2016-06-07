@@ -1,4 +1,4 @@
-![Icon](http://i.imgur.com/AcsG8mf.png)
+![Icon](http://i.imgur.com/Dog6Eim.png)
 
 material-drawer
 ===============
