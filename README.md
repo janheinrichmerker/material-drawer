@@ -63,7 +63,7 @@ setContentView(R.layout.activity_main);
 **Step 3:** Set a profile:
 
 ````java
-drawer.setProfile(
+setProfile(
         new DrawerProfile()
                 .setRoundedAvatar((BitmapDrawable)getResources().getDrawable(R.drawable.profile_avatar))
                 .setBackground(getResources().getDrawable(R.drawable.profile_cover))
@@ -81,7 +81,7 @@ drawer.setProfile(
 **Step 4:** Populate your drawer list:
 
 ````java
-drawer.addItem(
+addItem(
         new DrawerItem()
                 .setImage(getResources().getDrawable(R.drawable.ic_first_item))
                 .setTextPrimary(getString(R.string.title_first_item))
@@ -92,9 +92,9 @@ drawer.addItem(
                         Toast.makeText(MainActivity.this, "Clicked first item #" + id, Toast.LENGTH_SHORT).show();
                     }
                 })
-        );
-drawer.addDivider();
-drawer.addItem(
+        );
+addDivider();
+addItem(
         new DrawerItem()
                 .setImage(getResources().getDrawable(R.drawable.ic_second_item))
                 .setTextPrimary(getString(R.string.title_second_item))
