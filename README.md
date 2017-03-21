@@ -40,7 +40,7 @@ repositories {
 ````
 ````gradle
 dependencies {
-    compile 'com.heinrichreimersoftware:material-drawer:2.3.2'
+    compile 'com.heinrichreimersoftware:material-drawer:2.3.3'
 }
 ````
 

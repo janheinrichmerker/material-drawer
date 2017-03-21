@@ -2,17 +2,17 @@ apply plugin: 'com.android.application'
 
 def versionMajor = 2
 def versionMinor = 3
-def versionPatch = 2
+def versionPatch = 3
 def versionBuild = 0 // bump for dogfood builds, public betas, etc.
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.0"
+    compileSdkVersion 25
+    buildToolsVersion '25.0.2'
 
     defaultConfig {
         applicationId "com.heinrichreimersoftware.materialdrawerdemo"
         minSdkVersion 14
-        targetSdkVersion 24
+        targetSdkVersion 25
         versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
     }
@@ -29,5 +29,5 @@ android {
 
 dependencies {
     compile project(':library')
-    compile 'com.android.support:appcompat-v7:24.0.0'
+    compile 'com.android.support:appcompat-v7:25.3.0'
 }
