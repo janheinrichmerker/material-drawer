@@ -5,8 +5,8 @@ material-drawer
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-material--drawer-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/1162)
 [![JitPack](https://jitpack.io/v/com.heinrichreimersoftware/material-drawer.svg)](https://jitpack.io/#com.heinrichreimersoftware/material-drawer)
-[![Build Status](https://travis-ci.org/HeinrichReimer/material-drawer.svg?branch=master)](https://travis-ci.org/HeinrichReimer/material-drawer)
-[![License](https://img.shields.io/github/license/HeinrichReimer/material-drawer.svg)](https://github.com/HeinrichReimer/material-drawer/blob/master/LICENSE.txt)
+[![Build Status](https://travis-ci.org/heinrichreimer/material-drawer.svg?branch=master)](https://travis-ci.org/heinrichreimer/material-drawer)
+[![License](https://img.shields.io/github/license/heinrichreimer/material-drawer.svg)](https://github.com/heinrichreimer/material-drawer/blob/master/LICENSE.txt)
 
 
 Custom drawer implementation for Material design apps.
@@ -199,7 +199,7 @@ License
 
 [J]: https://jitpack.io/#com.heinrichreimersoftware/material-drawer
 [ABA]: http://developer.android.com/reference/android/support/v7/app/ActionBarActivity.html
-[DA]: https://github.com/HeinrichReimer/material-drawer/blob/master/library/src/main/java/com/heinrichreimersoftware/materialdrawer/DrawerActivity.java
+[DA]: https://github.com/heinrichreimer/material-drawer/blob/master/library/src/main/java/com/heinrichreimersoftware/materialdrawer/DrawerActivity.java
 [T]: http://developer.android.com/reference/android/support/v7/widget/Toolbar.html
-[DFL]: https://github.com/HeinrichReimer/material-drawer/blob/master/library/src/main/java/com/heinrichreimersoftware/materialdrawer/DrawerFrameLayout.java
-[DV]: https://github.com/HeinrichReimer/material-drawer/blob/master/library/src/main/java/com/heinrichreimersoftware/materialdrawer/DrawerView.java
+[DFL]: https://github.com/heinrichreimer/material-drawer/blob/master/library/src/main/java/com/heinrichreimersoftware/materialdrawer/DrawerFrameLayout.java
+[DV]: https://github.com/heinrichreimer/material-drawer/blob/master/library/src/main/java/com/heinrichreimersoftware/materialdrawer/DrawerView.java
