@@ -26,18 +26,27 @@ package com.heinrichreimersoftware.materialdrawer.structure;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.widget.ArrayAdapter;
 
 import com.heinrichreimersoftware.materialdrawer.drawable.RoundedAvatarDrawable;
 import com.heinrichreimersoftware.materialdrawer.theme.DrawerTheme;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+
+import com.heinrichreimersoftware.materialdrawer.util.DrawableUtil;
+import com.heinrichreimersoftware.materialdrawer.util.ParcelUtil;
+
 /**
  * Object to be used with {@link com.heinrichreimersoftware.materialdrawer.adapter.DrawerAdapter} and {@link com.heinrichreimersoftware.materialdrawer.DrawerView} to display a drawer item.
  * Can hold an image, a primary text, a secondary text and a listener.
  */
-public class DrawerItem {
+public class DrawerItem implements Parcelable {
     public static final int ICON = 1;
     public static final int AVATAR = 2;
     public static final int SMALL_AVATAR = 3;
@@ -62,6 +71,24 @@ public class DrawerItem {
     private OnItemClickListener mOnClickListener;
 
     private ArrayAdapter<DrawerItem> mAdapter;
+
+    public DrawerItem() {
+    }
+
+    public DrawerItem(Parcel in) {
+        String[] data = new String[8];
+        in.readStringArray(data);
+        this.mDrawerTheme = (DrawerTheme) ParcelUtil.fromParcelString(data[0]);
+        this.mIsHeader = ("1".equals(data[1]));
+        this.mId = Long.valueOf(data[2]);
+
+        this.mImage = DrawableUtil.byteArr2Drawable((byte[]) ParcelUtil.fromParcelString(data[3]));
+        this.mImageMode = Integer.valueOf(data[4]);
+        this.mTextPrimary = data[5];
+        this.mTextSecondary = data[6];
+        this.mTextMode = Integer.valueOf(data[7]);
+        notifyDataChanged();
+    }
 
 
     /**
@@ -512,8 +539,75 @@ public class DrawerItem {
         }
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        String[] data = new String[8];
+        data[0] = ParcelUtil.toParcelString(mDrawerTheme);
+        data[1] = mIsHeader ? "1" : "0";
+        data[2] = String.valueOf(mId);
+
+        data[3] = ParcelUtil.toParcelString(DrawableUtil.drawable2ByteArr(mImage));
+        data[4] = String.valueOf(mImageMode);
+        data[5] = mTextPrimary;
+        data[6] = mTextSecondary;
+        data[7] = String.valueOf(mTextMode);
+
+        parcel.writeStringArray(data);
+
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        DrawerItem item = (DrawerItem) o;
+
+        if (mIsHeader != item.mIsHeader) return false;
+        if (mId != item.mId) return false;
+        if (mImageMode != item.mImageMode) return false;
+        if (mTextMode != item.mTextMode) return false;
+        if (mDrawerTheme != null ? !mDrawerTheme.equals(item.mDrawerTheme) : item.mDrawerTheme != null)
+            return false;
+        if (mTextPrimary != null ? !mTextPrimary.equals(item.mTextPrimary) : item.mTextPrimary != null)
+            return false;
+        if (mTextSecondary != null ? !mTextSecondary.equals(item.mTextSecondary) : item.mTextSecondary != null)
+            return false;
+        return true;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = mDrawerTheme != null ? mDrawerTheme.hashCode() : 0;
+        result = 31 * result + (mIsHeader ? 1 : 0);
+        result = 31 * result + (int) (mId ^ (mId >>> 32));
+        result = 31 * result + (mImage != null ? mImage.hashCode() : 0);
+        result = 31 * result + mImageMode;
+        result = 31 * result + (mTextPrimary != null ? mTextPrimary.hashCode() : 0);
+        result = 31 * result + (mTextSecondary != null ? mTextSecondary.hashCode() : 0);
+        result = 31 * result + mTextMode;
+        return result;
+    }
 
     public interface OnItemClickListener {
         void onClick(DrawerItem item, long id, int position);
     }
+
+    public static final Parcelable.Creator<DrawerItem> CREATOR
+            = new Parcelable.Creator<DrawerItem>() {
+        public DrawerItem createFromParcel(Parcel in) {
+            return new DrawerItem(in);
+        }
+
+        public DrawerItem[] newArray(int size) {
+            return new DrawerItem[size];
+        }
+    };
 }
