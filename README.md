@@ -60,10 +60,10 @@ public class MainActivity extends DrawerActivity {}
 setContentView(R.layout.activity_main);
 ````
 
-**Step 3:** Set a profile:
+**Step 3:** Add a profile:
 
 ````java
-setProfile(
+addProfile(
         new DrawerProfile()
                 .setRoundedAvatar((BitmapDrawable)getResources().getDrawable(R.drawable.profile_avatar))
                 .setBackground(getResources().getDrawable(R.drawable.profile_cover))
