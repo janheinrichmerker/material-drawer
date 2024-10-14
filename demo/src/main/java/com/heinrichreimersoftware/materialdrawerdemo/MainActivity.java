@@ -207,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.action_github:
-                String url = "https://github.com/HeinrichReimer/material-drawer";
+                String url = "https://github.com/janheinrichmerker/material-drawer";
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(url));
                 startActivity(i);
